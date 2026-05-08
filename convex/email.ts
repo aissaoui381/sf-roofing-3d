@@ -13,17 +13,20 @@ export const sendLeadNotification = internalAction({
   },
   handler: async (ctx, args) => {
     const apiKey = process.env.RESEND_API_KEY;
-    if (!apiKey) return;
+    if (!apiKey) {
+      console.error('RESEND_API_KEY is not set');
+      return;
+    }
 
-    await fetch('https://api.resend.com/emails', {
+    const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'leads@sanfranciscoroofingservice.com',
-        to:   'INFO@SanFranciscoRoofingService.com',
+        from: 'onboarding@resend.dev',
+        to:   'aissaoui381@gmail.com',
         subject: `New Quote Request — ${args.service} from ${args.email}`,
         html: `
           <div style="font-family:sans-serif;max-width:600px;margin:0 auto">
@@ -73,5 +76,11 @@ export const sendLeadNotification = internalAction({
         `,
       }),
     });
+    const data = await res.json();
+    if (!res.ok) {
+      console.error('Resend error:', JSON.stringify(data));
+    } else {
+      console.log('Email sent successfully:', JSON.stringify(data));
+    }
   },
 });
