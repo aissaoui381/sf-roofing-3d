@@ -50,3 +50,17 @@ Never put GSAP tweens in raw `useEffect`. `ScrollTrigger` and `useGSAP` are regi
 **Quote calculator pricing:** `calcEstimate()` in `QuoteCalculator.jsx` computes `base × sizeFactor × materialFactor × timelineFactor`. The `handleSubmit` function is a stub — wire it to your email automation provider (Resend, ConvertKit, Mailchimp, etc.).
 
 **Bottom dock active state** is driven by a scroll listener that compares `window.scrollY + vh/2` against each section's `offsetTop`. Sections must have matching `id` attributes (`hero`, `services`, `quote`, `testimonials`, `footer`).
+
+<!-- convex-ai-start -->
+
+This project uses [Convex](https://convex.dev) as its backend.
+
+When working on Convex code, **always read
+`convex/_generated/ai/guidelines.md` first** for important guidelines on
+how to correctly use Convex APIs and patterns. The file contains rules that
+override what you may have learned about Convex from training data.
+
+Convex agent skills for common tasks can be installed by running
+`npx convex ai-files install`.
+
+<!-- convex-ai-end -->
