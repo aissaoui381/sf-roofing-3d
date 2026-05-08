@@ -2,6 +2,8 @@ import { useState, useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ArrowRight, ArrowLeft, CheckCircle, Send, Check } from 'lucide-react';
+import { useMutation } from 'convex/react';
+import { api } from '../../../convex/_generated/api';
 
 const STEPS = [
   {
@@ -64,6 +66,7 @@ export default function QuoteCalculator() {
   const [submitted, setSubmitted]   = useState(false);
   const containerRef                = useRef(null);
   const cardRef                     = useRef(null);
+  const submitLead                  = useMutation(api.leads.submitLead);
 
   useGSAP(() => {
     gsap.from('.calc-header', {
@@ -99,9 +102,18 @@ export default function QuoteCalculator() {
   const allAnswered = STEPS.every((s) => selections[s.id]);
   const estimate    = allAnswered ? calcEstimate(selections) : null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!email || !allAnswered) return;
+    if (!email || !allAnswered || !estimate) return;
+    await submitLead({
+      email,
+      service:  selections.service,
+      size:     selections.size,
+      material: selections.material,
+      timeline: selections.timeline,
+      estMin:   estimate.min,
+      estMax:   estimate.max,
+    });
     setSubmitted(true);
   };
 
