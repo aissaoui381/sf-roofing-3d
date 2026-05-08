@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -23,6 +24,7 @@ export default function App() {
       <QuoteCalculator />
       <Testimonials />
       <Footer />
+      <Analytics />
     </Layout>
   );
 }
