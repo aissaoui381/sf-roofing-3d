@@ -1,4 +1,5 @@
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -25,6 +26,7 @@ export default function App() {
       <Testimonials />
       <Footer />
       <Analytics />
+      <SpeedInsights />
     </Layout>
   );
 }
