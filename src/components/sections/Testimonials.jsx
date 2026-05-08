@@ -73,7 +73,7 @@ export default function Testimonials() {
       className="py-24 px-6 md:px-16 lg:px-24 bg-zinc-950 relative overflow-hidden"
     >
       {/* Background accent */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gold/[0.04] rounded-full blur-3xl translate-x-1/3 -translate-y-1/3 pointer-events-none" />
+      <div className="absolute top-0 right-0 w-64 h-64 md:w-96 md:h-96 bg-gold/[0.04] rounded-full blur-3xl translate-x-1/3 -translate-y-1/3 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto testi-section">
         <div className="grid md:grid-cols-[280px_1fr] gap-14 md:gap-20 items-start">
@@ -137,7 +137,7 @@ export default function Testimonials() {
               style={{ transform: `translateX(-${index * 100}%)` }}
             >
               {TESTIMONIALS.map((t, i) => (
-                <div key={i} className="w-full flex-shrink-0 relative pr-1">
+                <div key={i} className="w-full min-w-full flex-shrink-0 relative pr-1">
 
                   {/* Giant decorative quote mark */}
                   <div

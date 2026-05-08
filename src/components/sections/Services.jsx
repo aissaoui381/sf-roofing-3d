@@ -60,7 +60,7 @@ function MaterialCarousel() {
 
   return (
     <div className="relative overflow-hidden rounded-2xl mb-12 group shadow-2xl">
-      <div className="relative aspect-[21/8] overflow-hidden bg-zinc-900">
+      <div className="relative aspect-[4/3] sm:aspect-[16/7] overflow-hidden bg-zinc-900">
         <img
           key={index}
           src={slide.src}
@@ -139,7 +139,7 @@ export default function Services() {
       className="py-24 px-6 md:px-16 lg:px-24 bg-zinc-950 relative overflow-hidden">
 
       {/* Ambient gold glow */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-gold/[0.04] rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+      <div className="absolute top-0 left-0 w-64 h-64 bg-gold/[0.04] rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative">
 
@@ -149,7 +149,7 @@ export default function Services() {
             <span className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-4 block">
               What We Do
             </span>
-            <h2 className="text-4xl md:text-5xl font-black text-white leading-[1.0] tracking-tight whitespace-nowrap">
+            <h2 className="text-3xl md:text-5xl font-black text-white leading-[1.05] tracking-tight">
               Complete Roofing Solutions
             </h2>
           </div>
@@ -187,7 +187,7 @@ export default function Services() {
             {/* Ghost index number */}
             <span
               aria-hidden
-              className="absolute -top-6 right-0 text-[9rem] md:text-[11rem] font-black text-gold/[0.04] leading-none select-none pointer-events-none tabular-nums"
+              className="hidden md:block absolute -top-6 right-0 text-[11rem] font-black text-gold/[0.04] leading-none select-none pointer-events-none tabular-nums"
             >
               {String(selectedIndex + 1).padStart(2, '0')}
             </span>

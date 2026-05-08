@@ -6,7 +6,7 @@ export default function Layout({ children }) {
         [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
       "
     >
-      <main>{children}</main>
+      <main className="w-full overflow-x-hidden">{children}</main>
     </div>
   );
 }
