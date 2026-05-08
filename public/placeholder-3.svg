@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 700">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <!-- Panel gradient: 140px wide in userSpaceOnUse within pattern -->
+    <linearGradient id="panel-g" x1="0" y1="0" x2="140" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#475569"/>
+      <stop offset="25%"  stop-color="#4a6070"/>
+      <stop offset="60%"  stop-color="#334155"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <!-- Standing seam ridge gradient: 20px wide -->
+    <linearGradient id="seam-g" x1="0" y1="0" x2="20" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#475569"/>
+      <stop offset="30%"  stop-color="#94a3b8"/>
+      <stop offset="55%"  stop-color="#cbd5e1"/>
+      <stop offset="80%"  stop-color="#94a3b8"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </linearGradient>
+    <!-- Pattern: 160px wide (140px panel + 20px seam) -->
+    <pattern id="seam-panel" x="0" y="0" width="160" height="700" patternUnits="userSpaceOnUse">
+      <rect width="140" height="700" fill="url(#panel-g)"/>
+      <rect x="140" width="20" height="700" fill="url(#seam-g)"/>
+      <!-- subtle horizontal score lines every 175px -->
+      <rect x="0" y="174" width="140" height="1" fill="#0f172a" opacity="0.4"/>
+      <rect x="0" y="349" width="140" height="1" fill="#0f172a" opacity="0.4"/>
+      <rect x="0" y="524" width="140" height="1" fill="#0f172a" opacity="0.4"/>
+    </pattern>
+    <linearGradient id="vig" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="45%" stop-color="transparent"/>
+      <stop offset="100%" stop-color="#09090b" stop-opacity="0.95"/>
+    </linearGradient>
+    <linearGradient id="vigL" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#09090b" stop-opacity="0.75"/>
+      <stop offset="30%" stop-color="transparent"/>
+    </linearGradient>
+    <linearGradient id="vigT" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="transparent"/>
+      <stop offset="100%" stop-color="#09090b" stop-opacity="0.45"/>
+    </linearGradient>
+    <!-- Subtle sky-reflection highlight across top of metal -->
+    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"  stop-color="#7dd3fc" stop-opacity="0.08"/>
+      <stop offset="40%" stop-color="transparent"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="700" fill="url(#bg)"/>
+
+  <!-- Standing seam panels tiled across full width -->
+  <rect width="1600" height="700" fill="url(#seam-panel)"/>
+
+  <!-- Sky sheen at top -->
+  <rect width="1600" height="700" fill="url(#sheen)"/>
+
+  <!-- Vignette overlays -->
+  <rect width="1600" height="700" fill="url(#vigT)"/>
+  <rect width="1600" height="700" fill="url(#vigL)"/>
+  <rect width="1600" height="700" fill="url(#vig)"/>
+</svg>

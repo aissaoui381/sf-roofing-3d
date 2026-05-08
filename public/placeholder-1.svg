@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 700">
+  <defs>
+    <rect id="sa" width="200" height="100" fill="#3f3f46" stroke="#09090b" stroke-width="2"/>
+    <rect id="sb" width="200" height="100" fill="#27272a" stroke="#09090b" stroke-width="2"/>
+    <linearGradient id="vig" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="45%" stop-color="transparent"/>
+      <stop offset="100%" stop-color="#09090b" stop-opacity="0.96"/>
+    </linearGradient>
+    <linearGradient id="vigL" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#09090b" stop-opacity="0.75"/>
+      <stop offset="30%" stop-color="transparent"/>
+    </linearGradient>
+    <linearGradient id="vigT" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="transparent"/>
+      <stop offset="100%" stop-color="#09090b" stop-opacity="0.5"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="700" fill="#09090b"/>
+
+  <!-- Row 0 y=600 even -->
+  <use href="#sa" x="0" y="600"/><use href="#sb" x="200" y="600"/>
+  <use href="#sa" x="400" y="600"/><use href="#sb" x="600" y="600"/>
+  <use href="#sa" x="800" y="600"/><use href="#sb" x="1000" y="600"/>
+  <use href="#sa" x="1200" y="600"/><use href="#sb" x="1400" y="600"/>
+  <use href="#sa" x="1600" y="600"/>
+
+  <!-- Row 1 y=530 odd -->
+  <use href="#sb" x="-100" y="530"/><use href="#sa" x="100" y="530"/>
+  <use href="#sb" x="300" y="530"/><use href="#sa" x="500" y="530"/>
+  <use href="#sb" x="700" y="530"/><use href="#sa" x="900" y="530"/>
+  <use href="#sb" x="1100" y="530"/><use href="#sa" x="1300" y="530"/>
+  <use href="#sb" x="1500" y="530"/>
+
+  <!-- Row 2 y=460 even -->
+  <use href="#sa" x="0" y="460"/><use href="#sb" x="200" y="460"/>
+  <use href="#sa" x="400" y="460"/><use href="#sb" x="600" y="460"/>
+  <use href="#sa" x="800" y="460"/><use href="#sb" x="1000" y="460"/>
+  <use href="#sa" x="1200" y="460"/><use href="#sb" x="1400" y="460"/>
+  <use href="#sa" x="1600" y="460"/>
+
+  <!-- Row 3 y=390 odd -->
+  <use href="#sb" x="-100" y="390"/><use href="#sa" x="100" y="390"/>
+  <use href="#sb" x="300" y="390"/><use href="#sa" x="500" y="390"/>
+  <use href="#sb" x="700" y="390"/><use href="#sa" x="900" y="390"/>
+  <use href="#sb" x="1100" y="390"/><use href="#sa" x="1300" y="390"/>
+  <use href="#sb" x="1500" y="390"/>
+
+  <!-- Row 4 y=320 even -->
+  <use href="#sa" x="0" y="320"/><use href="#sb" x="200" y="320"/>
+  <use href="#sa" x="400" y="320"/><use href="#sb" x="600" y="320"/>
+  <use href="#sa" x="800" y="320"/><use href="#sb" x="1000" y="320"/>
+  <use href="#sa" x="1200" y="320"/><use href="#sb" x="1400" y="320"/>
+  <use href="#sa" x="1600" y="320"/>
+
+  <!-- Row 5 y=250 odd -->
+  <use href="#sb" x="-100" y="250"/><use href="#sa" x="100" y="250"/>
+  <use href="#sb" x="300" y="250"/><use href="#sa" x="500" y="250"/>
+  <use href="#sb" x="700" y="250"/><use href="#sa" x="900" y="250"/>
+  <use href="#sb" x="1100" y="250"/><use href="#sa" x="1300" y="250"/>
+  <use href="#sb" x="1500" y="250"/>
+
+  <!-- Row 6 y=180 even -->
+  <use href="#sa" x="0" y="180"/><use href="#sb" x="200" y="180"/>
+  <use href="#sa" x="400" y="180"/><use href="#sb" x="600" y="180"/>
+  <use href="#sa" x="800" y="180"/><use href="#sb" x="1000" y="180"/>
+  <use href="#sa" x="1200" y="180"/><use href="#sb" x="1400" y="180"/>
+  <use href="#sa" x="1600" y="180"/>
+
+  <!-- Row 7 y=110 odd -->
+  <use href="#sb" x="-100" y="110"/><use href="#sa" x="100" y="110"/>
+  <use href="#sb" x="300" y="110"/><use href="#sa" x="500" y="110"/>
+  <use href="#sb" x="700" y="110"/><use href="#sa" x="900" y="110"/>
+  <use href="#sb" x="1100" y="110"/><use href="#sa" x="1300" y="110"/>
+  <use href="#sb" x="1500" y="110"/>
+
+  <!-- Row 8 y=40 even -->
+  <use href="#sa" x="0" y="40"/><use href="#sb" x="200" y="40"/>
+  <use href="#sa" x="400" y="40"/><use href="#sb" x="600" y="40"/>
+  <use href="#sa" x="800" y="40"/><use href="#sb" x="1000" y="40"/>
+  <use href="#sa" x="1200" y="40"/><use href="#sb" x="1400" y="40"/>
+  <use href="#sa" x="1600" y="40"/>
+
+  <!-- Row 9 y=-30 odd -->
+  <use href="#sb" x="-100" y="-30"/><use href="#sa" x="100" y="-30"/>
+  <use href="#sb" x="300" y="-30"/><use href="#sa" x="500" y="-30"/>
+  <use href="#sb" x="700" y="-30"/><use href="#sa" x="900" y="-30"/>
+  <use href="#sb" x="1100" y="-30"/><use href="#sa" x="1300" y="-30"/>
+  <use href="#sb" x="1500" y="-30"/>
+
+  <!-- Vignette overlays -->
+  <rect width="1600" height="700" fill="url(#vigT)"/>
+  <rect width="1600" height="700" fill="url(#vigL)"/>
+  <rect width="1600" height="700" fill="url(#vig)"/>
+</svg>

@@ -1,0 +1,302 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 700">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#02020a"/>
+      <stop offset="70%" stop-color="#09091a"/>
+      <stop offset="100%" stop-color="#0d0d20"/>
+    </linearGradient>
+    <radialGradient id="moon-halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f8d87a" stop-opacity="0.18"/>
+      <stop offset="60%" stop-color="#f8d87a" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#f8d87a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="facade-g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1c1c30"/>
+      <stop offset="100%" stop-color="#0f0f1e"/>
+    </linearGradient>
+    <linearGradient id="wing-g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#18182a"/>
+      <stop offset="100%" stop-color="#0c0c1a"/>
+    </linearGradient>
+    <linearGradient id="roof-l" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#22223a"/>
+      <stop offset="100%" stop-color="#0c0c18"/>
+    </linearGradient>
+    <linearGradient id="roof-r" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0c0c18"/>
+      <stop offset="100%" stop-color="#1a1a2c"/>
+    </linearGradient>
+    <linearGradient id="ground-g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0c0c1a"/>
+      <stop offset="100%" stop-color="#04040c"/>
+    </linearGradient>
+    <radialGradient id="win-a" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="win-b" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.40"/>
+      <stop offset="100%" stop-color="#fbbf24" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="door-glow" cx="50%" cy="0%" r="80%">
+      <stop offset="0%" stop-color="#CE9843" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#CE9843" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="vignB" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="50%" stop-color="transparent"/>
+      <stop offset="100%" stop-color="#09090b" stop-opacity="0.97"/>
+    </linearGradient>
+    <radialGradient id="vignS" cx="50%" cy="50%" r="50%">
+      <stop offset="55%" stop-color="transparent"/>
+      <stop offset="100%" stop-color="#09090b" stop-opacity="0.85"/>
+    </radialGradient>
+    <radialGradient id="ground-light" cx="50%" cy="0%" r="60%">
+      <stop offset="0%" stop-color="#CE9843" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="1600" height="700" fill="url(#sky)"/>
+
+  <!-- Stars -->
+  <circle cx="60"   cy="45"  r="1.2" fill="white" fill-opacity="0.65"/>
+  <circle cx="130"  cy="22"  r="0.8" fill="white" fill-opacity="0.50"/>
+  <circle cx="240"  cy="60"  r="1.0" fill="white" fill-opacity="0.60"/>
+  <circle cx="350"  cy="18"  r="0.7" fill="white" fill-opacity="0.45"/>
+  <circle cx="420"  cy="50"  r="1.1" fill="white" fill-opacity="0.55"/>
+  <circle cx="520"  cy="30"  r="0.6" fill="white" fill-opacity="0.40"/>
+  <circle cx="1080" cy="25"  r="1.0" fill="white" fill-opacity="0.58"/>
+  <circle cx="1200" cy="48"  r="0.8" fill="white" fill-opacity="0.48"/>
+  <circle cx="1320" cy="15"  r="1.2" fill="white" fill-opacity="0.62"/>
+  <circle cx="1450" cy="38"  r="0.7" fill="white" fill-opacity="0.44"/>
+  <circle cx="1540" cy="60"  r="1.0" fill="white" fill-opacity="0.52"/>
+  <circle cx="1590" cy="20"  r="0.8" fill="white" fill-opacity="0.42"/>
+
+  <!-- Moon halo -->
+  <ellipse cx="1420" cy="85" rx="90" ry="90" fill="url(#moon-halo)"/>
+  <!-- Moon disc -->
+  <circle cx="1420" cy="85" r="34" fill="#0f0f1e"/>
+  <circle cx="1420" cy="85" r="28" fill="#1a1a14" fill-opacity="0.15"/>
+  <path d="M 1402,68 Q 1436,58 1448,90 Q 1436,118 1402,108 Q 1424,98 1424,85 Q 1424,72 1402,68 Z" fill="#f0e080" fill-opacity="0.18"/>
+  <circle cx="1420" cy="85" r="34" fill="none" stroke="#f8d87a" stroke-opacity="0.20" stroke-width="1"/>
+
+  <!-- Ground -->
+  <rect x="0" y="568" width="1600" height="132" fill="url(#ground-g)"/>
+
+  <!-- Ground door-light spill -->
+  <ellipse cx="800" cy="575" rx="320" ry="60" fill="url(#ground-light)"/>
+
+  <!-- Walkway -->
+  <path d="M 760,572 L 840,572 L 960,700 L 640,700 Z" fill="#111120" opacity="0.9"/>
+  <line x1="800" y1="572" x2="800" y2="700" stroke="#1e1e30" stroke-width="2" opacity="0.4"/>
+
+  <!-- Lawn hedges -->
+  <ellipse cx="390"  cy="568" rx="65" ry="18" fill="#09091a"/>
+  <ellipse cx="490"  cy="569" rx="42" ry="14" fill="#0b0b1c"/>
+  <ellipse cx="1110" cy="569" rx="42" ry="14" fill="#0b0b1c"/>
+  <ellipse cx="1210" cy="568" rx="65" ry="18" fill="#09091a"/>
+
+  <!-- ── Left trees ── -->
+  <rect x="97"  y="180" width="12" height="398" fill="#04040e" rx="3"/>
+  <ellipse cx="103" cy="210" rx="62" ry="96" fill="#06060f"/>
+  <ellipse cx="103" cy="265" rx="56" ry="85" fill="#05050e"/>
+  <ellipse cx="103" cy="318" rx="48" ry="72" fill="#07070f"/>
+  <rect x="182" y="260" width="10" height="318" fill="#04040e" rx="3"/>
+  <ellipse cx="187" cy="278" rx="48" ry="74" fill="#06060f"/>
+  <ellipse cx="187" cy="328" rx="42" ry="62" fill="#05050e"/>
+
+  <!-- ── Right trees ── -->
+  <rect x="1491" y="180" width="12" height="398" fill="#04040e" rx="3"/>
+  <ellipse cx="1497" cy="210" rx="62" ry="96" fill="#06060f"/>
+  <ellipse cx="1497" cy="265" rx="56" ry="85" fill="#05050e"/>
+  <ellipse cx="1497" cy="318" rx="48" ry="72" fill="#07070f"/>
+  <rect x="1408" y="260" width="10" height="318" fill="#04040e" rx="3"/>
+  <ellipse cx="1413" cy="278" rx="48" ry="74" fill="#06060f"/>
+  <ellipse cx="1413" cy="328" rx="42" ry="62" fill="#05050e"/>
+
+  <!-- ══ LEFT WING ══ -->
+  <rect x="195" y="338" width="218" height="234" fill="url(#wing-g)"/>
+  <!-- Wing roof -->
+  <polygon points="180,340 304,248 428,340" fill="url(#roof-l)"/>
+  <!-- Wing roof ridge -->
+  <line x1="304" y1="248" x2="304" y2="340" stroke="#CE9843" stroke-opacity="0.22" stroke-width="1.5"/>
+  <!-- Wing eave line -->
+  <line x1="175" y1="340" x2="433" y2="340" stroke="#CE9843" stroke-opacity="0.18" stroke-width="1"/>
+  <!-- Wing roof tiles (subtle lines) -->
+  <line x1="304" y1="248" x2="180" y2="340" stroke="#252540" stroke-width="0.5" stroke-opacity="0.5"/>
+  <!-- Wing window glow -->
+  <ellipse cx="304" cy="435" rx="85" ry="80" fill="url(#win-a)"/>
+  <!-- Wing window frame -->
+  <rect x="252" y="385" width="104" height="130" fill="#f59e0b" fill-opacity="0.14" rx="3"/>
+  <rect x="252" y="385" width="104" height="130" fill="none" stroke="#2a2a44" stroke-width="2.5" rx="3"/>
+  <line x1="304" y1="385" x2="304" y2="515" stroke="#2a2a44" stroke-width="1.5"/>
+  <line x1="252" y1="450" x2="356" y2="450" stroke="#2a2a44" stroke-width="1.5"/>
+  <!-- Wing column left -->
+  <rect x="212" y="480" width="10" height="92" fill="#181828" rx="1"/>
+  <!-- Wing column right -->
+  <rect x="390" y="480" width="10" height="92" fill="#181828" rx="1"/>
+
+  <!-- ══ RIGHT WING ══ -->
+  <rect x="1187" y="338" width="218" height="234" fill="url(#wing-g)"/>
+  <polygon points="1172,340 1296,248 1420,340" fill="url(#roof-r)"/>
+  <line x1="1296" y1="248" x2="1296" y2="340" stroke="#CE9843" stroke-opacity="0.22" stroke-width="1.5"/>
+  <line x1="1167" y1="340" x2="1425" y2="340" stroke="#CE9843" stroke-opacity="0.18" stroke-width="1"/>
+  <ellipse cx="1296" cy="435" rx="85" ry="80" fill="url(#win-b)"/>
+  <rect x="1244" y="385" width="104" height="130" fill="#fbbf24" fill-opacity="0.14" rx="3"/>
+  <rect x="1244" y="385" width="104" height="130" fill="none" stroke="#2a2a44" stroke-width="2.5" rx="3"/>
+  <line x1="1296" y1="385" x2="1296" y2="515" stroke="#2a2a44" stroke-width="1.5"/>
+  <line x1="1244" y1="450" x2="1348" y2="450" stroke="#2a2a44" stroke-width="1.5"/>
+  <rect x="1188" y="480" width="10" height="92" fill="#181828" rx="1"/>
+  <rect x="1382" y="480" width="10" height="92" fill="#181828" rx="1"/>
+
+  <!-- ══ MAIN HOUSE FACADE ══ -->
+  <rect x="408" y="248" width="784" height="322" fill="url(#facade-g)"/>
+
+  <!-- ── Main gable roof ── -->
+  <!-- Left face (lighter - catches moonlight) -->
+  <polygon points="385,250 800,72 800,250" fill="url(#roof-l)"/>
+  <!-- Right face (darker) -->
+  <polygon points="800,72 1215,250 800,250" fill="url(#roof-r)"/>
+
+  <!-- Roof tile lines on left face -->
+  <line x1="690" y1="160" x2="385" y2="250" stroke="#1e1e34" stroke-width="0.8" stroke-opacity="0.6"/>
+  <line x1="745" y1="116" x2="385" y2="250" stroke="#1e1e34" stroke-width="0.8" stroke-opacity="0.4"/>
+  <line x1="770" y1="94"  x2="420" y2="250" stroke="#1e1e34" stroke-width="0.8" stroke-opacity="0.3"/>
+
+  <!-- Roof ridge line (gold) -->
+  <line x1="800" y1="72" x2="800" y2="250" stroke="#CE9843" stroke-opacity="0.35" stroke-width="2"/>
+  <!-- Ridge cap highlight -->
+  <line x1="380" y1="250" x2="1220" y2="250" stroke="#CE9843" stroke-opacity="0.28" stroke-width="1.5"/>
+
+  <!-- Gutter line -->
+  <rect x="378" y="247" width="844" height="5" fill="#181828" rx="1"/>
+
+  <!-- ── Left dormer ── -->
+  <polygon points="536,204 605,155 674,204" fill="#16162a"/>
+  <line x1="605" y1="155" x2="605" y2="204" stroke="#CE9843" stroke-opacity="0.30" stroke-width="1.5"/>
+  <line x1="530" y1="204" x2="680" y2="204" stroke="#CE9843" stroke-opacity="0.20" stroke-width="1"/>
+  <ellipse cx="605" cy="178" rx="52" ry="38" fill="url(#win-a)"/>
+  <rect x="570" y="168" width="70" height="38" fill="#f59e0b" fill-opacity="0.25" rx="2"/>
+  <rect x="570" y="168" width="70" height="38" fill="none" stroke="#2a2a44" stroke-width="2" rx="2"/>
+
+  <!-- ── Right dormer ── -->
+  <polygon points="926,204 995,155 1064,204" fill="#16162a"/>
+  <line x1="995" y1="155" x2="995" y2="204" stroke="#CE9843" stroke-opacity="0.30" stroke-width="1.5"/>
+  <line x1="920" y1="204" x2="1070" y2="204" stroke="#CE9843" stroke-opacity="0.20" stroke-width="1"/>
+  <ellipse cx="995" cy="178" rx="52" ry="38" fill="url(#win-b)"/>
+  <rect x="960" y="168" width="70" height="38" fill="#fbbf24" fill-opacity="0.22" rx="2"/>
+  <rect x="960" y="168" width="70" height="38" fill="none" stroke="#2a2a44" stroke-width="2" rx="2"/>
+
+  <!-- ── Facade: cornice ── -->
+  <rect x="403" y="247" width="794" height="10" fill="#1e1e32"/>
+  <rect x="403" y="255" width="794" height="3"  fill="#252540"/>
+
+  <!-- ── Second floor windows (4) ── -->
+  <!-- Win 2F-L -->
+  <ellipse cx="490" cy="320" rx="68" ry="72" fill="url(#win-a)"/>
+  <rect x="448" y="277" width="84" height="115" fill="#f59e0b" fill-opacity="0.17" rx="3"/>
+  <rect x="448" y="277" width="84" height="115" fill="none" stroke="#242440" stroke-width="2.5" rx="3"/>
+  <path d="M 448,300 Q 490,268 532,300" fill="none" stroke="#CE9843" stroke-opacity="0.28" stroke-width="1.5"/>
+  <line x1="490" y1="277" x2="490" y2="392" stroke="#242440" stroke-width="1.5"/>
+
+  <!-- Win 2F-CL -->
+  <ellipse cx="648" cy="320" rx="60" ry="70" fill="url(#win-b)"/>
+  <rect x="608" y="277" width="80" height="115" fill="#fbbf24" fill-opacity="0.14" rx="3"/>
+  <rect x="608" y="277" width="80" height="115" fill="none" stroke="#242440" stroke-width="2.5" rx="3"/>
+  <path d="M 608,300 Q 648,268 688,300" fill="none" stroke="#CE9843" stroke-opacity="0.25" stroke-width="1.5"/>
+  <line x1="648" y1="277" x2="648" y2="392" stroke="#242440" stroke-width="1.5"/>
+
+  <!-- Win 2F-CR -->
+  <ellipse cx="952" cy="320" rx="60" ry="70" fill="url(#win-a)"/>
+  <rect x="912" y="277" width="80" height="115" fill="#f59e0b" fill-opacity="0.18" rx="3"/>
+  <rect x="912" y="277" width="80" height="115" fill="none" stroke="#242440" stroke-width="2.5" rx="3"/>
+  <path d="M 912,300 Q 952,268 992,300" fill="none" stroke="#CE9843" stroke-opacity="0.28" stroke-width="1.5"/>
+  <line x1="952" y1="277" x2="952" y2="392" stroke="#242440" stroke-width="1.5"/>
+
+  <!-- Win 2F-R -->
+  <ellipse cx="1110" cy="320" rx="68" ry="72" fill="url(#win-b)"/>
+  <rect x="1068" y="277" width="84" height="115" fill="#fbbf24" fill-opacity="0.15" rx="3"/>
+  <rect x="1068" y="277" width="84" height="115" fill="none" stroke="#242440" stroke-width="2.5" rx="3"/>
+  <path d="M 1068,300 Q 1110,268 1152,300" fill="none" stroke="#CE9843" stroke-opacity="0.25" stroke-width="1.5"/>
+  <line x1="1110" y1="277" x2="1110" y2="392" stroke="#242440" stroke-width="1.5"/>
+
+  <!-- Floor belt -->
+  <rect x="408" y="408" width="784" height="6" fill="#1a1a2c"/>
+  <rect x="408" y="412" width="784" height="2" fill="#222238"/>
+
+  <!-- ── First floor windows + door ── -->
+  <!-- Win 1F-L -->
+  <ellipse cx="490" cy="490" rx="72" ry="80" fill="url(#win-a)"/>
+  <rect x="440" y="425" width="100" height="140" fill="#f59e0b" fill-opacity="0.15" rx="4"/>
+  <rect x="440" y="425" width="100" height="140" fill="none" stroke="#242440" stroke-width="2.5" rx="4"/>
+  <path d="M 440,452 Q 490,418 540,452" fill="none" stroke="#CE9843" stroke-opacity="0.32" stroke-width="2"/>
+  <line x1="490" y1="425" x2="490" y2="565" stroke="#242440" stroke-width="1.5"/>
+  <line x1="440" y1="495" x2="540" y2="495" stroke="#242440" stroke-width="1.5"/>
+
+  <!-- Win 1F-CL -->
+  <ellipse cx="648" cy="490" rx="65" ry="75" fill="url(#win-b)"/>
+  <rect x="600" y="425" width="96" height="140" fill="#fbbf24" fill-opacity="0.13" rx="4"/>
+  <rect x="600" y="425" width="96" height="140" fill="none" stroke="#242440" stroke-width="2.5" rx="4"/>
+  <path d="M 600,452 Q 648,418 696,452" fill="none" stroke="#CE9843" stroke-opacity="0.28" stroke-width="2"/>
+  <line x1="648" y1="425" x2="648" y2="565" stroke="#242440" stroke-width="1.5"/>
+  <line x1="600" y1="495" x2="696" y2="495" stroke="#242440" stroke-width="1.5"/>
+
+  <!-- Grand entrance (center door) -->
+  <ellipse cx="800" cy="520" rx="160" ry="130" fill="url(#door-glow)"/>
+  <rect x="744" y="430" width="112" height="140" fill="#CE9843" fill-opacity="0.07" rx="5"/>
+  <rect x="744" y="430" width="112" height="140" fill="none" stroke="#CE9843" stroke-opacity="0.40" stroke-width="2.5" rx="5"/>
+  <!-- Door arch -->
+  <path d="M 744,462 Q 800,424 856,462" fill="none" stroke="#CE9843" stroke-opacity="0.55" stroke-width="2.5"/>
+  <!-- Door panels -->
+  <line x1="800" y1="462" x2="800" y2="570" stroke="#CE9843" stroke-opacity="0.28" stroke-width="1.5"/>
+  <rect x="754" y="472" width="40" height="50" fill="none" stroke="#CE9843" stroke-opacity="0.20" stroke-width="1" rx="1"/>
+  <rect x="806" y="472" width="40" height="50" fill="none" stroke="#CE9843" stroke-opacity="0.20" stroke-width="1" rx="1"/>
+  <!-- Handles -->
+  <circle cx="790" cy="515" r="5" fill="#CE9843" fill-opacity="0.55"/>
+  <circle cx="810" cy="515" r="5" fill="#CE9843" fill-opacity="0.55"/>
+  <!-- Fanlight above door -->
+  <path d="M 744,462 Q 800,424 856,462" fill="#f59e0b" fill-opacity="0.12"/>
+  <!-- Pilasters -->
+  <rect x="736" y="435" width="10" height="135" fill="#202038" rx="2"/>
+  <rect x="854" y="435" width="10" height="135" fill="#202038" rx="2"/>
+
+  <!-- Win 1F-CR -->
+  <ellipse cx="952" cy="490" rx="65" ry="75" fill="url(#win-a)"/>
+  <rect x="904" y="425" width="96" height="140" fill="#f59e0b" fill-opacity="0.14" rx="4"/>
+  <rect x="904" y="425" width="96" height="140" fill="none" stroke="#242440" stroke-width="2.5" rx="4"/>
+  <path d="M 904,452 Q 952,418 1000,452" fill="none" stroke="#CE9843" stroke-opacity="0.28" stroke-width="2"/>
+  <line x1="952" y1="425" x2="952" y2="565" stroke="#242440" stroke-width="1.5"/>
+  <line x1="904" y1="495" x2="1000" y2="495" stroke="#242440" stroke-width="1.5"/>
+
+  <!-- Win 1F-R -->
+  <ellipse cx="1110" cy="490" rx="72" ry="80" fill="url(#win-b)"/>
+  <rect x="1060" y="425" width="100" height="140" fill="#fbbf24" fill-opacity="0.15" rx="4"/>
+  <rect x="1060" y="425" width="100" height="140" fill="none" stroke="#242440" stroke-width="2.5" rx="4"/>
+  <path d="M 1060,452 Q 1110,418 1160,452" fill="none" stroke="#CE9843" stroke-opacity="0.32" stroke-width="2"/>
+  <line x1="1110" y1="425" x2="1110" y2="565" stroke="#242440" stroke-width="1.5"/>
+  <line x1="1060" y1="495" x2="1160" y2="495" stroke="#242440" stroke-width="1.5"/>
+
+  <!-- Front porch base -->
+  <rect x="406" y="566" width="788" height="6"  fill="#181828" rx="1"/>
+  <rect x="420" y="570" width="760" height="4"  fill="#14142200"/>
+
+  <!-- Porch columns (decorative) -->
+  <rect x="430" y="480" width="10" height="90" fill="#1c1c2e" rx="2"/>
+  <rect x="740" y="480" width="8"  height="90" fill="#1c1c2e" rx="2"/>
+  <rect x="852" y="480" width="8"  height="90" fill="#1c1c2e" rx="2"/>
+  <rect x="1160" y="480" width="10" height="90" fill="#1c1c2e" rx="2"/>
+
+  <!-- Connection between wings and main house -->
+  <rect x="408" y="340" width="13"  height="232" fill="#101020"/>
+  <rect x="1179" y="340" width="13" height="232" fill="#101020"/>
+
+  <!-- Moonlight edge glow on left roof face -->
+  <line x1="385" y1="250" x2="800" y2="72" stroke="#CE9843" stroke-opacity="0.12" stroke-width="2"/>
+  <!-- Atmospheric roof highlight -->
+  <path d="M 385,250 L 800,72 L 815,76 L 400,254 Z" fill="#CE9843" fill-opacity="0.04"/>
+
+  <!-- Overlays -->
+  <rect width="1600" height="700" fill="url(#vignB)"/>
+  <rect width="1600" height="700" fill="url(#vignS)"/>
+</svg>
