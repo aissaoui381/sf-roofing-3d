@@ -149,8 +149,8 @@ export default function Services() {
             <span className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-4 block">
               What We Do
             </span>
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-white leading-[1.0] tracking-tight">
-              Complete<br />Roofing<br />Solutions
+            <h2 className="text-4xl md:text-5xl font-black text-white leading-[1.0] tracking-tight whitespace-nowrap">
+              Complete Roofing Solutions
             </h2>
           </div>
           <p className="text-zinc-400 text-base leading-relaxed max-w-xs md:mb-2">
