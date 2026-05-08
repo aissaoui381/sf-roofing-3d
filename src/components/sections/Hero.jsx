@@ -71,7 +71,7 @@ export default function Hero() {
           </h1>
 
           {/* H2 */}
-          <h2 className="hero-sub text-white font-semibold mb-4 text-xl sm:text-2xl whitespace-nowrap overflow-visible">
+          <h2 className="hero-sub text-white font-semibold mb-4 text-lg whitespace-nowrap">
             Complete Roofing Solutions
           </h2>
 
