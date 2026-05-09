@@ -110,16 +110,18 @@ export default function Hero() {
       .from('.hero-stats',  { y: 20, opacity: 0, duration: 0.5, ease: 'power3.out' }, '-=0.3')
       .from('.hero-scroll', { opacity: 0, duration: 0.4 }, '-=0.2');
 
-    // Gentle float for preview cards
+    // Gentle float for preview cards — each on its own rhythm
     floatRefs.current.forEach((el, i) => {
       if (!el) return;
       gsap.to(el, {
-        y: -8 + i * 3,
-        duration: 2.8 + i * 0.5,
+        y: i % 2 === 0 ? -12 : -7,
+        x: i % 2 === 0 ? 3 : -3,
+        rotation: i % 2 === 0 ? 0.8 : -0.8,
+        duration: 3.2 + i * 0.7,
         ease: 'sine.inOut',
         repeat: -1,
         yoyo: true,
-        delay: i * 0.4,
+        delay: i * 0.6,
       });
     });
   }, { scope: containerRef });
@@ -195,9 +197,8 @@ export default function Hero() {
                            bg-[#DD9E3A] hover:bg-[#C98D2F]
                            text-zinc-950 font-bold text-base
                            transition-all duration-300
-                           shadow-[0_8px_24px_rgba(221,158,58,0.45)]
-                           hover:shadow-[0_8px_32px_rgba(221,158,58,0.65)]
                            hover:-translate-y-0.5 active:scale-[0.98]"
+            style={{ animation: 'glow-pulse 3s ease-in-out infinite' }}
               >
                 <span aria-hidden className="absolute inset-0 rounded-xl bg-gradient-to-b from-white/20 to-transparent pointer-events-none" />
                 <span className="relative">Build My Custom Quote</span>
@@ -270,9 +271,14 @@ export default function Hero() {
                       bg-black/60 backdrop-blur-md border-t border-white/8">
         <div className="max-w-7xl mx-auto px-8 lg:px-16 py-4
                         grid grid-cols-2 md:grid-cols-4 gap-4">
-          {STATS.map((s) => (
+          {STATS.map((s, i) => (
             <div key={s.label} className="text-center">
-              <p className="text-[#DD9E3A] font-black text-xl md:text-2xl leading-none">{s.value}</p>
+              <p
+                className="text-[#DD9E3A] font-black text-xl md:text-2xl leading-none"
+                style={{ animation: `float-bob ${3 + i * 0.4}s ease-in-out infinite`, animationDelay: `${i * 0.5}s` }}
+              >
+                {s.value}
+              </p>
               <p className="text-zinc-500 text-xs mt-1 tracking-wide">{s.label}</p>
             </div>
           ))}
