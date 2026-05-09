@@ -15,7 +15,7 @@ const PROJECTS = [
     skyA: '#3d1a00',
     skyB: '#150900',
     slug: '/roof-replacement-san-francisco',
-    img: '/projects/mission.png',
+    img: '/projects/mission.webp',
     alt: 'Flat TPO roof replacement Mission District San Francisco',
   },
   {
@@ -27,7 +27,7 @@ const PROJECTS = [
     skyA: '#001833',
     skyB: '#000b1a',
     slug: '/roof-repair-san-francisco',
-    img: '/projects/noe-valley.png',
+    img: '/projects/noe-valley.webp',
     alt: 'Roof repair flashing Noe Valley San Francisco',
   },
   {
@@ -39,7 +39,7 @@ const PROJECTS = [
     skyA: '#1a001a',
     skyB: '#080008',
     slug: '/storm-damage-roofing-san-francisco',
-    img: '/projects/twin-peaks.png',
+    img: '/projects/twin-peaks.webp',
     alt: 'Storm damage roof repair Twin Peaks San Francisco',
   },
   {
@@ -51,7 +51,7 @@ const PROJECTS = [
     skyA: '#2d1800',
     skyB: '#0d0700',
     slug: '/roof-replacement-san-francisco',
-    img: '/projects/Sunset.png',
+    img: '/projects/Sunset.webp',
     alt: 'Asphalt shingle roof replacement Sunset District San Francisco',
   },
   {
@@ -63,7 +63,7 @@ const PROJECTS = [
     skyA: '#001a2e',
     skyB: '#00080f',
     slug: '/roof-inspection-san-francisco',
-    img: '/projects/pacific-heights.png',
+    img: '/projects/pacific-heights.webp',
     alt: 'Roof inspection Pacific Heights San Francisco',
   },
   {
@@ -75,7 +75,7 @@ const PROJECTS = [
     skyA: '#0a1a0a',
     skyB: '#030803',
     slug: '/roof-replacement-san-francisco',
-    img: '/projects/richmond.png',
+    img: '/projects/richmond.webp',
     alt: 'Standing seam metal roof Richmond District San Francisco',
   },
 ];

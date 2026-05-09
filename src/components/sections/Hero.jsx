@@ -14,17 +14,17 @@ const PREVIEWS = [
   {
     neighborhood: 'Noe Valley',
     service: 'Victorian Replacement',
-    img: '/projects/noe-valley.png',
+    img: '/projects/noe-valley.webp',
   },
   {
     neighborhood: 'Mission District',
     service: 'TPO Flat Roof',
-    img: '/projects/mission.png',
+    img: '/projects/mission.webp',
   },
   {
     neighborhood: 'Twin Peaks',
     service: 'Storm Repair',
-    img: '/projects/twin-peaks.png',
+    img: '/projects/twin-peaks.webp',
   },
 ];
 
