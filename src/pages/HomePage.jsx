@@ -3,6 +3,7 @@ import Hero from '../components/sections/Hero.jsx';
 import Marquee from '../components/ui/Marquee.jsx';
 import Services from '../components/sections/Services.jsx';
 import WhyUs from '../components/sections/WhyUs.jsx';
+import Portfolio from '../components/sections/Portfolio.jsx';
 import QuoteCalculator from '../components/sections/QuoteCalculator.jsx';
 import Testimonials from '../components/sections/Testimonials.jsx';
 import Footer from '../components/Footer.jsx';
@@ -14,6 +15,7 @@ export default function HomePage() {
       <Marquee />
       <Services />
       <WhyUs />
+      <Portfolio />
       <QuoteCalculator />
       <Testimonials />
       <Footer />
