@@ -172,8 +172,8 @@ export default function Services() {
                   flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold
                   border transition-all duration-200
                   ${selected.title === s.title
-                    ? 'bg-gold/[0.12] text-gold border-gold/40 shadow-[0_0_20px_rgba(206,152,67,0.1)]'
-                    : 'text-zinc-500 border-zinc-200 hover:text-zinc-700 hover:border-zinc-400 hover:bg-zinc-50'
+                    ? 'bg-[#CE9843] text-zinc-950 border-[#CE9843] shadow-[0_4px_16px_rgba(206,152,67,0.35)] scale-[1.02]'
+                    : 'bg-white text-zinc-500 border-zinc-200 hover:text-zinc-800 hover:border-zinc-400 hover:bg-zinc-50'
                   }
                 `}
               >
