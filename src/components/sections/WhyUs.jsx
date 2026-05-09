@@ -196,7 +196,7 @@ export default function WhyUs() {
               <div key={label} className="stat-pill py-8 md:py-10 text-center">
                 <div
                   ref={(el) => (statRefs.current[i] = el)}
-                  className="text-3xl md:text-4xl lg:text-5xl font-black text-gold tabular-nums leading-none mb-2"
+                  className="text-3xl md:text-4xl lg:text-5xl font-black text-[#CE9843] tabular-nums leading-none mb-2"
                 >
                   0{suffix}
                 </div>
