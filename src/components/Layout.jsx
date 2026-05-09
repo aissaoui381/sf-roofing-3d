@@ -6,7 +6,6 @@ const ORBS = [
   { size: 350, top: '15%', left: '45%',  anim: 'orb-drift-b', dur: '30s', delay: '16s'  },
 ];
 
-// Particles — tiny gold specks that slowly rise
 const PARTICLES = Array.from({ length: 18 }, (_, i) => ({
   left:  `${(i * 17 + 7)  % 95}%`,
   top:   `${(i * 31 + 13) % 90}%`,
@@ -18,7 +17,7 @@ const PARTICLES = Array.from({ length: 18 }, (_, i) => ({
 
 export default function Layout({ children }) {
   return (
-    <div className="relative bg-zinc-950 min-h-screen overflow-x-hidden antialiased [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+    <div className="relative bg-white min-h-screen overflow-x-hidden antialiased [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
 
       {/* ── Global ambient layer — fixed behind all content ── */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
@@ -35,7 +34,7 @@ export default function Layout({ children }) {
               left:   o.left,
               animation: `${o.anim} ${o.dur} ease-in-out infinite`,
               animationDelay: o.delay,
-              opacity: 0.045,
+              opacity: 0.06,
               transform: 'translate(-50%, -50%)',
             }}
           />
@@ -58,9 +57,9 @@ export default function Layout({ children }) {
           />
         ))}
 
-        {/* One slow diagonal shimmer sweep (repeats every 18s) */}
+        {/* One slow diagonal shimmer sweep */}
         <div
-          className="absolute top-0 left-0 w-px h-[200%] bg-gradient-to-b from-transparent via-[#CE9843]/20 to-transparent"
+          className="absolute top-0 left-0 w-px h-[200%] bg-gradient-to-b from-transparent via-[#CE9843]/15 to-transparent"
           style={{ animation: 'shimmer-sweep 18s ease-in-out infinite', animationDelay: '6s' }}
         />
       </div>

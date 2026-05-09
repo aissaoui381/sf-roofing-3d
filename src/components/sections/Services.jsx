@@ -59,8 +59,8 @@ function MaterialCarousel() {
   const slide = SLIDES[index];
 
   return (
-    <div className="relative overflow-hidden rounded-2xl mb-12 group shadow-2xl">
-      <div className="relative aspect-[4/3] sm:aspect-[16/7] overflow-hidden bg-zinc-900">
+    <div className="relative overflow-hidden rounded-2xl mb-12 group shadow-xl border border-zinc-200">
+      <div className="relative aspect-[4/3] sm:aspect-[16/7] overflow-hidden bg-zinc-100">
         <img
           key={index}
           src={slide.src}
@@ -80,7 +80,7 @@ function MaterialCarousel() {
               Material Showcase
             </span>
             <p className="text-white font-bold text-xl">{slide.label}</p>
-            <p className="text-zinc-400 text-sm">{slide.desc}</p>
+            <p className="text-zinc-300 text-sm">{slide.desc}</p>
           </div>
           <div className="flex gap-1.5">
             {SLIDES.map((_, i) => (
@@ -136,10 +136,10 @@ export default function Services() {
 
   return (
     <section id="services" ref={containerRef}
-      className="py-24 px-6 md:px-16 lg:px-24 bg-zinc-950 relative overflow-hidden">
+      className="py-24 px-6 md:px-16 lg:px-24 bg-white relative overflow-hidden">
 
       {/* Ambient gold glow */}
-      <div className="absolute top-0 left-0 w-64 h-64 bg-gold/[0.04] rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+      <div className="absolute top-0 left-0 w-64 h-64 bg-gold/[0.06] rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative">
 
@@ -149,11 +149,11 @@ export default function Services() {
             <span className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-4 block">
               What We Do
             </span>
-            <h2 className="text-3xl md:text-5xl font-black text-white leading-[1.05] tracking-tight">
+            <h2 className="text-3xl md:text-5xl font-black text-zinc-900 leading-[1.05] tracking-tight">
               Complete Roofing Solutions
             </h2>
           </div>
-          <p className="text-zinc-400 text-base leading-relaxed max-w-xs md:mb-2">
+          <p className="text-zinc-500 text-base leading-relaxed max-w-xs md:mb-2">
             From a missing shingle to a full Victorian flat re-roof — every project delivered with itemised pricing before we touch your home.
           </p>
         </div>
@@ -172,7 +172,7 @@ export default function Services() {
                   border transition-all duration-200
                   ${selected.title === s.title
                     ? 'bg-gold/[0.12] text-gold border-gold/40 shadow-[0_0_20px_rgba(206,152,67,0.1)]'
-                    : 'text-zinc-500 border-zinc-800 hover:text-zinc-200 hover:border-zinc-600 hover:bg-zinc-800/50'
+                    : 'text-zinc-500 border-zinc-200 hover:text-zinc-700 hover:border-zinc-400 hover:bg-zinc-50'
                   }
                 `}
               >
@@ -187,32 +187,32 @@ export default function Services() {
             {/* Ghost index number */}
             <span
               aria-hidden
-              className="hidden md:block absolute -top-6 right-0 text-[11rem] font-black text-gold/[0.04] leading-none select-none pointer-events-none tabular-nums"
+              className="hidden md:block absolute -top-6 right-0 text-[11rem] font-black text-gold/[0.07] leading-none select-none pointer-events-none tabular-nums"
             >
               {String(selectedIndex + 1).padStart(2, '0')}
             </span>
 
             <div className="relative">
               <span className="text-5xl block mb-5">{selected.icon}</span>
-              <h3 className="text-3xl md:text-4xl font-black text-white mb-3 tracking-tight">
+              <h3 className="text-3xl md:text-4xl font-black text-zinc-900 mb-3 tracking-tight">
                 {selected.title}
               </h3>
-              <span className="inline-flex items-center gap-1.5 text-xs text-zinc-400 bg-zinc-800/80 border border-zinc-700/50 px-3 py-1.5 rounded-full mb-6">
+              <span className="inline-flex items-center gap-1.5 text-xs text-zinc-500 bg-zinc-100 border border-zinc-200 px-3 py-1.5 rounded-full mb-6">
                 <Clock size={11} className="text-gold" />
                 Typical timeline: {selected.time}
               </span>
-              <p className="text-zinc-300 text-base leading-relaxed">{selected.desc}</p>
+              <p className="text-zinc-600 text-base leading-relaxed">{selected.desc}</p>
             </div>
 
             <div className="relative flex flex-col justify-center">
-              <p className="text-zinc-600 text-[11px] font-bold tracking-[0.2em] uppercase mb-5">
+              <p className="text-zinc-400 text-[11px] font-bold tracking-[0.2em] uppercase mb-5">
                 What's included
               </p>
               <ul className="space-y-4 mb-8">
                 {selected.features.map((f) => (
                   <li key={f} className="flex items-start gap-3">
                     <CheckCircle size={16} className="text-gold flex-shrink-0 mt-0.5" />
-                    <span className="text-zinc-200 text-sm leading-relaxed">{f}</span>
+                    <span className="text-zinc-700 text-sm leading-relaxed">{f}</span>
                   </li>
                 ))}
               </ul>

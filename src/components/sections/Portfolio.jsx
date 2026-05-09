@@ -87,7 +87,6 @@ function RoofScene({ roofType, skyA, skyB, index }) {
   const isVictorian = roofType === 'victorian';
   const isModern   = roofType === 'modern';
 
-  // seeded pseudo-random for star positions
   const stars = Array.from({ length: 14 }, (_, i) => ({
     cx: ((i * 67 + 23) % 280) + 10,
     cy: ((i * 43 + 11) % 55) + 5,
@@ -95,7 +94,6 @@ function RoofScene({ roofType, skyA, skyB, index }) {
     op: 0.3 + (i % 4) * 0.15,
   }));
 
-  // background building silhouettes
   const bgBuildings = [
     { x: 0,   y: 115, w: 28, h: 85 },
     { x: 35,  y: 108, w: 18, h: 92 },
@@ -117,11 +115,7 @@ function RoofScene({ roofType, skyA, skyB, index }) {
   }
 
   return (
-    <svg
-      viewBox="0 0 300 200"
-      className="w-full h-full"
-      preserveAspectRatio="xMidYMid slice"
-    >
+    <svg viewBox="0 0 300 200" className="w-full h-full" preserveAspectRatio="xMidYMid slice">
       <defs>
         <linearGradient id={gId} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor={skyA} />
@@ -129,39 +123,20 @@ function RoofScene({ roofType, skyA, skyB, index }) {
         </linearGradient>
         <linearGradient id={fId} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="transparent" />
-          <stop offset="100%" stopColor="#09090b" />
+          <stop offset="100%" stopColor="#f4f4f5" />
         </linearGradient>
       </defs>
-
-      {/* Sky */}
       <rect width="300" height="200" fill={`url(#${gId})`} />
-
-      {/* Stars */}
       {stars.map((s, i) => (
         <circle key={i} cx={s.cx} cy={s.cy} r={s.r} fill="white" opacity={s.op} />
       ))}
-
-      {/* Background city */}
       {bgBuildings.map((b, i) => (
         <rect key={i} x={b.x} y={b.y} width={b.w} height={b.h} fill="#000" opacity="0.38" />
       ))}
-
-      {/* Main building */}
       <rect x="68" y="92" width="164" height="108" fill="#0d0d0d" />
-
-      {/* Windows */}
       {windows.map((w, i) => (
-        <rect
-          key={i}
-          x={w.x} y={w.y}
-          width="14" height="10"
-          fill="#CE9843"
-          opacity={w.lit ? 0.65 : 0.1}
-          rx="2"
-        />
+        <rect key={i} x={w.x} y={w.y} width="14" height="10" fill="#CE9843" opacity={w.lit ? 0.65 : 0.1} rx="2" />
       ))}
-
-      {/* Roof by type */}
       {isFlat && (
         <>
           <rect x="55" y="83" width="190" height="13" fill="#CE9843" opacity="0.92" rx="2" />
@@ -170,23 +145,17 @@ function RoofScene({ roofType, skyA, skyB, index }) {
           <rect x="130" y="59" width="10" height="9" fill="#2a2a2a" />
         </>
       )}
-
       {isVictorian && (
         <>
-          {/* Main gable */}
           <polygon points="48,92 150,30 252,92" fill="#CE9843" opacity="0.9" />
           <line x1="48"  y1="92" x2="150" y2="30" stroke="#e8b855" strokeWidth="2.5" />
           <line x1="150" y1="30" x2="252" y2="92" stroke="#e8b855" strokeWidth="2.5" />
-          {/* Side gable */}
           <polygon points="195,92 235,64 275,92" fill="#CE9843" opacity="0.45" />
-          {/* Chimney */}
           <rect x="132" y="14" width="18" height="32" fill="#1e1e1e" />
           <rect x="129" y="10" width="24" height="7" fill="#2a2a2a" />
-          {/* Ridge ornament */}
           <circle cx="150" cy="28" r="4" fill="#e8b855" opacity="0.8" />
         </>
       )}
-
       {isModern && (
         <>
           <polygon points="48,92 260,82 260,72 150,62 48,82" fill="#888" opacity="0.7" />
@@ -194,10 +163,8 @@ function RoofScene({ roofType, skyA, skyB, index }) {
           <rect x="160" y="52" width="50" height="14" fill="#1a1a1a" rx="2" />
         </>
       )}
-
       {!isFlat && !isVictorian && !isModern && (
         <>
-          {/* Standard pitched */}
           <polygon points="48,92 150,34 252,92" fill="#CE9843" opacity="0.9" />
           <line x1="48"  y1="92" x2="150" y2="34" stroke="#e8b855" strokeWidth="2" />
           <line x1="150" y1="34" x2="252" y2="92" stroke="#e8b855" strokeWidth="2" />
@@ -205,8 +172,6 @@ function RoofScene({ roofType, skyA, skyB, index }) {
           <rect x="135" y="14" width="20" height="6" fill="#2a2a2a" />
         </>
       )}
-
-      {/* Bottom fade to card bg */}
       <rect x="0" y="148" width="300" height="52" fill={`url(#${fId})`} />
     </svg>
   );
@@ -233,7 +198,7 @@ export default function Portfolio() {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="bg-zinc-950 py-24 border-t border-zinc-900 overflow-hidden">
+    <section ref={containerRef} className="bg-zinc-50 py-24 border-t border-zinc-200 overflow-hidden">
 
       {/* Header */}
       <div className="portfolio-header px-6 md:px-16 lg:px-24 max-w-7xl mx-auto
@@ -242,7 +207,7 @@ export default function Portfolio() {
           <p className="text-[#CE9843] text-xs font-bold tracking-[0.25em] uppercase mb-3">
             Recent Projects
           </p>
-          <h2 className="text-4xl md:text-5xl font-black text-white leading-[1.05]">
+          <h2 className="text-4xl md:text-5xl font-black text-zinc-900 leading-[1.05]">
             Our Work Across<br />San Francisco
           </h2>
         </div>
@@ -251,7 +216,7 @@ export default function Portfolio() {
         </p>
       </div>
 
-      {/* Infinite sliding strip — pauses on hover */}
+      {/* Infinite sliding strip */}
       <div className="portfolio-strip group select-none">
         <div
           className="flex gap-5 w-max group-hover:[animation-play-state:paused]"
@@ -262,13 +227,13 @@ export default function Portfolio() {
               key={`${p.neighborhood}-${i}`}
               to={p.slug}
               className="flex-shrink-0 w-[340px] rounded-2xl overflow-hidden
-                         border border-zinc-800 hover:border-[#CE9843]/50 bg-zinc-900
+                         border border-zinc-200 hover:border-[#CE9843]/50 bg-white
                          transition-all duration-300
-                         hover:shadow-[0_16px_48px_rgba(206,152,67,0.2)]
+                         hover:shadow-[0_16px_48px_rgba(206,152,67,0.15)]
                          hover:-translate-y-2"
             >
               {/* Image */}
-              <div className="relative h-72 overflow-hidden bg-zinc-950">
+              <div className="relative h-72 overflow-hidden bg-zinc-100">
                 {p.img ? (
                   <img
                     src={p.img}
@@ -281,20 +246,17 @@ export default function Portfolio() {
                   <RoofScene {...p} index={i % PROJECTS.length} />
                 )}
 
-                {/* Hover overlay */}
                 <div className="absolute inset-0 bg-[#CE9843]/10 opacity-0 hover:opacity-100 transition-opacity duration-300" />
 
-                {/* Year */}
                 <span className="absolute top-3 right-3 px-2.5 py-1 rounded-full
-                                 bg-black/70 backdrop-blur-sm border border-zinc-700/60
-                                 text-[11px] text-zinc-400 font-medium">
+                                 bg-white/90 backdrop-blur-sm border border-zinc-200
+                                 text-[11px] text-zinc-500 font-medium">
                   {p.year}
                 </span>
 
-                {/* Service badge */}
                 <span className="absolute bottom-3 left-3 px-3 py-1.5 rounded-full
-                                 bg-[#CE9843]/25 backdrop-blur-sm border border-[#CE9843]/40
-                                 text-[11px] text-[#CE9843] font-bold tracking-wide">
+                                 bg-[#CE9843]/90 backdrop-blur-sm
+                                 text-[11px] text-white font-bold tracking-wide">
                   {p.service}
                 </span>
               </div>
@@ -307,9 +269,9 @@ export default function Portfolio() {
                     {p.neighborhood}
                   </span>
                 </div>
-                <h3 className="text-white font-black text-lg leading-tight mb-1">{p.service}</h3>
+                <h3 className="text-zinc-900 font-black text-lg leading-tight mb-1">{p.service}</h3>
                 <p className="text-zinc-500 text-sm leading-relaxed">{p.detail}</p>
-                <div className="flex items-center gap-1 mt-4 text-[#CE9843]/70 text-xs font-semibold">
+                <div className="flex items-center gap-1 mt-4 text-[#CE9843]/80 text-xs font-semibold">
                   View service <ChevronRight size={12} />
                 </div>
               </div>

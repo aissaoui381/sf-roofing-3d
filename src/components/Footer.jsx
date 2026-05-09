@@ -14,17 +14,17 @@ const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior:
 
 export default function Footer() {
   return (
-    <footer id="about" className="bg-zinc-950 relative overflow-hidden">
+    <footer id="about" className="bg-zinc-50 relative overflow-hidden border-t border-zinc-200">
 
       {/* Gold gradient line at top */}
       <div className="h-px w-full bg-gradient-to-r from-transparent via-gold to-transparent" />
 
       {/* Ambient glow behind brand area */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[200px]
-                      bg-gold/[0.06] rounded-full blur-3xl pointer-events-none" />
+                      bg-gold/[0.05] rounded-full blur-3xl pointer-events-none" />
 
       {/* ── Brand header ── */}
-      <div className="relative px-6 md:px-16 lg:px-24 pt-16 pb-14 border-b border-zinc-800/60">
+      <div className="relative px-6 md:px-16 lg:px-24 pt-16 pb-14 border-b border-zinc-200">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div>
             <div className="flex items-center gap-3 mb-4">
@@ -33,10 +33,10 @@ export default function Footer() {
                 <span className="text-zinc-950 font-black text-sm tracking-tight">SF</span>
               </div>
               <div>
-                <p className="text-white font-black text-lg tracking-tight leading-none">
+                <p className="text-zinc-900 font-black text-lg tracking-tight leading-none">
                   San Francisco Roofing Service
                 </p>
-                <p className="text-zinc-500 text-xs mt-0.5">SanFranciscoRoofingService.com</p>
+                <p className="text-zinc-400 text-xs mt-0.5">SanFranciscoRoofingService.com</p>
               </div>
             </div>
             <p className="text-zinc-500 text-sm leading-relaxed max-w-sm">
@@ -89,14 +89,14 @@ export default function Footer() {
             <div className="space-y-4">
               <a
                 href="mailto:INFO@SanFranciscoRoofingService.com"
-                className="flex items-center gap-2.5 text-gold hover:text-gold-light transition-colors duration-200 text-sm font-medium"
+                className="flex items-center gap-2.5 text-gold hover:text-[#B8832A] transition-colors duration-200 text-sm font-medium"
               >
                 <Mail size={14} className="flex-shrink-0" />
                 INFO@SanFranciscoRoofingService.com
               </a>
-              <p className="text-zinc-600 text-xs">All enquiries answered within 2 business hours.</p>
+              <p className="text-zinc-400 text-xs">All enquiries answered within 2 business hours.</p>
               <div className="flex items-start gap-2.5 pt-1">
-                <MapPin size={14} className="text-zinc-600 flex-shrink-0 mt-0.5" />
+                <MapPin size={14} className="text-zinc-400 flex-shrink-0 mt-0.5" />
                 <p className="text-zinc-500 text-sm">San Francisco & Bay Area</p>
               </div>
               <div className="flex items-center gap-3 pt-2">
@@ -112,8 +112,8 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={label}
-                    className="w-8 h-8 rounded-lg bg-zinc-800 hover:bg-gold/20 border border-zinc-700 hover:border-gold/40
-                               flex items-center justify-center text-zinc-500 hover:text-gold transition-all duration-200"
+                    className="w-8 h-8 rounded-lg bg-white hover:bg-gold/10 border border-zinc-200 hover:border-gold/40
+                               flex items-center justify-center text-zinc-400 hover:text-gold transition-all duration-200"
                   >
                     <Icon size={14} />
                   </a>
@@ -144,13 +144,13 @@ export default function Footer() {
       </div>
 
       {/* ── Bottom bar ── */}
-      <div className="px-6 md:px-16 lg:px-24 py-5 border-t border-zinc-800/60">
+      <div className="px-6 md:px-16 lg:px-24 py-5 border-t border-zinc-200">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-zinc-700 text-xs">© 2025 San Francisco Roofing Service. All rights reserved.</p>
+          <p className="text-zinc-400 text-xs">© 2025 San Francisco Roofing Service. All rights reserved.</p>
           <div className="flex gap-5">
-            <Link to="/about" className="text-zinc-700 hover:text-zinc-400 text-xs transition-colors">About</Link>
-            <Link to="/contact" className="text-zinc-700 hover:text-zinc-400 text-xs transition-colors">Contact</Link>
-            <Link to="/privacy" className="text-zinc-700 hover:text-zinc-400 text-xs transition-colors">Privacy Policy</Link>
+            <Link to="/about" className="text-zinc-400 hover:text-zinc-600 text-xs transition-colors">About</Link>
+            <Link to="/contact" className="text-zinc-400 hover:text-zinc-600 text-xs transition-colors">Contact</Link>
+            <Link to="/privacy" className="text-zinc-400 hover:text-zinc-600 text-xs transition-colors">Privacy Policy</Link>
           </div>
         </div>
       </div>

@@ -18,8 +18,8 @@ const BENEFITS = [
     desc: 'Your itemised estimate arrives via email before any work begins — a full line-by-line breakdown with no hidden fees, ever.',
     detail: 'We email you a complete cost breakdown before we touch a single shingle. Every material, every labour hour, every permit — priced and explained.',
     accent: '#CE9843',
-    bg: 'from-amber-500/[0.12] to-amber-900/[0.04]',
-    border: 'border-amber-500/20',
+    bg: 'from-amber-500/[0.08] to-amber-100/[0.5]',
+    border: 'border-amber-200',
   },
   {
     num: '02',
@@ -27,8 +27,8 @@ const BENEFITS = [
     desc: 'Fully licensed in California (CSLB #1045782) with $2M liability coverage protecting you and your property on every project.',
     detail: 'Your home is protected from the moment our crew arrives. $2M liability policy, workers\' comp on every crew member, bonded and verified.',
     accent: '#e8b855',
-    bg: 'from-orange-500/[0.12] to-orange-900/[0.04]',
-    border: 'border-orange-500/20',
+    bg: 'from-orange-500/[0.08] to-orange-100/[0.5]',
+    border: 'border-orange-200',
   },
   {
     num: '03',
@@ -36,8 +36,8 @@ const BENEFITS = [
     desc: "We know San Francisco's micro-climates, Victorian flats, Edwardian details, and building codes better than any general contractor.",
     detail: 'From fog-belt moisture barriers to Mission District flat roofs — we\'ve handled every SF roof type and every city permit requirement.',
     accent: '#f59e0b',
-    bg: 'from-yellow-500/[0.12] to-yellow-900/[0.04]',
-    border: 'border-yellow-500/20',
+    bg: 'from-yellow-500/[0.08] to-yellow-100/[0.5]',
+    border: 'border-yellow-200',
   },
   {
     num: '04',
@@ -45,8 +45,8 @@ const BENEFITS = [
     desc: 'Most repairs within 48 hours. We treat your home like our own — clean job sites, daily progress updates, no lingering crews.',
     detail: 'We show up on time, protect your landscaping, and clean up completely every day. You\'ll get a photo update each evening until the job is done.',
     accent: '#CE9843',
-    bg: 'from-amber-400/[0.12] to-amber-800/[0.04]',
-    border: 'border-amber-400/20',
+    bg: 'from-amber-400/[0.08] to-amber-100/[0.5]',
+    border: 'border-amber-200',
   },
 ];
 
@@ -178,7 +178,7 @@ export default function WhyUs() {
       </div>
 
       {/* ── Luxury house image with stats overlaid ── */}
-      <div className="relative bg-zinc-950 overflow-hidden">
+      <div className="relative bg-zinc-100 overflow-hidden">
         <img
           src="/luxury-house.svg"
           alt="Luxury San Francisco home with premium roofing"
@@ -210,7 +210,7 @@ export default function WhyUs() {
       </div>
 
       {/* ── Benefits Slider ── */}
-      <div className="bg-zinc-950 py-20 px-6 md:px-16 lg:px-24">
+      <div className="bg-white py-20 px-6 md:px-16 lg:px-24">
         <div className="max-w-7xl mx-auto benefits-slider-wrap">
 
           {/* Slider header row */}
@@ -219,7 +219,7 @@ export default function WhyUs() {
               <span className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3 block">
                 Our Commitments
               </span>
-              <h3 className="text-3xl md:text-4xl font-black text-white leading-tight">
+              <h3 className="text-3xl md:text-4xl font-black text-zinc-900 leading-tight">
                 What Sets Us Apart
               </h3>
             </div>
@@ -228,13 +228,13 @@ export default function WhyUs() {
             <div className="flex items-center gap-4">
               <p className="text-2xl font-black tabular-nums hidden sm:block">
                 <span className="text-gold">{String(index + 1).padStart(2, '0')}</span>
-                <span className="text-zinc-700 text-xl"> / </span>
-                <span className="text-zinc-700">{String(BENEFITS.length).padStart(2, '0')}</span>
+                <span className="text-zinc-300 text-xl"> / </span>
+                <span className="text-zinc-300">{String(BENEFITS.length).padStart(2, '0')}</span>
               </p>
               <div className="flex gap-2">
                 <button
                   onClick={prev}
-                  className="w-10 h-10 rounded-full border border-zinc-700 hover:border-gold/50 hover:bg-gold/[0.08]
+                  className="w-10 h-10 rounded-full border border-zinc-300 hover:border-gold/50 hover:bg-gold/[0.08]
                              flex items-center justify-center text-zinc-400 hover:text-gold
                              transition-all duration-200"
                 >
@@ -242,7 +242,7 @@ export default function WhyUs() {
                 </button>
                 <button
                   onClick={next}
-                  className="w-10 h-10 rounded-full border border-zinc-700 hover:border-gold/50 hover:bg-gold/[0.08]
+                  className="w-10 h-10 rounded-full border border-zinc-300 hover:border-gold/50 hover:bg-gold/[0.08]
                              flex items-center justify-center text-zinc-400 hover:text-gold
                              transition-all duration-200"
                 >
@@ -265,7 +265,7 @@ export default function WhyUs() {
             <span
               aria-hidden
               className="absolute -right-4 -bottom-6 text-[12rem] md:text-[18rem] font-black leading-none select-none tabular-nums pointer-events-none"
-              style={{ color: `${b.accent}0D` }}
+              style={{ color: `${b.accent}15` }}
             >
               {b.num}
             </span>
@@ -285,17 +285,17 @@ export default function WhyUs() {
                 >
                   {b.num}
                 </span>
-                <h4 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-[1.05] tracking-tight mb-5">
+                <h4 className="text-3xl md:text-4xl lg:text-5xl font-black text-zinc-900 leading-[1.05] tracking-tight mb-5">
                   {b.title}
                 </h4>
-                <p className="text-zinc-300 text-base md:text-lg leading-relaxed">
+                <p className="text-zinc-600 text-base md:text-lg leading-relaxed">
                   {b.desc}
                 </p>
               </div>
 
               {/* Right */}
               <div className="space-y-5">
-                <p className="text-zinc-400 text-sm md:text-base leading-relaxed border-l-2 pl-5"
+                <p className="text-zinc-500 text-sm md:text-base leading-relaxed border-l-2 pl-5"
                    style={{ borderColor: `${b.accent}50` }}>
                   {b.detail}
                 </p>
@@ -323,14 +323,14 @@ export default function WhyUs() {
                 key={i}
                 onClick={() => handleNav(i, i > index ? 1 : -1)}
                 className={`h-1 rounded-full transition-all duration-400 ${
-                  i === index ? 'w-10 bg-gold' : 'w-2.5 bg-zinc-700 hover:bg-zinc-500'
+                  i === index ? 'w-10 bg-gold' : 'w-2.5 bg-zinc-300 hover:bg-zinc-400'
                 }`}
               />
             ))}
           </div>
 
           {/* Auto-progress bar */}
-          <div className="mt-3 h-px bg-zinc-800 rounded-full overflow-hidden">
+          <div className="mt-3 h-px bg-zinc-200 rounded-full overflow-hidden">
             <div
               key={`pb-${index}`}
               className="h-full rounded-full"
