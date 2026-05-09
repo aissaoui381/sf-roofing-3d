@@ -1,95 +1,239 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 700">
   <defs>
-    <rect id="sa" width="200" height="100" fill="#3f3f46" stroke="#09090b" stroke-width="2"/>
-    <rect id="sb" width="200" height="100" fill="#27272a" stroke="#09090b" stroke-width="2"/>
-    <linearGradient id="vig" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="45%" stop-color="transparent"/>
-      <stop offset="100%" stop-color="#09090b" stop-opacity="0.96"/>
+    <!-- Shingle face gradients (3 variants for natural variation) -->
+    <linearGradient id="sf1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#525252"/>
+      <stop offset="35%"  stop-color="#3a3a3a"/>
+      <stop offset="100%" stop-color="#1c1c1c"/>
     </linearGradient>
-    <linearGradient id="vigL" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#09090b" stop-opacity="0.75"/>
-      <stop offset="30%" stop-color="transparent"/>
+    <linearGradient id="sf2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#454545"/>
+      <stop offset="35%"  stop-color="#2f2f2f"/>
+      <stop offset="100%" stop-color="#161616"/>
+    </linearGradient>
+    <linearGradient id="sf3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#5a5a5a"/>
+      <stop offset="35%"  stop-color="#424242"/>
+      <stop offset="100%" stop-color="#222222"/>
+    </linearGradient>
+    <!-- Row shadow (overlap edge) -->
+    <linearGradient id="rowshadow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#000" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </linearGradient>
+    <!-- Vignettes -->
+    <linearGradient id="vigB" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="55%"  stop-color="transparent"/>
+      <stop offset="100%" stop-color="#09090b" stop-opacity="0.97"/>
     </linearGradient>
     <linearGradient id="vigT" x1="0" y1="1" x2="0" y2="0">
-      <stop offset="0%" stop-color="transparent"/>
-      <stop offset="100%" stop-color="#09090b" stop-opacity="0.5"/>
+      <stop offset="72%"  stop-color="transparent"/>
+      <stop offset="100%" stop-color="#09090b" stop-opacity="0.55"/>
     </linearGradient>
+    <linearGradient id="vigL" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#09090b" stop-opacity="0.85"/>
+      <stop offset="28%"  stop-color="transparent"/>
+    </linearGradient>
+    <!-- Gold ridge -->
+    <linearGradient id="ridge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#f0c96a"/>
+      <stop offset="100%" stop-color="#a87020"/>
+    </linearGradient>
+    <!-- Shingle prototypes (width=200 height=80) -->
+    <rect id="s1" width="200" height="80" fill="url(#sf1)"/>
+    <rect id="s2" width="200" height="80" fill="url(#sf2)"/>
+    <rect id="s3" width="200" height="80" fill="url(#sf3)"/>
+    <!-- Top highlight on each shingle -->
+    <rect id="sh" width="200" height="3" fill="#6a6a6a" opacity="0.6"/>
+    <!-- Tab cut lines -->
+    <rect id="tab" width="2" height="28" fill="#0a0a0a" opacity="0.9"/>
+    <!-- Row-seam shadow strip (full width) -->
+    <rect id="seam" width="1700" height="22" fill="url(#rowshadow)"/>
   </defs>
 
-  <rect width="1600" height="700" fill="#09090b"/>
+  <!-- Sky background -->
+  <rect width="1600" height="700" fill="#111111"/>
 
-  <!-- Row 0 y=600 even -->
-  <use href="#sa" x="0" y="600"/><use href="#sb" x="200" y="600"/>
-  <use href="#sa" x="400" y="600"/><use href="#sb" x="600" y="600"/>
-  <use href="#sa" x="800" y="600"/><use href="#sb" x="1000" y="600"/>
-  <use href="#sa" x="1200" y="600"/><use href="#sb" x="1400" y="600"/>
-  <use href="#sa" x="1600" y="600"/>
+  <!-- ── Shingle rows (bottom → top so upper rows overlap lower) ── -->
+  <!-- Exposed height per row: 62px   Total step: 62px   -->
+  <!-- Even rows: x=0 offset   Odd rows: x=100 offset (staggered) -->
 
-  <!-- Row 1 y=530 odd -->
-  <use href="#sb" x="-100" y="530"/><use href="#sa" x="100" y="530"/>
-  <use href="#sb" x="300" y="530"/><use href="#sa" x="500" y="530"/>
-  <use href="#sb" x="700" y="530"/><use href="#sa" x="900" y="530"/>
-  <use href="#sb" x="1100" y="530"/><use href="#sa" x="1300" y="530"/>
-  <use href="#sb" x="1500" y="530"/>
+  <!-- Row 0  y=626  even -->
+  <use href="#s2" x="-100" y="626"/><use href="#s1" x="100"  y="626"/>
+  <use href="#s3" x="300"  y="626"/><use href="#s2" x="500"  y="626"/>
+  <use href="#s1" x="700"  y="626"/><use href="#s3" x="900"  y="626"/>
+  <use href="#s2" x="1100" y="626"/><use href="#s1" x="1300" y="626"/>
+  <use href="#s3" x="1500" y="626"/>
+  <use href="#sh"  x="-100" y="626"/><use href="#sh"  x="100"  y="626"/>
+  <use href="#sh"  x="300"  y="626"/><use href="#sh"  x="500"  y="626"/>
+  <use href="#sh"  x="700"  y="626"/><use href="#sh"  x="900"  y="626"/>
+  <use href="#sh"  x="1100" y="626"/><use href="#sh"  x="1300" y="626"/>
+  <use href="#sh"  x="1500" y="626"/>
+  <use href="#seam" x="-100" y="626"/>
+  <!-- Tab cuts -->
+  <use href="#tab" x="165"  y="636"/><use href="#tab" x="365"  y="636"/>
+  <use href="#tab" x="565"  y="636"/><use href="#tab" x="765"  y="636"/>
+  <use href="#tab" x="965"  y="636"/><use href="#tab" x="1165" y="636"/>
+  <use href="#tab" x="1365" y="636"/><use href="#tab" x="1565" y="636"/>
 
-  <!-- Row 2 y=460 even -->
-  <use href="#sa" x="0" y="460"/><use href="#sb" x="200" y="460"/>
-  <use href="#sa" x="400" y="460"/><use href="#sb" x="600" y="460"/>
-  <use href="#sa" x="800" y="460"/><use href="#sb" x="1000" y="460"/>
-  <use href="#sa" x="1200" y="460"/><use href="#sb" x="1400" y="460"/>
-  <use href="#sa" x="1600" y="460"/>
+  <!-- Row 1  y=564  odd -->
+  <use href="#s1" x="0"    y="564"/><use href="#s3" x="200"  y="564"/>
+  <use href="#s2" x="400"  y="564"/><use href="#s1" x="600"  y="564"/>
+  <use href="#s3" x="800"  y="564"/><use href="#s2" x="1000" y="564"/>
+  <use href="#s1" x="1200" y="564"/><use href="#s3" x="1400" y="564"/>
+  <use href="#s2" x="1600" y="564"/>
+  <use href="#sh"  x="0"    y="564"/><use href="#sh"  x="200"  y="564"/>
+  <use href="#sh"  x="400"  y="564"/><use href="#sh"  x="600"  y="564"/>
+  <use href="#sh"  x="800"  y="564"/><use href="#sh"  x="1000" y="564"/>
+  <use href="#sh"  x="1200" y="564"/><use href="#sh"  x="1400" y="564"/>
+  <use href="#seam" x="-100" y="564"/>
+  <use href="#tab" x="65"   y="574"/><use href="#tab" x="265"  y="574"/>
+  <use href="#tab" x="465"  y="574"/><use href="#tab" x="665"  y="574"/>
+  <use href="#tab" x="865"  y="574"/><use href="#tab" x="1065" y="574"/>
+  <use href="#tab" x="1265" y="574"/><use href="#tab" x="1465" y="574"/>
 
-  <!-- Row 3 y=390 odd -->
-  <use href="#sb" x="-100" y="390"/><use href="#sa" x="100" y="390"/>
-  <use href="#sb" x="300" y="390"/><use href="#sa" x="500" y="390"/>
-  <use href="#sb" x="700" y="390"/><use href="#sa" x="900" y="390"/>
-  <use href="#sb" x="1100" y="390"/><use href="#sa" x="1300" y="390"/>
-  <use href="#sb" x="1500" y="390"/>
+  <!-- Row 2  y=502  even -->
+  <use href="#s3" x="-100" y="502"/><use href="#s2" x="100"  y="502"/>
+  <use href="#s1" x="300"  y="502"/><use href="#s3" x="500"  y="502"/>
+  <use href="#s2" x="700"  y="502"/><use href="#s1" x="900"  y="502"/>
+  <use href="#s3" x="1100" y="502"/><use href="#s2" x="1300" y="502"/>
+  <use href="#s1" x="1500" y="502"/>
+  <use href="#sh"  x="-100" y="502"/><use href="#sh"  x="100"  y="502"/>
+  <use href="#sh"  x="300"  y="502"/><use href="#sh"  x="500"  y="502"/>
+  <use href="#sh"  x="700"  y="502"/><use href="#sh"  x="900"  y="502"/>
+  <use href="#sh"  x="1100" y="502"/><use href="#sh"  x="1300" y="502"/>
+  <use href="#seam" x="-100" y="502"/>
+  <use href="#tab" x="165"  y="512"/><use href="#tab" x="365"  y="512"/>
+  <use href="#tab" x="565"  y="512"/><use href="#tab" x="765"  y="512"/>
+  <use href="#tab" x="965"  y="512"/><use href="#tab" x="1165" y="512"/>
+  <use href="#tab" x="1365" y="512"/><use href="#tab" x="1565" y="512"/>
 
-  <!-- Row 4 y=320 even -->
-  <use href="#sa" x="0" y="320"/><use href="#sb" x="200" y="320"/>
-  <use href="#sa" x="400" y="320"/><use href="#sb" x="600" y="320"/>
-  <use href="#sa" x="800" y="320"/><use href="#sb" x="1000" y="320"/>
-  <use href="#sa" x="1200" y="320"/><use href="#sb" x="1400" y="320"/>
-  <use href="#sa" x="1600" y="320"/>
+  <!-- Row 3  y=440  odd -->
+  <use href="#s2" x="0"    y="440"/><use href="#s1" x="200"  y="440"/>
+  <use href="#s3" x="400"  y="440"/><use href="#s2" x="600"  y="440"/>
+  <use href="#s1" x="800"  y="440"/><use href="#s3" x="1000" y="440"/>
+  <use href="#s2" x="1200" y="440"/><use href="#s1" x="1400" y="440"/>
+  <use href="#s3" x="1600" y="440"/>
+  <use href="#sh"  x="0"    y="440"/><use href="#sh"  x="200"  y="440"/>
+  <use href="#sh"  x="400"  y="440"/><use href="#sh"  x="600"  y="440"/>
+  <use href="#sh"  x="800"  y="440"/><use href="#sh"  x="1000" y="440"/>
+  <use href="#sh"  x="1200" y="440"/><use href="#sh"  x="1400" y="440"/>
+  <use href="#seam" x="-100" y="440"/>
+  <use href="#tab" x="65"   y="450"/><use href="#tab" x="265"  y="450"/>
+  <use href="#tab" x="465"  y="450"/><use href="#tab" x="665"  y="450"/>
+  <use href="#tab" x="865"  y="450"/><use href="#tab" x="1065" y="450"/>
+  <use href="#tab" x="1265" y="450"/><use href="#tab" x="1465" y="450"/>
 
-  <!-- Row 5 y=250 odd -->
-  <use href="#sb" x="-100" y="250"/><use href="#sa" x="100" y="250"/>
-  <use href="#sb" x="300" y="250"/><use href="#sa" x="500" y="250"/>
-  <use href="#sb" x="700" y="250"/><use href="#sa" x="900" y="250"/>
-  <use href="#sb" x="1100" y="250"/><use href="#sa" x="1300" y="250"/>
-  <use href="#sb" x="1500" y="250"/>
+  <!-- Row 4  y=378  even -->
+  <use href="#s1" x="-100" y="378"/><use href="#s3" x="100"  y="378"/>
+  <use href="#s2" x="300"  y="378"/><use href="#s1" x="500"  y="378"/>
+  <use href="#s3" x="700"  y="378"/><use href="#s2" x="900"  y="378"/>
+  <use href="#s1" x="1100" y="378"/><use href="#s3" x="1300" y="378"/>
+  <use href="#s2" x="1500" y="378"/>
+  <use href="#sh"  x="-100" y="378"/><use href="#sh"  x="100"  y="378"/>
+  <use href="#sh"  x="300"  y="378"/><use href="#sh"  x="500"  y="378"/>
+  <use href="#sh"  x="700"  y="378"/><use href="#sh"  x="900"  y="378"/>
+  <use href="#sh"  x="1100" y="378"/><use href="#sh"  x="1300" y="378"/>
+  <use href="#seam" x="-100" y="378"/>
+  <use href="#tab" x="165"  y="388"/><use href="#tab" x="365"  y="388"/>
+  <use href="#tab" x="565"  y="388"/><use href="#tab" x="765"  y="388"/>
+  <use href="#tab" x="965"  y="388"/><use href="#tab" x="1165" y="388"/>
+  <use href="#tab" x="1365" y="388"/><use href="#tab" x="1565" y="388"/>
 
-  <!-- Row 6 y=180 even -->
-  <use href="#sa" x="0" y="180"/><use href="#sb" x="200" y="180"/>
-  <use href="#sa" x="400" y="180"/><use href="#sb" x="600" y="180"/>
-  <use href="#sa" x="800" y="180"/><use href="#sb" x="1000" y="180"/>
-  <use href="#sa" x="1200" y="180"/><use href="#sb" x="1400" y="180"/>
-  <use href="#sa" x="1600" y="180"/>
+  <!-- Row 5  y=316  odd -->
+  <use href="#s3" x="0"    y="316"/><use href="#s2" x="200"  y="316"/>
+  <use href="#s1" x="400"  y="316"/><use href="#s3" x="600"  y="316"/>
+  <use href="#s2" x="800"  y="316"/><use href="#s1" x="1000" y="316"/>
+  <use href="#s3" x="1200" y="316"/><use href="#s2" x="1400" y="316"/>
+  <use href="#s1" x="1600" y="316"/>
+  <use href="#sh"  x="0"    y="316"/><use href="#sh"  x="200"  y="316"/>
+  <use href="#sh"  x="400"  y="316"/><use href="#sh"  x="600"  y="316"/>
+  <use href="#sh"  x="800"  y="316"/><use href="#sh"  x="1000" y="316"/>
+  <use href="#sh"  x="1200" y="316"/><use href="#sh"  x="1400" y="316"/>
+  <use href="#seam" x="-100" y="316"/>
+  <use href="#tab" x="65"   y="326"/><use href="#tab" x="265"  y="326"/>
+  <use href="#tab" x="465"  y="326"/><use href="#tab" x="665"  y="326"/>
+  <use href="#tab" x="865"  y="326"/><use href="#tab" x="1065" y="326"/>
+  <use href="#tab" x="1265" y="326"/><use href="#tab" x="1465" y="326"/>
 
-  <!-- Row 7 y=110 odd -->
-  <use href="#sb" x="-100" y="110"/><use href="#sa" x="100" y="110"/>
-  <use href="#sb" x="300" y="110"/><use href="#sa" x="500" y="110"/>
-  <use href="#sb" x="700" y="110"/><use href="#sa" x="900" y="110"/>
-  <use href="#sb" x="1100" y="110"/><use href="#sa" x="1300" y="110"/>
-  <use href="#sb" x="1500" y="110"/>
+  <!-- Row 6  y=254  even -->
+  <use href="#s2" x="-100" y="254"/><use href="#s1" x="100"  y="254"/>
+  <use href="#s3" x="300"  y="254"/><use href="#s2" x="500"  y="254"/>
+  <use href="#s1" x="700"  y="254"/><use href="#s3" x="900"  y="254"/>
+  <use href="#s2" x="1100" y="254"/><use href="#s1" x="1300" y="254"/>
+  <use href="#s3" x="1500" y="254"/>
+  <use href="#sh"  x="-100" y="254"/><use href="#sh"  x="100"  y="254"/>
+  <use href="#sh"  x="300"  y="254"/><use href="#sh"  x="500"  y="254"/>
+  <use href="#sh"  x="700"  y="254"/><use href="#sh"  x="900"  y="254"/>
+  <use href="#sh"  x="1100" y="254"/><use href="#sh"  x="1300" y="254"/>
+  <use href="#seam" x="-100" y="254"/>
+  <use href="#tab" x="165"  y="264"/><use href="#tab" x="365"  y="264"/>
+  <use href="#tab" x="565"  y="264"/><use href="#tab" x="765"  y="264"/>
+  <use href="#tab" x="965"  y="264"/><use href="#tab" x="1165" y="264"/>
+  <use href="#tab" x="1365" y="264"/><use href="#tab" x="1565" y="264"/>
 
-  <!-- Row 8 y=40 even -->
-  <use href="#sa" x="0" y="40"/><use href="#sb" x="200" y="40"/>
-  <use href="#sa" x="400" y="40"/><use href="#sb" x="600" y="40"/>
-  <use href="#sa" x="800" y="40"/><use href="#sb" x="1000" y="40"/>
-  <use href="#sa" x="1200" y="40"/><use href="#sb" x="1400" y="40"/>
-  <use href="#sa" x="1600" y="40"/>
+  <!-- Row 7  y=192  odd -->
+  <use href="#s1" x="0"    y="192"/><use href="#s3" x="200"  y="192"/>
+  <use href="#s2" x="400"  y="192"/><use href="#s1" x="600"  y="192"/>
+  <use href="#s3" x="800"  y="192"/><use href="#s2" x="1000" y="192"/>
+  <use href="#s1" x="1200" y="192"/><use href="#s3" x="1400" y="192"/>
+  <use href="#s2" x="1600" y="192"/>
+  <use href="#sh"  x="0"    y="192"/><use href="#sh"  x="200"  y="192"/>
+  <use href="#sh"  x="400"  y="192"/><use href="#sh"  x="600"  y="192"/>
+  <use href="#sh"  x="800"  y="192"/><use href="#sh"  x="1000" y="192"/>
+  <use href="#sh"  x="1200" y="192"/><use href="#sh"  x="1400" y="192"/>
+  <use href="#seam" x="-100" y="192"/>
+  <use href="#tab" x="65"   y="202"/><use href="#tab" x="265"  y="202"/>
+  <use href="#tab" x="465"  y="202"/><use href="#tab" x="665"  y="202"/>
+  <use href="#tab" x="865"  y="202"/><use href="#tab" x="1065" y="202"/>
+  <use href="#tab" x="1265" y="202"/><use href="#tab" x="1465" y="202"/>
 
-  <!-- Row 9 y=-30 odd -->
-  <use href="#sb" x="-100" y="-30"/><use href="#sa" x="100" y="-30"/>
-  <use href="#sb" x="300" y="-30"/><use href="#sa" x="500" y="-30"/>
-  <use href="#sb" x="700" y="-30"/><use href="#sa" x="900" y="-30"/>
-  <use href="#sb" x="1100" y="-30"/><use href="#sa" x="1300" y="-30"/>
-  <use href="#sb" x="1500" y="-30"/>
+  <!-- Row 8  y=130  even -->
+  <use href="#s3" x="-100" y="130"/><use href="#s2" x="100"  y="130"/>
+  <use href="#s1" x="300"  y="130"/><use href="#s3" x="500"  y="130"/>
+  <use href="#s2" x="700"  y="130"/><use href="#s1" x="900"  y="130"/>
+  <use href="#s3" x="1100" y="130"/><use href="#s2" x="1300" y="130"/>
+  <use href="#s1" x="1500" y="130"/>
+  <use href="#sh"  x="-100" y="130"/><use href="#sh"  x="100"  y="130"/>
+  <use href="#sh"  x="300"  y="130"/><use href="#sh"  x="500"  y="130"/>
+  <use href="#sh"  x="700"  y="130"/><use href="#sh"  x="900"  y="130"/>
+  <use href="#sh"  x="1100" y="130"/><use href="#sh"  x="1300" y="130"/>
+  <use href="#seam" x="-100" y="130"/>
+  <use href="#tab" x="165"  y="140"/><use href="#tab" x="365"  y="140"/>
+  <use href="#tab" x="565"  y="140"/><use href="#tab" x="765"  y="140"/>
+  <use href="#tab" x="965"  y="140"/><use href="#tab" x="1165" y="140"/>
+  <use href="#tab" x="1365" y="140"/><use href="#tab" x="1565" y="140"/>
+
+  <!-- Row 9  y=68  odd -->
+  <use href="#s2" x="0"    y="68"/><use href="#s1" x="200"  y="68"/>
+  <use href="#s3" x="400"  y="68"/><use href="#s2" x="600"  y="68"/>
+  <use href="#s1" x="800"  y="68"/><use href="#s3" x="1000" y="68"/>
+  <use href="#s2" x="1200" y="68"/><use href="#s1" x="1400" y="68"/>
+  <use href="#s3" x="1600" y="68"/>
+  <use href="#sh"  x="0"    y="68"/><use href="#sh"  x="200"  y="68"/>
+  <use href="#sh"  x="400"  y="68"/><use href="#sh"  x="600"  y="68"/>
+  <use href="#sh"  x="800"  y="68"/><use href="#sh"  x="1000" y="68"/>
+  <use href="#sh"  x="1200" y="68"/><use href="#sh"  x="1400" y="68"/>
+  <use href="#seam" x="-100" y="68"/>
+  <use href="#tab" x="65"   y="78"/><use href="#tab" x="265"  y="78"/>
+  <use href="#tab" x="465"  y="78"/><use href="#tab" x="665"  y="78"/>
+  <use href="#tab" x="865"  y="78"/><use href="#tab" x="1065" y="78"/>
+  <use href="#tab" x="1265" y="78"/><use href="#tab" x="1465" y="78"/>
+
+  <!-- Row 10  y=6  even -->
+  <use href="#s1" x="-100" y="6"/><use href="#s3" x="100"  y="6"/>
+  <use href="#s2" x="300"  y="6"/><use href="#s1" x="500"  y="6"/>
+  <use href="#s3" x="700"  y="6"/><use href="#s2" x="900"  y="6"/>
+  <use href="#s1" x="1100" y="6"/><use href="#s3" x="1300" y="6"/>
+  <use href="#s2" x="1500" y="6"/>
+  <use href="#seam" x="-100" y="6"/>
+
+  <!-- Gold ridge cap -->
+  <rect x="0" y="0" width="1600" height="14" fill="url(#ridge)"/>
+  <rect x="0" y="12" width="1600" height="4" fill="#0a0a0a" opacity="0.5"/>
 
   <!-- Vignette overlays -->
   <rect width="1600" height="700" fill="url(#vigT)"/>
   <rect width="1600" height="700" fill="url(#vigL)"/>
-  <rect width="1600" height="700" fill="url(#vig)"/>
+  <rect width="1600" height="700" fill="url(#vigB)"/>
 </svg>

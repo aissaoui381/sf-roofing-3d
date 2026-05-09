@@ -1,62 +1,122 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 700">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%"   stop-color="#1e293b"/>
-      <stop offset="100%" stop-color="#0f172a"/>
+    <!-- Steel panel face gradient -->
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#4a5060"/>
+      <stop offset="40%"  stop-color="#353b48"/>
+      <stop offset="100%" stop-color="#1e2330"/>
     </linearGradient>
-    <!-- Panel gradient: 140px wide in userSpaceOnUse within pattern -->
-    <linearGradient id="panel-g" x1="0" y1="0" x2="140" y2="0" gradientUnits="userSpaceOnUse">
-      <stop offset="0%"   stop-color="#475569"/>
-      <stop offset="25%"  stop-color="#4a6070"/>
-      <stop offset="60%"  stop-color="#334155"/>
-      <stop offset="100%" stop-color="#1e293b"/>
+    <!-- Seam raised highlight -->
+    <linearGradient id="seam" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#8090a8"/>
+      <stop offset="45%"  stop-color="#b0c0d8"/>
+      <stop offset="55%"  stop-color="#b0c0d8"/>
+      <stop offset="100%" stop-color="#5a6a80"/>
     </linearGradient>
-    <!-- Standing seam ridge gradient: 20px wide -->
-    <linearGradient id="seam-g" x1="0" y1="0" x2="20" y2="0" gradientUnits="userSpaceOnUse">
-      <stop offset="0%"   stop-color="#475569"/>
-      <stop offset="30%"  stop-color="#94a3b8"/>
-      <stop offset="55%"  stop-color="#cbd5e1"/>
-      <stop offset="80%"  stop-color="#94a3b8"/>
-      <stop offset="100%" stop-color="#334155"/>
+    <!-- Horizontal lap line -->
+    <linearGradient id="lap" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#000" stop-opacity="0.55"/>
+      <stop offset="60%"  stop-color="#000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#6080a0" stop-opacity="0.15"/>
     </linearGradient>
-    <!-- Pattern: 160px wide (140px panel + 20px seam) -->
-    <pattern id="seam-panel" x="0" y="0" width="160" height="700" patternUnits="userSpaceOnUse">
-      <rect width="140" height="700" fill="url(#panel-g)"/>
-      <rect x="140" width="20" height="700" fill="url(#seam-g)"/>
-      <!-- subtle horizontal score lines every 175px -->
-      <rect x="0" y="174" width="140" height="1" fill="#0f172a" opacity="0.4"/>
-      <rect x="0" y="349" width="140" height="1" fill="#0f172a" opacity="0.4"/>
-      <rect x="0" y="524" width="140" height="1" fill="#0f172a" opacity="0.4"/>
-    </pattern>
-    <linearGradient id="vig" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="45%" stop-color="transparent"/>
-      <stop offset="100%" stop-color="#09090b" stop-opacity="0.95"/>
+    <!-- Metallic sheen across panel (diagonal) -->
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#fff" stop-opacity="0"/>
+      <stop offset="40%"  stop-color="#fff" stop-opacity="0.04"/>
+      <stop offset="55%"  stop-color="#fff" stop-opacity="0.09"/>
+      <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
     </linearGradient>
-    <linearGradient id="vigL" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#09090b" stop-opacity="0.75"/>
-      <stop offset="30%" stop-color="transparent"/>
+    <!-- Vignettes -->
+    <linearGradient id="vigB" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="55%"  stop-color="transparent"/>
+      <stop offset="100%" stop-color="#09090b" stop-opacity="0.97"/>
     </linearGradient>
     <linearGradient id="vigT" x1="0" y1="1" x2="0" y2="0">
-      <stop offset="0%" stop-color="transparent"/>
-      <stop offset="100%" stop-color="#09090b" stop-opacity="0.45"/>
+      <stop offset="72%"  stop-color="transparent"/>
+      <stop offset="100%" stop-color="#09090b" stop-opacity="0.55"/>
     </linearGradient>
-    <!-- Subtle sky-reflection highlight across top of metal -->
-    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%"  stop-color="#7dd3fc" stop-opacity="0.08"/>
-      <stop offset="40%" stop-color="transparent"/>
+    <linearGradient id="vigL" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#09090b" stop-opacity="0.8"/>
+      <stop offset="25%"  stop-color="transparent"/>
     </linearGradient>
+    <!-- Gold ridge cap -->
+    <linearGradient id="ridge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#f0c96a"/>
+      <stop offset="100%" stop-color="#a87020"/>
+    </linearGradient>
+    <!-- Panel prototype: 130px wide -->
+    <rect id="pnl" width="130" height="700" fill="url(#panel)"/>
+    <rect id="psh" width="130" height="700" fill="url(#sheen)"/>
+    <!-- Seam prototype: 10px wide -->
+    <rect id="sm" width="10" height="700" fill="url(#seam)"/>
+    <!-- Lap line prototype -->
+    <rect id="lp" width="1600" height="16" fill="url(#lap)"/>
+    <!-- Seam shadow on each side -->
+    <rect id="ssL" width="4" height="700" fill="#000" opacity="0.35"/>
+    <rect id="ssR" width="4" height="700" fill="#000" opacity="0.18"/>
   </defs>
 
-  <rect width="1600" height="700" fill="url(#bg)"/>
+  <!-- Dark steel background -->
+  <rect width="1600" height="700" fill="#181e28"/>
 
-  <!-- Standing seam panels tiled across full width -->
-  <rect width="1600" height="700" fill="url(#seam-panel)"/>
+  <!-- ── Steel panels — pitch = 140px (130 panel + 10 seam) — 12 panels ── -->
+  <use href="#pnl" x="0"/><use href="#psh" x="0"/>
+  <use href="#sm"  x="130"/>
+  <use href="#ssL" x="128"/><use href="#ssR" x="140"/>
 
-  <!-- Sky sheen at top -->
-  <rect width="1600" height="700" fill="url(#sheen)"/>
+  <use href="#pnl" x="140"/><use href="#psh" x="140"/>
+  <use href="#sm"  x="270"/>
+  <use href="#ssL" x="268"/><use href="#ssR" x="280"/>
 
-  <!-- Vignette overlays -->
+  <use href="#pnl" x="280"/><use href="#psh" x="280"/>
+  <use href="#sm"  x="410"/>
+  <use href="#ssL" x="408"/><use href="#ssR" x="420"/>
+
+  <use href="#pnl" x="420"/><use href="#psh" x="420"/>
+  <use href="#sm"  x="550"/>
+  <use href="#ssL" x="548"/><use href="#ssR" x="560"/>
+
+  <use href="#pnl" x="560"/><use href="#psh" x="560"/>
+  <use href="#sm"  x="690"/>
+  <use href="#ssL" x="688"/><use href="#ssR" x="700"/>
+
+  <use href="#pnl" x="700"/><use href="#psh" x="700"/>
+  <use href="#sm"  x="830"/>
+  <use href="#ssL" x="828"/><use href="#ssR" x="840"/>
+
+  <use href="#pnl" x="840"/><use href="#psh" x="840"/>
+  <use href="#sm"  x="970"/>
+  <use href="#ssL" x="968"/><use href="#ssR" x="980"/>
+
+  <use href="#pnl" x="980"/><use href="#psh" x="980"/>
+  <use href="#sm"  x="1110"/>
+  <use href="#ssL" x="1108"/><use href="#ssR" x="1120"/>
+
+  <use href="#pnl" x="1120"/><use href="#psh" x="1120"/>
+  <use href="#sm"  x="1250"/>
+  <use href="#ssL" x="1248"/><use href="#ssR" x="1260"/>
+
+  <use href="#pnl" x="1260"/><use href="#psh" x="1260"/>
+  <use href="#sm"  x="1390"/>
+  <use href="#ssL" x="1388"/><use href="#ssR" x="1400"/>
+
+  <use href="#pnl" x="1400"/><use href="#psh" x="1400"/>
+  <use href="#sm"  x="1530"/>
+  <use href="#ssL" x="1528"/><use href="#ssR" x="1540"/>
+
+  <use href="#pnl" x="1540"/><use href="#psh" x="1540"/>
+
+  <!-- ── Horizontal lap lines (panel courses) — every 175px ── -->
+  <use href="#lp" y="175"/>
+  <use href="#lp" y="350"/>
+  <use href="#lp" y="525"/>
+
+  <!-- Gold ridge cap -->
+  <rect x="0" y="0" width="1600" height="16" fill="url(#ridge)"/>
+  <rect x="0" y="14" width="1600" height="5"  fill="#000" opacity="0.45"/>
+
+  <!-- Vignettes -->
   <rect width="1600" height="700" fill="url(#vigT)"/>
   <rect width="1600" height="700" fill="url(#vigL)"/>
-  <rect width="1600" height="700" fill="url(#vig)"/>
+  <rect width="1600" height="700" fill="url(#vigB)"/>
 </svg>

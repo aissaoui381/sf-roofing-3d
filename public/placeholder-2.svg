@@ -1,73 +1,151 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 700">
   <defs>
-    <!-- Barrel tile gradient (per-tile, 0→80px userSpaceOnUse within pattern) -->
-    <linearGradient id="bg1" x1="0" y1="0" x2="80" y2="0" gradientUnits="userSpaceOnUse">
-      <stop offset="0%"   stop-color="#7c2d12"/>
-      <stop offset="20%"  stop-color="#c2410c"/>
-      <stop offset="50%"  stop-color="#f97316"/>
-      <stop offset="80%"  stop-color="#c2410c"/>
-      <stop offset="100%" stop-color="#7c2d12"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#2a0a00"/>
+      <stop offset="100%" stop-color="#0d0400"/>
     </linearGradient>
-    <linearGradient id="bg2" x1="0" y1="0" x2="80" y2="0" gradientUnits="userSpaceOnUse">
-      <stop offset="0%"   stop-color="#7c2d12"/>
-      <stop offset="20%"  stop-color="#9a3412"/>
-      <stop offset="50%"  stop-color="#ea580c"/>
-      <stop offset="80%"  stop-color="#9a3412"/>
-      <stop offset="100%" stop-color="#7c2d12"/>
+    <linearGradient id="cap" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#6b1e00" stop-opacity="0.9"/>
+      <stop offset="22%"  stop-color="#c44010"/>
+      <stop offset="50%"  stop-color="#d95520"/>
+      <stop offset="78%"  stop-color="#c44010"/>
+      <stop offset="100%" stop-color="#6b1e00" stop-opacity="0.9"/>
     </linearGradient>
-    <!-- Pattern: 100px wide (80px barrel + 20px valley), 350px tall (one tile length) -->
-    <pattern id="barrel" x="0" y="0" width="100" height="350" patternUnits="userSpaceOnUse">
-      <rect width="100" height="350" fill="#450a03"/>
-      <rect width="80" height="346" fill="url(#bg1)"/>
-      <!-- top edge highlight -->
-      <rect x="10" y="0" width="60" height="4" fill="#fb923c" opacity="0.6"/>
-    </pattern>
-    <pattern id="barrel2" x="0" y="0" width="100" height="350" patternUnits="userSpaceOnUse">
-      <rect width="100" height="350" fill="#450a03"/>
-      <rect width="80" height="346" fill="url(#bg2)"/>
-      <rect x="10" y="0" width="60" height="4" fill="#f97316" opacity="0.4"/>
-    </pattern>
-    <linearGradient id="vig" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="45%" stop-color="transparent"/>
-      <stop offset="100%" stop-color="#09090b" stop-opacity="0.95"/>
+    <linearGradient id="capedge" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#000" stop-opacity="0.55"/>
+      <stop offset="14%"  stop-color="#000" stop-opacity="0"/>
+      <stop offset="86%"  stop-color="#000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.55"/>
     </linearGradient>
-    <linearGradient id="vigL" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#09090b" stop-opacity="0.75"/>
-      <stop offset="30%" stop-color="transparent"/>
+    <linearGradient id="pan" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#3d0e00"/>
+      <stop offset="100%" stop-color="#1f0600"/>
+    </linearGradient>
+    <linearGradient id="hseam" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#000" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="vigB" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="55%"  stop-color="transparent"/>
+      <stop offset="100%" stop-color="#09090b" stop-opacity="0.97"/>
     </linearGradient>
     <linearGradient id="vigT" x1="0" y1="1" x2="0" y2="0">
-      <stop offset="0%" stop-color="transparent"/>
-      <stop offset="100%" stop-color="#09090b" stop-opacity="0.45"/>
+      <stop offset="72%"  stop-color="transparent"/>
+      <stop offset="100%" stop-color="#09090b" stop-opacity="0.55"/>
     </linearGradient>
+    <linearGradient id="vigL" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#09090b" stop-opacity="0.8"/>
+      <stop offset="25%"  stop-color="transparent"/>
+    </linearGradient>
+    <linearGradient id="ridge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#f0c96a"/>
+      <stop offset="100%" stop-color="#a87020"/>
+    </linearGradient>
+    <!-- Cap prototype -->
+    <rect id="c" width="120" height="120" fill="url(#cap)" rx="5"/>
+    <rect id="ce" width="120" height="120" fill="url(#capedge)" rx="5"/>
+    <!-- Pan prototype (vertical strip) -->
+    <rect id="p" width="20" height="700" fill="url(#pan)"/>
   </defs>
 
-  <rect width="1600" height="700" fill="#450a03"/>
+  <rect width="1600" height="700" fill="url(#bg)"/>
 
-  <!-- 16 barrel columns alternating two patterns, each 100px wide -->
-  <rect x="0"    y="0" width="80" height="700" fill="url(#barrel)"/>
-  <rect x="100"  y="0" width="80" height="700" fill="url(#barrel2)"/>
-  <rect x="200"  y="0" width="80" height="700" fill="url(#barrel)"/>
-  <rect x="300"  y="0" width="80" height="700" fill="url(#barrel2)"/>
-  <rect x="400"  y="0" width="80" height="700" fill="url(#barrel)"/>
-  <rect x="500"  y="0" width="80" height="700" fill="url(#barrel2)"/>
-  <rect x="600"  y="0" width="80" height="700" fill="url(#barrel)"/>
-  <rect x="700"  y="0" width="80" height="700" fill="url(#barrel2)"/>
-  <rect x="800"  y="0" width="80" height="700" fill="url(#barrel)"/>
-  <rect x="900"  y="0" width="80" height="700" fill="url(#barrel2)"/>
-  <rect x="1000" y="0" width="80" height="700" fill="url(#barrel)"/>
-  <rect x="1100" y="0" width="80" height="700" fill="url(#barrel2)"/>
-  <rect x="1200" y="0" width="80" height="700" fill="url(#barrel)"/>
-  <rect x="1300" y="0" width="80" height="700" fill="url(#barrel2)"/>
-  <rect x="1400" y="0" width="80" height="700" fill="url(#barrel)"/>
-  <rect x="1500" y="0" width="80" height="700" fill="url(#barrel2)"/>
+  <!-- Pan strips (dark channels between caps) — columns at pitch=160px, cap=120px, pan=40px split each side -->
+  <use href="#p" x="0"/><use href="#p" x="140"/>
+  <use href="#p" x="160"/><use href="#p" x="300"/>
+  <use href="#p" x="320"/><use href="#p" x="460"/>
+  <use href="#p" x="480"/><use href="#p" x="620"/>
+  <use href="#p" x="640"/><use href="#p" x="780"/>
+  <use href="#p" x="800"/><use href="#p" x="940"/>
+  <use href="#p" x="960"/><use href="#p" x="1100"/>
+  <use href="#p" x="1120"/><use href="#p" x="1260"/>
+  <use href="#p" x="1280"/><use href="#p" x="1420"/>
+  <use href="#p" x="1440"/><use href="#p" x="1580"/>
 
-  <!-- Horizontal grout lines (tile length divisions) -->
-  <rect x="0" y="173" width="1600" height="4" fill="#280601" opacity="0.85"/>
-  <rect x="0" y="348" width="1600" height="4" fill="#280601" opacity="0.85"/>
-  <rect x="0" y="523" width="1600" height="4" fill="#280601" opacity="0.85"/>
+  <!-- Cap rows — 7 rows, y step=100px, caps at x=20 per 160px pitch -->
+  <use href="#c" x="20"   y="580"/><use href="#c" x="180"  y="580"/>
+  <use href="#c" x="340"  y="580"/><use href="#c" x="500"  y="580"/>
+  <use href="#c" x="660"  y="580"/><use href="#c" x="820"  y="580"/>
+  <use href="#c" x="980"  y="580"/><use href="#c" x="1140" y="580"/>
+  <use href="#c" x="1300" y="580"/><use href="#c" x="1460" y="580"/>
+  <use href="#ce" x="20"  y="580"/><use href="#ce" x="180"  y="580"/>
+  <use href="#ce" x="340" y="580"/><use href="#ce" x="500"  y="580"/>
+  <use href="#ce" x="660" y="580"/><use href="#ce" x="820"  y="580"/>
+  <use href="#ce" x="980" y="580"/><use href="#ce" x="1140" y="580"/>
+  <use href="#ce" x="1300" y="580"/><use href="#ce" x="1460" y="580"/>
+  <rect x="0" y="580" width="1600" height="18" fill="url(#hseam)"/>
 
-  <!-- Vignette overlays -->
+  <use href="#c" x="20"   y="480"/><use href="#c" x="180"  y="480"/>
+  <use href="#c" x="340"  y="480"/><use href="#c" x="500"  y="480"/>
+  <use href="#c" x="660"  y="480"/><use href="#c" x="820"  y="480"/>
+  <use href="#c" x="980"  y="480"/><use href="#c" x="1140" y="480"/>
+  <use href="#c" x="1300" y="480"/><use href="#c" x="1460" y="480"/>
+  <use href="#ce" x="20"  y="480"/><use href="#ce" x="180"  y="480"/>
+  <use href="#ce" x="340" y="480"/><use href="#ce" x="500"  y="480"/>
+  <use href="#ce" x="660" y="480"/><use href="#ce" x="820"  y="480"/>
+  <use href="#ce" x="980" y="480"/><use href="#ce" x="1140" y="480"/>
+  <use href="#ce" x="1300" y="480"/><use href="#ce" x="1460" y="480"/>
+  <rect x="0" y="480" width="1600" height="18" fill="url(#hseam)"/>
+
+  <use href="#c" x="20"   y="380"/><use href="#c" x="180"  y="380"/>
+  <use href="#c" x="340"  y="380"/><use href="#c" x="500"  y="380"/>
+  <use href="#c" x="660"  y="380"/><use href="#c" x="820"  y="380"/>
+  <use href="#c" x="980"  y="380"/><use href="#c" x="1140" y="380"/>
+  <use href="#c" x="1300" y="380"/><use href="#c" x="1460" y="380"/>
+  <use href="#ce" x="20"  y="380"/><use href="#ce" x="180"  y="380"/>
+  <use href="#ce" x="340" y="380"/><use href="#ce" x="500"  y="380"/>
+  <use href="#ce" x="660" y="380"/><use href="#ce" x="820"  y="380"/>
+  <use href="#ce" x="980" y="380"/><use href="#ce" x="1140" y="380"/>
+  <use href="#ce" x="1300" y="380"/><use href="#ce" x="1460" y="380"/>
+  <rect x="0" y="380" width="1600" height="18" fill="url(#hseam)"/>
+
+  <use href="#c" x="20"   y="280"/><use href="#c" x="180"  y="280"/>
+  <use href="#c" x="340"  y="280"/><use href="#c" x="500"  y="280"/>
+  <use href="#c" x="660"  y="280"/><use href="#c" x="820"  y="280"/>
+  <use href="#c" x="980"  y="280"/><use href="#c" x="1140" y="280"/>
+  <use href="#c" x="1300" y="280"/><use href="#c" x="1460" y="280"/>
+  <use href="#ce" x="20"  y="280"/><use href="#ce" x="180"  y="280"/>
+  <use href="#ce" x="340" y="280"/><use href="#ce" x="500"  y="280"/>
+  <use href="#ce" x="660" y="280"/><use href="#ce" x="820"  y="280"/>
+  <use href="#ce" x="980" y="280"/><use href="#ce" x="1140" y="280"/>
+  <use href="#ce" x="1300" y="280"/><use href="#ce" x="1460" y="280"/>
+  <rect x="0" y="280" width="1600" height="18" fill="url(#hseam)"/>
+
+  <use href="#c" x="20"   y="180"/><use href="#c" x="180"  y="180"/>
+  <use href="#c" x="340"  y="180"/><use href="#c" x="500"  y="180"/>
+  <use href="#c" x="660"  y="180"/><use href="#c" x="820"  y="180"/>
+  <use href="#c" x="980"  y="180"/><use href="#c" x="1140" y="180"/>
+  <use href="#c" x="1300" y="180"/><use href="#c" x="1460" y="180"/>
+  <use href="#ce" x="20"  y="180"/><use href="#ce" x="180"  y="180"/>
+  <use href="#ce" x="340" y="180"/><use href="#ce" x="500"  y="180"/>
+  <use href="#ce" x="660" y="180"/><use href="#ce" x="820"  y="180"/>
+  <use href="#ce" x="980" y="180"/><use href="#ce" x="1140" y="180"/>
+  <use href="#ce" x="1300" y="180"/><use href="#ce" x="1460" y="180"/>
+  <rect x="0" y="180" width="1600" height="18" fill="url(#hseam)"/>
+
+  <use href="#c" x="20"   y="80"/><use href="#c" x="180"  y="80"/>
+  <use href="#c" x="340"  y="80"/><use href="#c" x="500"  y="80"/>
+  <use href="#c" x="660"  y="80"/><use href="#c" x="820"  y="80"/>
+  <use href="#c" x="980"  y="80"/><use href="#c" x="1140" y="80"/>
+  <use href="#c" x="1300" y="80"/><use href="#c" x="1460" y="80"/>
+  <use href="#ce" x="20"  y="80"/><use href="#ce" x="180"  y="80"/>
+  <use href="#ce" x="340" y="80"/><use href="#ce" x="500"  y="80"/>
+  <use href="#ce" x="660" y="80"/><use href="#ce" x="820"  y="80"/>
+  <use href="#ce" x="980" y="80"/><use href="#ce" x="1140" y="80"/>
+  <use href="#ce" x="1300" y="80"/><use href="#ce" x="1460" y="80"/>
+  <rect x="0" y="80" width="1600" height="18" fill="url(#hseam)"/>
+
+  <use href="#c" x="20"   y="-20"/><use href="#c" x="180"  y="-20"/>
+  <use href="#c" x="340"  y="-20"/><use href="#c" x="500"  y="-20"/>
+  <use href="#c" x="660"  y="-20"/><use href="#c" x="820"  y="-20"/>
+  <use href="#c" x="980"  y="-20"/><use href="#c" x="1140" y="-20"/>
+  <use href="#c" x="1300" y="-20"/><use href="#c" x="1460" y="-20"/>
+
+  <!-- Gold ridge -->
+  <rect x="0" y="0" width="1600" height="14" fill="url(#ridge)"/>
+  <rect x="0" y="12" width="1600" height="4" fill="#0a0a0a" opacity="0.5"/>
+
   <rect width="1600" height="700" fill="url(#vigT)"/>
   <rect width="1600" height="700" fill="url(#vigL)"/>
-  <rect width="1600" height="700" fill="url(#vig)"/>
+  <rect width="1600" height="700" fill="url(#vigB)"/>
 </svg>
