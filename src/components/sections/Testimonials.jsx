@@ -41,7 +41,7 @@ const REVIEWS = [
 const CARD_W  = 360;
 const GAP     = 24;
 const TOTAL_W = REVIEWS.length * (CARD_W + GAP); // one full set width
-const PX_PER_SEC = TOTAL_W / 40;                 // 40-second loop
+const PX_PER_SEC = TOTAL_W / 90;                 // 90-second loop
 
 function Stars() {
   return (
