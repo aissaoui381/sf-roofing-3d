@@ -151,6 +151,7 @@ export default function Hero() {
         ref={videoRef}
         src="/hero.mp4"
         autoPlay loop muted playsInline
+        fetchPriority="high"
         className="absolute inset-0 w-full h-full object-cover z-[1]"
       />
 
