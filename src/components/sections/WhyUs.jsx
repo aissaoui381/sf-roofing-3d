@@ -182,6 +182,8 @@ export default function WhyUs() {
         <img
           src="/luxury-house.svg"
           alt="Luxury San Francisco home with premium roofing"
+          loading="lazy"
+          decoding="async"
           className="house-img w-full object-cover"
           style={{ aspectRatio: '16/7' }}
         />

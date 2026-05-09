@@ -20,7 +20,7 @@ export default function App() {
     <BrowserRouter>
       <Analytics />
       <SpeedInsights />
-      <Suspense fallback={<div className="min-h-screen bg-zinc-950" />}>
+      <Suspense fallback={<div className="min-h-screen bg-white" />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about"   element={<AboutPage />} />

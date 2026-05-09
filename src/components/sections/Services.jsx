@@ -66,6 +66,8 @@ function MaterialCarousel() {
           key={index}
           src={slide.src}
           alt={slide.label}
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover"
           style={{ animation: 'img-fade-in 0.6s ease forwards' }}
         />

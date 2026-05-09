@@ -4,13 +4,17 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   build: {
+    target: 'esnext',
+    cssCodeSplit: true,
+    reportCompressedSize: false,
     rollupOptions: {
       output: {
-        manualChunks: {
-          'vendor-react':  ['react', 'react-dom', 'react-router-dom'],
-          'vendor-gsap':   ['gsap', '@gsap/react'],
-          'vendor-ui':     ['lucide-react', 'react-helmet-async'],
-          'vendor-convex': ['convex'],
+        manualChunks(id) {
+          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom') || id.includes('node_modules/react-router-dom')) return 'vendor-react';
+          if (id.includes('node_modules/gsap') || id.includes('node_modules/@gsap'))   return 'vendor-gsap';
+          if (id.includes('node_modules/lucide-react'))                                return 'vendor-lucide';
+          if (id.includes('node_modules/@vercel'))                                     return 'vendor-vercel';
+          if (id.includes('node_modules/convex') || id.includes('node_modules/@convex-dev')) return 'vendor-convex';
         },
       },
     },
