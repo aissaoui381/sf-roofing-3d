@@ -68,6 +68,11 @@ body {
   50%       { transform: translateY(-10px); }
 }
 
+@keyframes portfolio-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
 @keyframes glow-pulse {
   0%, 100% { box-shadow: 0 0 20px rgba(206,152,67,0.2); }
   50%       { box-shadow: 0 0 40px rgba(206,152,67,0.45); }

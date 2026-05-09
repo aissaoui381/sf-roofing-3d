@@ -212,80 +212,77 @@ function RoofScene({ roofType, skyA, skyB, index }) {
   );
 }
 
+const DOUBLED = [...PROJECTS, ...PROJECTS];
+
 export default function Portfolio() {
   const containerRef = useRef(null);
 
   useGSAP(() => {
-    gsap.from('.portfolio-card', {
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: 'top 78%',
-      },
-      y: 55,
-      opacity: 0,
-      duration: 0.75,
-      ease: 'power3.out',
-      stagger: 0.09,
-    });
     gsap.from('.portfolio-header', {
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: 'top 80%',
-      },
-      y: 30,
-      opacity: 0,
-      duration: 0.7,
-      ease: 'power3.out',
+      scrollTrigger: { trigger: containerRef.current, start: 'top 82%' },
+      y: 30, opacity: 0, duration: 0.7, ease: 'power3.out',
+    });
+    gsap.from('.portfolio-strip', {
+      scrollTrigger: { trigger: containerRef.current, start: 'top 75%' },
+      opacity: 0, duration: 0.8, ease: 'power2.out',
+    });
+    gsap.from('.portfolio-cta', {
+      scrollTrigger: { trigger: '.portfolio-cta', start: 'top 90%' },
+      y: 20, opacity: 0, duration: 0.6, ease: 'power3.out',
     });
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="bg-zinc-950 px-6 md:px-16 lg:px-24 py-24 border-t border-zinc-900">
-      <div className="max-w-7xl mx-auto">
+    <section ref={containerRef} className="bg-zinc-950 py-24 border-t border-zinc-900 overflow-hidden">
 
-        {/* Header */}
-        <div className="portfolio-header flex flex-col md:flex-row items-start md:items-end justify-between gap-6 mb-14">
-          <div>
-            <p className="text-[#CE9843] text-xs font-bold tracking-[0.25em] uppercase mb-3">
-              Recent Projects
-            </p>
-            <h2 className="text-4xl md:text-5xl font-black text-white leading-[1.05]">
-              Our Work Across<br />San Francisco
-            </h2>
-          </div>
-          <p className="text-zinc-500 text-sm max-w-xs md:text-right">
-            847+ roofs completed — every SF neighborhood, every roof type, every budget.
+      {/* Header */}
+      <div className="portfolio-header px-6 md:px-16 lg:px-24 max-w-7xl mx-auto
+                      flex flex-col md:flex-row items-start md:items-end justify-between gap-6 mb-14">
+        <div>
+          <p className="text-[#CE9843] text-xs font-bold tracking-[0.25em] uppercase mb-3">
+            Recent Projects
           </p>
+          <h2 className="text-4xl md:text-5xl font-black text-white leading-[1.05]">
+            Our Work Across<br />San Francisco
+          </h2>
         </div>
+        <p className="text-zinc-500 text-sm max-w-xs md:text-right">
+          847+ roofs completed — every SF neighborhood, every roof type, every budget.
+        </p>
+      </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {PROJECTS.map((p, i) => (
+      {/* Infinite sliding strip — pauses on hover */}
+      <div className="portfolio-strip group select-none">
+        <div
+          className="flex gap-5 w-max group-hover:[animation-play-state:paused]"
+          style={{ animation: 'portfolio-scroll 55s linear infinite' }}
+        >
+          {DOUBLED.map((p, i) => (
             <Link
-              key={p.neighborhood}
+              key={`${p.neighborhood}-${i}`}
               to={p.slug}
-              className="portfolio-card group rounded-2xl overflow-hidden border border-zinc-800
-                         hover:border-[#CE9843]/40 bg-zinc-900
+              className="flex-shrink-0 w-[340px] rounded-2xl overflow-hidden
+                         border border-zinc-800 hover:border-[#CE9843]/50 bg-zinc-900
                          transition-all duration-300
-                         hover:shadow-[0_12px_40px_rgba(206,152,67,0.15)]
-                         hover:-translate-y-1.5"
+                         hover:shadow-[0_16px_48px_rgba(206,152,67,0.2)]
+                         hover:-translate-y-2"
             >
-              {/* Photo or SVG illustration fallback */}
-              <div className="relative h-52 overflow-hidden bg-zinc-950">
+              {/* Image */}
+              <div className="relative h-72 overflow-hidden bg-zinc-950">
                 {p.img ? (
                   <img
                     src={p.img}
                     alt={p.alt}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy"
                     onError={(e) => { e.currentTarget.style.display = 'none'; }}
                   />
                 ) : (
-                  <RoofScene {...p} index={i} />
+                  <RoofScene {...p} index={i % PROJECTS.length} />
                 )}
 
-                {/* Hover shimmer */}
-                <div className="absolute inset-0 bg-[#CE9843]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-[#CE9843]/10 opacity-0 hover:opacity-100 transition-opacity duration-300" />
 
                 {/* Year */}
                 <span className="absolute top-3 right-3 px-2.5 py-1 rounded-full
@@ -295,8 +292,8 @@ export default function Portfolio() {
                 </span>
 
                 {/* Service badge */}
-                <span className="absolute bottom-3 left-3 px-3 py-1 rounded-full
-                                 bg-[#CE9843]/20 backdrop-blur-sm border border-[#CE9843]/35
+                <span className="absolute bottom-3 left-3 px-3 py-1.5 rounded-full
+                                 bg-[#CE9843]/25 backdrop-blur-sm border border-[#CE9843]/40
                                  text-[11px] text-[#CE9843] font-bold tracking-wide">
                   {p.service}
                 </span>
@@ -312,38 +309,32 @@ export default function Portfolio() {
                 </div>
                 <h3 className="text-white font-black text-lg leading-tight mb-1">{p.service}</h3>
                 <p className="text-zinc-500 text-sm leading-relaxed">{p.detail}</p>
-
-                <div className="flex items-center gap-1 mt-4 text-[#CE9843]/80 text-xs font-semibold
-                                -translate-x-1 opacity-0
-                                group-hover:translate-x-0 group-hover:opacity-100
-                                transition-all duration-200">
+                <div className="flex items-center gap-1 mt-4 text-[#CE9843]/70 text-xs font-semibold">
                   View service <ChevronRight size={12} />
                 </div>
               </div>
             </Link>
           ))}
         </div>
-
-        {/* CTA */}
-        <div className="mt-16 text-center">
-          <p className="text-zinc-500 text-sm mb-5">
-            Ready to add your home to our portfolio?
-          </p>
-          <button
-            onClick={() => document.getElementById('quote')?.scrollIntoView({ behavior: 'smooth' })}
-            className="inline-flex items-center gap-2.5 px-9 py-4 rounded-xl font-bold
-                       text-zinc-950 bg-gradient-to-r from-[#CE9843] to-[#e8b855]
-                       hover:from-[#d9ac63] hover:to-[#f0c870]
-                       transition-all duration-300
-                       shadow-[0_6px_24px_rgba(206,152,67,0.4)]
-                       hover:shadow-[0_10px_36px_rgba(206,152,67,0.6)]
-                       hover:-translate-y-0.5"
-          >
-            Get Your Free Estimate <ArrowRight size={16} />
-          </button>
-        </div>
-
       </div>
+
+      {/* CTA */}
+      <div className="portfolio-cta mt-16 text-center px-6">
+        <p className="text-zinc-500 text-sm mb-5">Ready to add your home to our portfolio?</p>
+        <button
+          onClick={() => document.getElementById('quote')?.scrollIntoView({ behavior: 'smooth' })}
+          className="inline-flex items-center gap-2.5 px-9 py-4 rounded-xl font-bold
+                     text-zinc-950 bg-gradient-to-r from-[#CE9843] to-[#e8b855]
+                     hover:from-[#d9ac63] hover:to-[#f0c870]
+                     transition-all duration-300
+                     shadow-[0_6px_24px_rgba(206,152,67,0.4)]
+                     hover:shadow-[0_10px_36px_rgba(206,152,67,0.6)]
+                     hover:-translate-y-0.5"
+        >
+          Get Your Free Estimate <ArrowRight size={16} />
+        </button>
+      </div>
+
     </section>
   );
 }

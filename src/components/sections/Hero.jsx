@@ -14,23 +14,17 @@ const PREVIEWS = [
   {
     neighborhood: 'Noe Valley',
     service: 'Victorian Replacement',
-    skyA: '#001833',
-    skyB: '#000b1a',
-    roofType: 'victorian',
+    img: '/projects/noe-valley.png',
   },
   {
     neighborhood: 'Mission District',
     service: 'TPO Flat Roof',
-    skyA: '#3d1a00',
-    skyB: '#150900',
-    roofType: 'flat',
+    img: '/projects/mission.png',
   },
   {
     neighborhood: 'Twin Peaks',
     service: 'Storm Repair',
-    skyA: '#1a001a',
-    skyB: '#080008',
-    roofType: 'pitched',
+    img: '/projects/twin-peaks.png',
   },
 ];
 
@@ -243,7 +237,11 @@ export default function Hero() {
                 style={{ transform: `translateX(${i % 2 === 0 ? '0px' : '20px'})` }}
               >
                 <div className="h-28 overflow-hidden">
-                  <MiniRoof {...p} uid={`prev-${i}`} />
+                  <img
+                    src={p.img}
+                    alt={p.neighborhood}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div className="px-4 py-3 flex items-center justify-between">
                   <div>
