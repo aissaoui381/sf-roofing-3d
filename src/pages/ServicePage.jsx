@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { CheckCircle, ArrowRight, Clock, ShieldCheck } from 'lucide-react';
 
 const SERVICES = {
@@ -100,7 +101,20 @@ export default function ServicePage({ service }) {
   const s = SERVICES[service];
   if (!s) return null;
 
+  const slugMap = {
+    replacement: 'roof-replacement-san-francisco',
+    repair:      'roof-repair-san-francisco',
+    inspection:  'roof-inspection-san-francisco',
+    storm:       'storm-damage-roofing-san-francisco',
+  };
+
   return (
+    <>
+      <Helmet>
+        <title>{s.metaTitle}</title>
+        <meta name="description" content={s.metaDesc} />
+        <link rel="canonical" href={`https://sanfranciscoroofingservice.com/${slugMap[service]}`} />
+      </Helmet>
     <div className="min-h-screen bg-zinc-950 text-white">
 
       {/* Hero */}
@@ -214,5 +228,6 @@ export default function ServicePage({ service }) {
       </div>
 
     </div>
+    </>
   );
 }

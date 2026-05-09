@@ -1,7 +1,14 @@
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 export default function PrivacyPage() {
   return (
+    <>
+      <Helmet>
+        <title>Privacy Policy | San Francisco Roofing Service</title>
+        <meta name="description" content="Privacy policy for San Francisco Roofing Service. Learn how we collect, use, and protect your personal information." />
+        <link rel="canonical" href="https://sanfranciscoroofingservice.com/privacy" />
+      </Helmet>
     <div className="min-h-screen bg-zinc-950 text-white px-6 md:px-16 lg:px-24 py-20">
       <div className="max-w-3xl mx-auto">
         <Link to="/" className="text-zinc-500 text-sm hover:text-gold transition-colors mb-8 inline-block">
@@ -56,5 +63,6 @@ export default function PrivacyPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }

@@ -1,13 +1,15 @@
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { ShieldCheck, ArrowRight, Award, Users, Clock } from 'lucide-react';
 
 export default function AboutPage() {
   return (
     <>
-      <head>
+      <Helmet>
         <title>About Us | San Francisco Roofing Service</title>
         <meta name="description" content="Learn about San Francisco Roofing Service — licensed roofing contractors with 15+ years serving SF homeowners. Transparent pricing, expert craftsmanship." />
-      </head>
+        <link rel="canonical" href="https://sanfranciscoroofingservice.com/about" />
+      </Helmet>
 
       <div className="min-h-screen bg-zinc-950 text-white">
 

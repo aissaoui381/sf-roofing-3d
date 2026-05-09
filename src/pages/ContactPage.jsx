@@ -1,8 +1,15 @@
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { Mail, MapPin, Clock, ArrowRight } from 'lucide-react';
 
 export default function ContactPage() {
   return (
+    <>
+      <Helmet>
+        <title>Contact Us | San Francisco Roofing Service</title>
+        <meta name="description" content="Contact San Francisco Roofing Service. Email us for a free estimate, emergency repairs, or any roofing question. Response within 2 business hours." />
+        <link rel="canonical" href="https://sanfranciscoroofingservice.com/contact" />
+      </Helmet>
     <div className="min-h-screen bg-zinc-950 text-white">
 
       <div className="bg-[#CE9843] px-6 md:px-16 lg:px-24 py-20">
@@ -79,5 +86,6 @@ export default function ContactPage() {
       </div>
 
     </div>
+    </>
   );
 }
