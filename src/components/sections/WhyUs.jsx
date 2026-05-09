@@ -227,9 +227,9 @@ export default function WhyUs() {
             {/* Counter + nav arrows */}
             <div className="flex items-center gap-4">
               <p className="text-2xl font-black tabular-nums hidden sm:block">
-                <span className="text-gold">{String(index + 1).padStart(2, '0')}</span>
-                <span className="text-zinc-300 text-xl"> / </span>
-                <span className="text-zinc-300">{String(BENEFITS.length).padStart(2, '0')}</span>
+                <span className="text-[#CE9843]">{String(index + 1).padStart(2, '0')}</span>
+                <span className="text-[#CE9843]/40 text-xl"> / </span>
+                <span className="text-[#CE9843]/40">{String(BENEFITS.length).padStart(2, '0')}</span>
               </p>
               <div className="flex gap-2">
                 <button
