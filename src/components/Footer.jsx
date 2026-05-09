@@ -89,7 +89,7 @@ export default function Footer() {
             <div className="space-y-4">
               <a
                 href="mailto:INFO@SanFranciscoRoofingService.com"
-                className="flex items-center gap-2.5 text-gold hover:text-[#B8832A] transition-colors duration-200 text-sm font-medium"
+                className="flex items-center gap-2.5 text-[#CE9843] hover:text-[#B8832A] transition-colors duration-200 text-sm font-medium"
               >
                 <Mail size={14} className="flex-shrink-0" />
                 INFO@SanFranciscoRoofingService.com

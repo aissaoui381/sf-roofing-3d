@@ -147,7 +147,7 @@ export default function Services() {
         {/* Header */}
         <div className="srv-header flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
           <div>
-            <span className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-4 block">
+            <span className="text-[#CE9843] text-xs font-bold tracking-[0.25em] uppercase mb-4 block">
               What We Do
             </span>
             <h2 className="text-3xl md:text-5xl font-black text-zinc-900 leading-[1.05] tracking-tight">
