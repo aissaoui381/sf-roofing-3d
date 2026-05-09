@@ -187,9 +187,9 @@ export default function WhyUs() {
         />
         <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-[#CE9843]/10 to-transparent pointer-events-none" />
         <div className="stats-overlay absolute bottom-0 left-0 right-0">
-          <div className="bg-black/65 backdrop-blur-md border-t border-white/[0.07]">
+          <div className="bg-white/90 backdrop-blur-md border-t border-zinc-200">
             <div className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24">
-              <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/[0.06]">
+              <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-zinc-200">
                 {STATS.map(({ suffix, label }, i) => (
                   <div key={label} className="stat-pill py-6 md:py-8 text-center">
                     <div
@@ -198,7 +198,7 @@ export default function WhyUs() {
                     >
                       0{suffix}
                     </div>
-                    <div className="text-zinc-400 text-[11px] font-semibold tracking-[0.18em] uppercase">
+                    <div className="text-zinc-500 text-[11px] font-semibold tracking-[0.18em] uppercase">
                       {label}
                     </div>
                   </div>
