@@ -299,13 +299,13 @@ export default function Hero() {
 
       {/* ── Stats bar ── */}
       <div className="hero-stats absolute bottom-0 left-0 right-0 z-20
-                      bg-black/60 backdrop-blur-md border-t border-white/8">
+                      bg-white/90 backdrop-blur-md border-t border-zinc-200">
         <div className="max-w-7xl mx-auto px-8 lg:px-16 py-4
                         grid grid-cols-2 md:grid-cols-4 gap-4">
           {STATS.map((s, i) => (
             <div key={s.label} className="text-center">
               <p
-                className="text-[#DD9E3A] font-black text-xl md:text-2xl leading-none"
+                className="text-[#CE9843] font-black text-xl md:text-2xl leading-none"
                 style={{ animation: `float-bob ${3 + i * 0.4}s ease-in-out infinite`, animationDelay: `${i * 0.5}s` }}
               >
                 {s.value}
