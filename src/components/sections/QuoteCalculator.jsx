@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
-import { ArrowRight, ArrowLeft, CheckCircle, Send, Check } from 'lucide-react';
+import { ArrowRight, ArrowLeft, CheckCircle, Send, Check, ShieldCheck, Ban, Zap } from 'lucide-react';
 import { useMutation } from 'convex/react';
 import { api } from '../../../convex/_generated/api';
 
@@ -146,10 +146,14 @@ export default function QuoteCalculator() {
               Answer 4 quick questions and we'll email you a full itemised estimate — materials, labour, and timeline — within minutes.
             </p>
             <div className="flex flex-wrap gap-2">
-              {['No commitment', 'No spam', 'Instant results'].map((t) => (
-                <span key={t} className="inline-flex items-center gap-1.5 text-xs text-zinc-500 bg-white border border-zinc-200 rounded-full px-3 py-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-gold inline-block" />
-                  {t}
+              {[
+                { label: 'No commitment', icon: ShieldCheck },
+                { label: 'No spam',       icon: Ban         },
+                { label: 'Instant results', icon: Zap       },
+              ].map(({ label, icon: Icon }) => (
+                <span key={label} className="inline-flex items-center gap-1.5 text-xs text-zinc-500 bg-white border border-zinc-200 rounded-full px-3 py-1">
+                  <Icon size={11} className="text-[#CE9843] flex-shrink-0" />
+                  {label}
                 </span>
               ))}
             </div>
@@ -168,14 +172,22 @@ export default function QuoteCalculator() {
                     <div className={`
                       w-10 h-10 rounded-full flex items-center justify-center text-sm font-black
                       flex-shrink-0 border-2 transition-all duration-300
-                      ${done    ? 'bg-gold border-gold text-zinc-950'                                          : ''}
-                      ${current ? 'bg-gold/[0.15] border-gold text-gold shadow-[0_0_18px_rgba(206,152,67,0.4)]' : ''}
-                      ${!done && !current ? 'bg-white border-zinc-300 text-zinc-400'                           : ''}
-                    `}>
+                      ${done    ? 'text-zinc-950'    : ''}
+                      ${current ? 'shadow-[0_0_18px_rgba(206,152,67,0.4)]' : ''}
+                      ${!done && !current ? 'bg-white border-zinc-300 text-zinc-400' : ''}
+                    `}
+                    style={
+                      done    ? { background: '#CE9843', borderColor: '#CE9843' } :
+                      current ? { background: 'rgba(206,152,67,0.15)', borderColor: '#CE9843', color: '#CE9843' } :
+                      {}
+                    }>
                       {done ? <Check size={16} strokeWidth={3} /> : i + 1}
                     </div>
                     {i < STEPS.length - 1 && (
-                      <div className={`flex-1 h-0.5 mx-2 rounded-full transition-all duration-500 ${step > i ? 'bg-gold' : 'bg-zinc-200'}`} />
+                      <div
+                        className="flex-1 h-0.5 mx-2 rounded-full transition-all duration-500"
+                        style={{ background: step > i ? '#CE9843' : '#e4e4e7' }}
+                      />
                     )}
                   </div>
                 );
