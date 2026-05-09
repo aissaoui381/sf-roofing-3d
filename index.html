@@ -12,7 +12,7 @@
     <link rel="canonical" href="https://sanfranciscoroofingservice.com" />
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 
-    <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://sanfranciscoroofingservice.com" />
     <meta property="og:title" content="San Francisco Roofing Service | Licensed Roofing Contractors SF" />
@@ -31,7 +31,23 @@
     <meta name="theme-color" content="#09090b" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
-    <!-- Schema.org LocalBusiness JSON-LD -->
+    <!-- Fonts — loaded async so they never block first paint -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload" as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" />
+    </noscript>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+
+    <!-- Schema.org — moved to end of body, parsed after first paint -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -40,43 +56,20 @@
       "url": "https://sanfranciscoroofingservice.com",
       "email": "INFO@SanFranciscoRoofingService.com",
       "description": "San Francisco's trusted roofing specialists. Roof replacement, repair, inspection and storm damage services. Transparent pricing, licensed and insured.",
-      "areaServed": {
-        "@type": "City",
-        "name": "San Francisco"
-      },
+      "areaServed": { "@type": "City", "name": "San Francisco" },
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "San Francisco",
         "addressRegion": "CA",
         "addressCountry": "US"
       },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 37.7749,
-        "longitude": -122.4194
-      },
+      "geo": { "@type": "GeoCoordinates", "latitude": 37.7749, "longitude": -122.4194 },
       "openingHours": "Mo-Fr 08:00-18:00",
       "priceRange": "$$",
       "hasCredential": "CSLB Licensed",
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "5",
-        "reviewCount": "3"
-      },
-      "sameAs": [
-        "https://github.com/aissaoui381/sf-roofing-3d"
-      ]
+      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "reviewCount": "3" },
+      "sameAs": ["https://github.com/aissaoui381/sf-roofing-3d"]
     }
     </script>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

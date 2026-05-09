@@ -18,7 +18,8 @@ html::-webkit-scrollbar {
 body {
   background-color: #09090b;
   color: white;
-  font-family: 'Inter', system-ui, sans-serif;
+  /* System font renders instantly on first paint; Inter swaps in async */
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   overflow-x: hidden;
 }
 
