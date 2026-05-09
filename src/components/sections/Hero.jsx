@@ -81,6 +81,7 @@ export default function Hero() {
   const containerRef = useRef(null);
   const videoRef     = useRef(null);
   const floatRefs    = useRef([]);
+  const leftColRef   = useRef(null);
 
   // Chrome loop fix
   useEffect(() => {
@@ -89,6 +90,23 @@ export default function Hero() {
     const restart = () => { video.currentTime = 0; video.play().catch(() => {}); };
     video.addEventListener('ended', restart);
     return () => video.removeEventListener('ended', restart);
+  }, []);
+
+  // Auto-fit loop — ResizeObserver watches the left column every frame
+  // and keeps text + buttons scaled to whatever width is available
+  useEffect(() => {
+    const col = leftColRef.current;
+    if (!col) return;
+    const fit = () => {
+      const w = col.offsetWidth;
+      // 0.68 at 280 px → 1.0 at 520 px, clamped at both ends
+      const s = Math.max(0.68, Math.min(1, (w - 280) / 240));
+      col.style.setProperty('--hs', s);
+    };
+    fit();
+    const ro = new ResizeObserver(fit);
+    ro.observe(col);
+    return () => ro.disconnect();
   }, []);
 
   useGSAP(() => {
@@ -158,27 +176,31 @@ export default function Hero() {
       <div className="absolute inset-0 z-10 flex items-center px-8 lg:px-16 pt-10 pb-28">
         <div className="w-full max-w-7xl mx-auto flex items-center justify-between gap-12">
 
-          {/* Left — copy */}
-          <div className="max-w-xl flex-shrink-0">
+          {/* Left — copy — leftColRef drives the --hs auto-fit loop */}
+          <div ref={leftColRef} className="max-w-xl flex-shrink-0 min-w-0 w-full lg:w-auto"
+               style={{ '--hs': 1 }}>
 
             <div className="hero-badge inline-flex items-center gap-2 mb-5
-                            px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm">
-              <span className="w-2 h-2 bg-[#DD9E3A] rounded-full animate-pulse" />
-              <span className="text-[#DD9E3A] text-xs font-semibold tracking-widest uppercase">
+                            px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm"
+                 style={{ fontSize: 'calc(var(--hs) * 0.75rem)' }}>
+              <span className="w-2 h-2 bg-[#DD9E3A] rounded-full animate-pulse flex-shrink-0" />
+              <span className="text-[#DD9E3A] font-semibold tracking-widest uppercase">
                 SanFranciscoRoofingService.com
               </span>
             </div>
 
-            <h1 className="hero-title font-black leading-[1.0] tracking-tight mb-3 text-[#DD9E3A]
-                           text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+            <h1 className="hero-title font-black leading-[1.0] tracking-tight mb-3 text-[#DD9E3A]"
+                style={{ fontSize: 'calc(var(--hs) * clamp(2.5rem, 7vw, 4.5rem))' }}>
               San Francisco<br />Roofing Service
             </h1>
 
-            <h2 className="hero-sub text-white font-semibold mb-4 text-lg">
+            <h2 className="hero-sub text-white font-semibold mb-4"
+                style={{ fontSize: 'calc(var(--hs) * 1.125rem)' }}>
               Complete Roofing Solutions
             </h2>
 
-            <p className="hero-body text-zinc-300 text-sm md:text-base leading-relaxed mb-7 max-w-md">
+            <p className="hero-body text-zinc-300 leading-relaxed mb-7 max-w-md"
+               style={{ fontSize: 'calc(var(--hs) * 0.9rem)' }}>
               From Victorian flats in the Mission to hillside homes in Twin Peaks —
               code-compliant, weather-tight roofing with every cost itemised before
               we touch your home.
@@ -188,15 +210,19 @@ export default function Hero() {
               <button
                 onClick={() => scrollTo('quote')}
                 className="group relative flex items-center justify-center gap-2
-                           px-4 py-3 sm:px-7 sm:py-3.5 rounded-xl flex-1 sm:flex-none
+                           rounded-xl flex-1
                            bg-[#DD9E3A] hover:bg-[#C98D2F]
-                           text-zinc-950 font-bold text-sm sm:text-base
+                           text-zinc-950 font-bold
                            transition-all duration-300
                            hover:-translate-y-0.5 active:scale-[0.98]"
-                style={{ animation: 'glow-pulse 3s ease-in-out infinite' }}
+                style={{
+                  fontSize: 'calc(var(--hs) * 0.875rem)',
+                  padding: 'calc(var(--hs) * 0.75rem) calc(var(--hs) * 1.25rem)',
+                  animation: 'glow-pulse 3s ease-in-out infinite',
+                }}
               >
                 <span aria-hidden className="absolute inset-0 rounded-xl bg-gradient-to-b from-white/20 to-transparent pointer-events-none" />
-                <span className="relative leading-tight text-center">Build My<br className="sm:hidden" /> Custom Quote</span>
+                <span className="relative leading-tight text-center">Build My Custom Quote</span>
                 <ArrowRight size={15} strokeWidth={2.5}
                   className="relative flex-shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
               </button>
@@ -204,13 +230,17 @@ export default function Hero() {
               <button
                 onClick={() => scrollTo('services')}
                 className="flex items-center justify-center gap-2
-                           px-4 py-3 sm:px-7 sm:py-3.5 rounded-xl flex-1 sm:flex-none
+                           rounded-xl flex-1
                            bg-gradient-to-r from-zinc-700 to-zinc-600
                            hover:from-zinc-600 hover:to-zinc-500
                            border border-zinc-500/50 hover:border-zinc-400/60
-                           text-white font-semibold text-sm sm:text-base
+                           text-white font-semibold
                            transition-all duration-300 active:scale-[0.98]
                            shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
+                style={{
+                  fontSize: 'calc(var(--hs) * 0.875rem)',
+                  padding: 'calc(var(--hs) * 0.75rem) calc(var(--hs) * 1.25rem)',
+                }}
               >
                 View Services
               </button>
@@ -218,7 +248,8 @@ export default function Hero() {
 
             <div className="hero-trust flex flex-wrap gap-x-5 gap-y-2">
               {['Licensed & Insured', '25-Year Warranty', 'Free Itemised Estimate'].map((item) => (
-                <span key={item} className="flex items-center gap-1.5 text-zinc-400 text-xs">
+                <span key={item} className="flex items-center gap-1.5 text-zinc-400"
+                      style={{ fontSize: 'calc(var(--hs) * 0.75rem)' }}>
                   <ShieldCheck size={13} className="text-[#DD9E3A] flex-shrink-0" />
                   {item}
                 </span>
