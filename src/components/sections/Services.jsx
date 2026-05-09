@@ -4,9 +4,10 @@ import gsap from 'gsap';
 import { ChevronLeft, ChevronRight, CheckCircle, Clock, ArrowRight } from 'lucide-react';
 
 const SLIDES = [
-  { src: '/placeholder-1.svg', label: 'Asphalt Shingles', desc: '20–30 yr lifespan · Most popular in SF' },
-  { src: '/placeholder-2.svg', label: 'Spanish Tile',     desc: '50+ yr lifespan · Classic California look' },
-  { src: '/placeholder-3.svg', label: 'Metal Roofing',    desc: '40–70 yr lifespan · Modern & durable' },
+  { src: '/projects/material-asphalt.webp', label: 'Asphalt Shingles', desc: '20–30 yr lifespan · Most popular in SF' },
+  { src: '/projects/material-tile.webp',    label: 'Spanish Tile',      desc: '50+ yr lifespan · Classic California look' },
+  { src: '/projects/material-metal.webp',   label: 'Metal Roofing',     desc: '40–70 yr lifespan · Modern & durable' },
+  { src: '/projects/material-tpo.webp',     label: 'Flat / TPO',        desc: '15–25 yr lifespan · Most SF flat roofs' },
 ];
 
 const SERVICES = [
