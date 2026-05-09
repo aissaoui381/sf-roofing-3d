@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { Star, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -38,12 +38,10 @@ const REVIEWS = [
   },
 ];
 
-// Duplicate for seamless infinite loop
-const TRACK = [...REVIEWS, ...REVIEWS];
-
-const CARD_W  = 360; // px — matches the card width below
-const GAP     = 24;  // px — gap-6
-const SPEED   = 40;  // seconds for one full loop (slow drift)
+const CARD_W  = 360;
+const GAP     = 24;
+const TOTAL_W = REVIEWS.length * (CARD_W + GAP); // one full set width
+const PX_PER_SEC = TOTAL_W / 40;                 // 40-second loop
 
 function Stars() {
   return (
@@ -67,27 +65,47 @@ function GoogleLogo() {
 }
 
 export default function Testimonials() {
-  const containerRef = useRef(null);
-  const trackRef     = useRef(null);
-  const [paused, setPaused] = useState(false);
+  const containerRef  = useRef(null);
+  const trackRef      = useRef(null);
+  const xRef          = useRef(0);
+  const nudgingRef    = useRef(false);
 
   useGSAP(() => {
     gsap.from('.testi-header', {
       y: 30, opacity: 0, duration: 0.8, ease: 'power3.out',
       scrollTrigger: { trigger: containerRef.current, start: 'top 78%' },
     });
+
+    // GSAP ticker drives the loop — so buttons can interact with xRef directly
+    const tick = (_, deltaTime) => {
+      if (nudgingRef.current) return;
+      xRef.current -= PX_PER_SEC * (deltaTime / 1000);
+      if (xRef.current < -TOTAL_W) xRef.current += TOTAL_W;
+      gsap.set(trackRef.current, { x: xRef.current });
+    };
+
+    gsap.ticker.add(tick);
+    return () => gsap.ticker.remove(tick);
   }, { scope: containerRef });
 
-  const totalW   = REVIEWS.length * (CARD_W + GAP); // -50% of TRACK width
-  const duration = `${SPEED}s`;
-
   const nudge = (dir) => {
-    if (!trackRef.current) return;
-    const cur = new DOMMatrix(getComputedStyle(trackRef.current).transform).m41;
-    gsap.to(trackRef.current, {
-      x: cur + dir * -(CARD_W + GAP),
-      duration: 0.5,
-      ease: 'power2.out',
+    nudgingRef.current = true;
+    const start = xRef.current;
+    const end   = start - dir * (CARD_W + GAP);
+    const proxy = { v: start };
+
+    gsap.to(proxy, {
+      v: end,
+      duration: 0.55,
+      ease: 'power2.inOut',
+      onUpdate() {
+        xRef.current = proxy.v;
+        // Keep in [-TOTAL_W, 0) so the loop never breaks
+        if (xRef.current < -TOTAL_W) xRef.current += TOTAL_W;
+        if (xRef.current > 0)        xRef.current -= TOTAL_W;
+        gsap.set(trackRef.current, { x: xRef.current });
+      },
+      onComplete() { nudgingRef.current = false; },
     });
   };
 
@@ -103,10 +121,9 @@ export default function Testimonials() {
         style={{ background: 'radial-gradient(ellipse 60% 50% at 80% 50%, rgba(206,152,67,0.06) 0%, transparent 70%)' }}
       />
 
-      <div className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24 relative">
-
-        {/* Header */}
-        <div className="testi-header flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+      {/* Header */}
+      <div className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24 relative mb-12">
+        <div className="testi-header flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
             <span className="text-[#CE9843] text-xs font-bold tracking-[0.25em] uppercase mb-4 block">
               Client Stories
@@ -116,9 +133,8 @@ export default function Testimonials() {
             </h2>
           </div>
 
-          {/* Rating + nav */}
           <div className="flex items-center gap-6 md:mb-2">
-            {/* Aggregate */}
+            {/* Aggregate rating */}
             <div className="flex items-center gap-2.5">
               <GoogleLogo />
               <div>
@@ -130,10 +146,9 @@ export default function Testimonials() {
               </div>
             </div>
 
-            {/* Divider */}
             <div className="h-8 w-px bg-zinc-200" />
 
-            {/* Manual nav */}
+            {/* Nav buttons */}
             <div className="flex gap-2">
               <button
                 onClick={() => nudge(-1)}
@@ -152,42 +167,30 @@ export default function Testimonials() {
             </div>
           </div>
         </div>
-
       </div>
 
-      {/* Marquee track — full bleed */}
-      <div
-        className="overflow-hidden"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-      >
+      {/* Scrolling track — full bleed, no hover pause */}
+      <div className="overflow-hidden">
         <div
           ref={trackRef}
-          className="flex"
-          style={{
-            gap: `${GAP}px`,
-            paddingLeft: `${GAP}px`,
-            width: 'max-content',
-            animation: `marquee ${duration} linear infinite`,
-            animationPlayState: paused ? 'paused' : 'running',
-          }}
+          className="flex will-change-transform"
+          style={{ gap: `${GAP}px`, paddingLeft: `${GAP}px`, width: 'max-content' }}
         >
-          {TRACK.map((r, i) => (
+          {/* Render 3× so wrap is never visible */}
+          {[...REVIEWS, ...REVIEWS, ...REVIEWS].map((r, i) => (
             <div
               key={i}
-              className="group relative bg-white rounded-2xl border border-zinc-200 flex-shrink-0
+              className="bg-white rounded-2xl border border-zinc-200 flex-shrink-0
                          shadow-[0_2px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_32px_rgba(206,152,67,0.12)]
-                         hover:border-[#CE9843]/30 transition-all duration-300 overflow-hidden flex flex-col"
+                         hover:border-[#CE9843]/30 transition-shadow transition-[border-color] duration-300
+                         overflow-hidden flex flex-col"
               style={{ width: `${CARD_W}px` }}
             >
-              {/* Gold top accent */}
               <div
                 className="h-1 w-full flex-shrink-0"
                 style={{ background: 'linear-gradient(90deg, #CE9843, #e8b855, transparent)' }}
               />
-
               <div className="p-6 flex flex-col flex-1">
-                {/* Stars + Google */}
                 <div className="flex items-center justify-between mb-5">
                   <Stars />
                   <div className="flex items-center gap-1.5">
@@ -196,21 +199,16 @@ export default function Testimonials() {
                   </div>
                 </div>
 
-                {/* Text */}
                 <blockquote className="flex-1">
                   <p className="text-zinc-500 text-sm leading-relaxed mb-4">{r.text}</p>
-                  <p
-                    className="text-sm font-semibold leading-snug border-l-2 pl-3"
-                    style={{ color: '#CE9843', borderColor: '#CE9843' }}
-                  >
+                  <p className="text-sm font-semibold leading-snug border-l-2 pl-3"
+                     style={{ color: '#CE9843', borderColor: '#CE9843' }}>
                     "{r.highlight}"
                   </p>
                 </blockquote>
 
-                {/* Divider */}
                 <div className="h-px bg-zinc-100 my-4" />
 
-                {/* Author */}
                 <div className="flex items-center gap-3">
                   <div
                     className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 font-black text-xs text-zinc-950"
@@ -233,9 +231,9 @@ export default function Testimonials() {
       </div>
 
       {/* Fade edges */}
-      <div className="absolute inset-y-0 left-0 w-24 pointer-events-none"
+      <div className="absolute inset-y-0 left-0 w-20 pointer-events-none"
            style={{ background: 'linear-gradient(90deg, #f4f4f5, transparent)' }} />
-      <div className="absolute inset-y-0 right-0 w-24 pointer-events-none"
+      <div className="absolute inset-y-0 right-0 w-20 pointer-events-none"
            style={{ background: 'linear-gradient(-90deg, #f4f4f5, transparent)' }} />
     </section>
   );
