@@ -15,6 +15,8 @@ const PROJECTS = [
     skyA: '#3d1a00',
     skyB: '#150900',
     slug: '/roof-replacement-san-francisco',
+    img: '/projects/mission.jpg',         // ← drop your photo here
+    alt: 'Flat TPO roof replacement Mission District San Francisco',
   },
   {
     neighborhood: 'Noe Valley',
@@ -25,6 +27,8 @@ const PROJECTS = [
     skyA: '#001833',
     skyB: '#000b1a',
     slug: '/roof-repair-san-francisco',
+    img: '/projects/noe-valley.jpg',      // ← drop your photo here
+    alt: 'Roof repair flashing Noe Valley San Francisco',
   },
   {
     neighborhood: 'Twin Peaks',
@@ -35,6 +39,8 @@ const PROJECTS = [
     skyA: '#1a001a',
     skyB: '#080008',
     slug: '/storm-damage-roofing-san-francisco',
+    img: '/projects/twin-peaks.jpg',      // ← drop your photo here
+    alt: 'Storm damage roof repair Twin Peaks San Francisco',
   },
   {
     neighborhood: 'Sunset District',
@@ -45,6 +51,8 @@ const PROJECTS = [
     skyA: '#2d1800',
     skyB: '#0d0700',
     slug: '/roof-replacement-san-francisco',
+    img: '/projects/sunset.jpg',          // ← drop your photo here
+    alt: 'Asphalt shingle roof replacement Sunset District San Francisco',
   },
   {
     neighborhood: 'Pacific Heights',
@@ -55,6 +63,8 @@ const PROJECTS = [
     skyA: '#001a2e',
     skyB: '#00080f',
     slug: '/roof-inspection-san-francisco',
+    img: '/projects/pacific-heights.jpg', // ← drop your photo here
+    alt: 'Roof inspection Pacific Heights San Francisco',
   },
   {
     neighborhood: 'Richmond District',
@@ -65,6 +75,8 @@ const PROJECTS = [
     skyA: '#0a1a0a',
     skyB: '#030803',
     slug: '/roof-replacement-san-francisco',
+    img: '/projects/richmond.jpg',        // ← drop your photo here
+    alt: 'Standing seam metal roof Richmond District San Francisco',
   },
 ];
 
@@ -258,9 +270,19 @@ export default function Portfolio() {
                          hover:shadow-[0_12px_40px_rgba(206,152,67,0.15)]
                          hover:-translate-y-1.5"
             >
-              {/* Illustration */}
+              {/* Photo or SVG illustration fallback */}
               <div className="relative h-52 overflow-hidden bg-zinc-950">
-                <RoofScene {...p} index={i} />
+                {p.img ? (
+                  <img
+                    src={p.img}
+                    alt={p.alt}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                    onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                  />
+                ) : (
+                  <RoofScene {...p} index={i} />
+                )}
 
                 {/* Hover shimmer */}
                 <div className="absolute inset-0 bg-[#CE9843]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
