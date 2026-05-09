@@ -1,32 +1,33 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 
-import Layout from './components/Layout.jsx';
-import Hero from './components/sections/Hero.jsx';
-import Marquee from './components/ui/Marquee.jsx';
-import Services from './components/sections/Services.jsx';
-import WhyUs from './components/sections/WhyUs.jsx';
-import QuoteCalculator from './components/sections/QuoteCalculator.jsx';
-import Testimonials from './components/sections/Testimonials.jsx';
-import Footer from './components/Footer.jsx';
+import HomePage from './pages/HomePage.jsx';
+import AboutPage from './pages/AboutPage.jsx';
+import PrivacyPage from './pages/PrivacyPage.jsx';
+import ContactPage from './pages/ContactPage.jsx';
+import ServicePage from './pages/ServicePage.jsx';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 export default function App() {
   return (
-    <Layout>
-      <Hero />
-      <Marquee />
-      <Services />
-      <WhyUs />
-      <QuoteCalculator />
-      <Testimonials />
-      <Footer />
+    <BrowserRouter>
       <Analytics />
       <SpeedInsights />
-    </Layout>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/roof-replacement-san-francisco" element={<ServicePage service="replacement" />} />
+        <Route path="/roof-repair-san-francisco" element={<ServicePage service="repair" />} />
+        <Route path="/roof-inspection-san-francisco" element={<ServicePage service="inspection" />} />
+        <Route path="/storm-damage-roofing-san-francisco" element={<ServicePage service="storm" />} />
+      </Routes>
+    </BrowserRouter>
   );
 }

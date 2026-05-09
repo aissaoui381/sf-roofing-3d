@@ -1,8 +1,13 @@
+import { Link } from 'react-router-dom';
 import { ArrowRight, Mail, MapPin, ShieldCheck } from 'lucide-react';
 
 const SERVICES = [
-  'Roof Replacement', 'Roof Repair', 'New Construction',
-  'Storm Damage', 'Roof Inspection', 'Maintenance Plans',
+  { label: 'Roof Replacement', href: '/roof-replacement-san-francisco' },
+  { label: 'Roof Repair',      href: '/roof-repair-san-francisco' },
+  { label: 'Roof Inspection',  href: '/roof-inspection-san-francisco' },
+  { label: 'Storm Damage',     href: '/storm-damage-roofing-san-francisco' },
+  { label: 'New Construction', href: '/#services' },
+  { label: 'Maintenance Plans',href: '/#services' },
 ];
 
 const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -66,13 +71,13 @@ export default function Footer() {
             <p className="text-zinc-400 text-xs font-bold tracking-[0.2em] uppercase mb-5">Services</p>
             <ul className="space-y-2.5">
               {SERVICES.map((s) => (
-                <li key={s}>
-                  <button
-                    onClick={() => scrollTo('services')}
-                    className="text-zinc-500 hover:text-gold text-sm transition-colors duration-200 text-left"
+                <li key={s.label}>
+                  <Link
+                    to={s.href}
+                    className="text-zinc-500 hover:text-gold text-sm transition-colors duration-200"
                   >
-                    {s}
-                  </button>
+                    {s.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -122,7 +127,11 @@ export default function Footer() {
       <div className="px-6 md:px-16 lg:px-24 py-5 border-t border-zinc-800/60">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-zinc-700 text-xs">© 2025 San Francisco Roofing Service. All rights reserved.</p>
-          <p className="text-zinc-700 text-xs">Built to last. Priced with integrity.</p>
+          <div className="flex gap-5">
+            <Link to="/about" className="text-zinc-700 hover:text-zinc-400 text-xs transition-colors">About</Link>
+            <Link to="/contact" className="text-zinc-700 hover:text-zinc-400 text-xs transition-colors">Contact</Link>
+            <Link to="/privacy" className="text-zinc-700 hover:text-zinc-400 text-xs transition-colors">Privacy Policy</Link>
+          </div>
         </div>
       </div>
 
