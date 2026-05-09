@@ -184,30 +184,31 @@ export default function Hero() {
               we touch your home.
             </p>
 
-            <div className="hero-cta flex flex-col sm:flex-row gap-3 mb-8">
+            <div className="hero-cta flex flex-row gap-2.5 mb-8">
               <button
                 onClick={() => scrollTo('quote')}
-                className="group relative flex items-center justify-center gap-2.5
-                           px-7 py-3.5 rounded-xl
+                className="group relative flex items-center justify-center gap-2
+                           px-4 py-3 sm:px-7 sm:py-3.5 rounded-xl flex-1 sm:flex-none
                            bg-[#DD9E3A] hover:bg-[#C98D2F]
-                           text-zinc-950 font-bold text-base
+                           text-zinc-950 font-bold text-sm sm:text-base
                            transition-all duration-300
                            hover:-translate-y-0.5 active:scale-[0.98]"
-            style={{ animation: 'glow-pulse 3s ease-in-out infinite' }}
+                style={{ animation: 'glow-pulse 3s ease-in-out infinite' }}
               >
                 <span aria-hidden className="absolute inset-0 rounded-xl bg-gradient-to-b from-white/20 to-transparent pointer-events-none" />
-                <span className="relative">Build My Custom Quote</span>
-                <ArrowRight size={17} strokeWidth={2.5}
-                  className="relative transition-transform duration-300 group-hover:translate-x-1" />
+                <span className="relative leading-tight text-center">Build My<br className="sm:hidden" /> Custom Quote</span>
+                <ArrowRight size={15} strokeWidth={2.5}
+                  className="relative flex-shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
               </button>
 
               <button
                 onClick={() => scrollTo('services')}
-                className="flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl
+                className="flex items-center justify-center gap-2
+                           px-4 py-3 sm:px-7 sm:py-3.5 rounded-xl flex-1 sm:flex-none
                            bg-gradient-to-r from-zinc-700 to-zinc-600
                            hover:from-zinc-600 hover:to-zinc-500
                            border border-zinc-500/50 hover:border-zinc-400/60
-                           text-white font-semibold text-base
+                           text-white font-semibold text-sm sm:text-base
                            transition-all duration-300 active:scale-[0.98]
                            shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
               >
