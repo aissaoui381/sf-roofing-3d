@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Mail, MapPin, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Mail, MapPin, ShieldCheck, Facebook, Instagram, Youtube, Twitter } from 'lucide-react';
 
 const SERVICES = [
   { label: 'Roof Replacement', href: '/roof-replacement-san-francisco' },
@@ -98,6 +98,26 @@ export default function Footer() {
               <div className="flex items-start gap-2.5 pt-1">
                 <MapPin size={14} className="text-zinc-600 flex-shrink-0 mt-0.5" />
                 <p className="text-zinc-500 text-sm">San Francisco & Bay Area</p>
+              </div>
+              <div className="flex items-center gap-3 pt-2">
+                {[
+                  { icon: Facebook,  href: 'https://facebook.com',  label: 'Facebook' },
+                  { icon: Instagram, href: 'https://instagram.com', label: 'Instagram' },
+                  { icon: Twitter,   href: 'https://twitter.com',   label: 'X / Twitter' },
+                  { icon: Youtube,   href: 'https://youtube.com',   label: 'YouTube' },
+                ].map(({ icon: Icon, href, label }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="w-8 h-8 rounded-lg bg-zinc-800 hover:bg-gold/20 border border-zinc-700 hover:border-gold/40
+                               flex items-center justify-center text-zinc-500 hover:text-gold transition-all duration-200"
+                  >
+                    <Icon size={14} />
+                  </a>
+                ))}
               </div>
             </div>
           </div>
