@@ -149,7 +149,7 @@ export default function Hero() {
       {/* ── Video background ── */}
       <video
         ref={videoRef}
-        src="/hero.mp4"
+        src="/hero-2.mp4"
         autoPlay loop muted playsInline
         fetchPriority="high"
         className="absolute inset-0 w-full h-full object-cover z-[1]"
