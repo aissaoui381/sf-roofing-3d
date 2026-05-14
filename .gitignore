@@ -8,3 +8,11 @@ dist
 .claude
 
 .vercel
+
+# Never commit secrets or unrelated dropped files in public/
+**/client_secret*.json
+**/credentials*.json
+*.pem
+*.key
+public/projects/*.zip
+public/projects/Invoice-*.pdf
