@@ -1,3 +1,6 @@
+
+
+
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
@@ -6,17 +9,25 @@ export default defineConfig({
   build: {
     target: 'esnext',
     cssCodeSplit: true,
-    reportCompressedSize: false,
+    sourcemap: false,
+    minify: 'esbuild',
     rollupOptions: {
       output: {
         manualChunks(id) {
-          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom') || id.includes('node_modules/react-router-dom')) return 'vendor-react';
-          if (id.includes('node_modules/gsap') || id.includes('node_modules/@gsap'))   return 'vendor-gsap';
-          if (id.includes('node_modules/lucide-react'))                                return 'vendor-lucide';
-          if (id.includes('node_modules/@vercel'))                                     return 'vendor-vercel';
-          if (id.includes('node_modules/convex') || id.includes('node_modules/@convex-dev')) return 'vendor-convex';
+          if (!id.includes('node_modules')) return;
+          if (id.includes('react-router')) return 'vendor-router';
+          if (id.includes('/react/') || id.includes('/react-dom/') || id.includes('scheduler')) return 'vendor-react';
+          if (id.includes('gsap') || id.includes('@gsap')) return 'vendor-gsap';
+          if (id.includes('lucide-react')) return 'vendor-lucide';
+          if (id.includes('convex')) return 'vendor-convex';
+          if (id.includes('@vercel')) return 'vendor-vercel';
+          if (id.includes('react-helmet')) return 'vendor-helmet';
+          return 'vendor';
         },
       },
     },
+  },
+  esbuild: {
+    legalComments: 'none',
   },
 });

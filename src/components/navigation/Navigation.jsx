@@ -14,20 +14,29 @@ export default function Navigation() {
   const [active, setActive] = useState('hero');
   const dockRef = useRef(null);
 
-  // Scroll spy — window-based so it works with the global scroll container
+  // Scroll spy — IntersectionObserver, zero work on scroll
   useEffect(() => {
-    const onScroll = () => {
-      const mid = window.scrollY + window.innerHeight / 2;
-      for (let i = NAV_ITEMS.length - 1; i >= 0; i--) {
-        const el = document.getElementById(NAV_ITEMS[i].id);
-        if (el && el.offsetTop <= mid) {
-          setActive(NAV_ITEMS[i].id);
-          break;
+    const visible = new Map();
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) visible.set(e.target.id, e.intersectionRatio);
+          else visible.delete(e.target.id);
         }
-      }
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+        let bestId = null;
+        let bestRatio = 0;
+        for (const [id, ratio] of visible) {
+          if (ratio > bestRatio) { bestRatio = ratio; bestId = id; }
+        }
+        if (bestId) setActive(bestId);
+      },
+      { threshold: [0, 0.25, 0.5, 0.75, 1] },
+    );
+    for (const item of NAV_ITEMS) {
+      const el = document.getElementById(item.id);
+      if (el) io.observe(el);
+    }
+    return () => io.disconnect();
   }, []);
 
   // Spring-up entrance on mount

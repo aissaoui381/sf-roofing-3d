@@ -3,11 +3,14 @@
 @tailwind utilities;
 
 html {
-  scroll-behavior: smooth;
   /* Hide scrollbar — Firefox */
   scrollbar-width: none;
   /* Hide scrollbar — IE/Edge legacy */
   -ms-overflow-style: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
 }
 
 /* Hide scrollbar — Chrome / Safari / Opera */
@@ -24,58 +27,13 @@ body {
 }
 
 @keyframes marquee {
-  from { transform: translateX(0) }
-  to   { transform: translateX(-50%) }
-}
-
-/* ── Ambient floating animations ── */
-@keyframes orb-drift-a {
-  0%   { transform: translate(0px,   0px)   scale(1);    opacity: 0.045; }
-  25%  { transform: translate(40px, -30px)  scale(1.08); opacity: 0.07;  }
-  50%  { transform: translate(20px, -55px)  scale(1.04); opacity: 0.05;  }
-  75%  { transform: translate(-25px,-30px)  scale(1.1);  opacity: 0.075; }
-  100% { transform: translate(0px,   0px)   scale(1);    opacity: 0.045; }
-}
-@keyframes orb-drift-b {
-  0%   { transform: translate(0px,  0px)  scale(1);    opacity: 0.035; }
-  33%  { transform: translate(-35px, 40px) scale(1.12); opacity: 0.06;  }
-  66%  { transform: translate(30px,  25px) scale(0.95); opacity: 0.04;  }
-  100% { transform: translate(0px,  0px)  scale(1);    opacity: 0.035; }
-}
-@keyframes orb-drift-c {
-  0%   { transform: translate(0px, 0px)   scale(1);    opacity: 0.03;  }
-  40%  { transform: translate(50px, -20px) scale(1.06); opacity: 0.055; }
-  70%  { transform: translate(-20px, 35px) scale(1.02); opacity: 0.04;  }
-  100% { transform: translate(0px, 0px)   scale(1);    opacity: 0.03;  }
-}
-
-@keyframes particle-rise {
-  0%   { transform: translateY(0)     translateX(0);          opacity: 0;   }
-  8%   { opacity: 0.55; }
-  85%  { opacity: 0.25; }
-  100% { transform: translateY(-140px) translateX(var(--dx));  opacity: 0;   }
-}
-
-@keyframes shimmer-sweep {
-  0%   { transform: translateX(-120%) skewX(-20deg); opacity: 0;   }
-  15%  { opacity: 0.6; }
-  85%  { opacity: 0.4; }
-  100% { transform: translateX(220%)  skewX(-20deg); opacity: 0;   }
-}
-
-@keyframes float-bob {
-  0%, 100% { transform: translateY(0px);  }
-  50%       { transform: translateY(-10px); }
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
 }
 
 @keyframes portfolio-scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-@keyframes glow-pulse {
-  0%, 100% { box-shadow: 0 0 20px rgba(206,152,67,0.2); }
-  50%       { box-shadow: 0 0 40px rgba(206,152,67,0.45); }
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
 }
 
 @keyframes progress-fill {
@@ -84,6 +42,6 @@ body {
 }
 
 @keyframes img-fade-in {
-  from { opacity: 0; transform: scale(1.03); }
-  to   { opacity: 1; transform: scale(1); }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }

@@ -16,3 +16,6 @@ dist
 *.key
 public/projects/*.zip
 public/projects/Invoice-*.pdf
+
+# Local-only originals of optimized assets
+public/hero-2.original.mp4

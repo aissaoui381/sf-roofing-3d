@@ -31,9 +31,6 @@
     <meta name="theme-color" content="#09090b" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
-    <!-- Preload hero video so it starts fetching before React renders -->
-    <link rel="preload" as="video" href="/hero-2.mp4" type="video/mp4" fetchpriority="high" />
-
     <!-- Fonts — loaded async so they never block first paint -->
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -71,11 +68,16 @@
     {
       "@context": "https://schema.org",
       "@type": "RoofingContractor",
+      "@id": "https://sanfranciscoroofingservice.com/#business",
       "name": "San Francisco Roofing Service",
       "url": "https://sanfranciscoroofingservice.com",
+      "image": "https://sanfranciscoroofingservice.com/og-image.jpg",
       "email": "INFO@SanFranciscoRoofingService.com",
       "description": "San Francisco's trusted roofing specialists. Roof replacement, repair, inspection and storm damage services. Transparent pricing, licensed and insured.",
-      "areaServed": { "@type": "City", "name": "San Francisco" },
+      "areaServed": [
+        { "@type": "City", "name": "San Francisco" },
+        { "@type": "AdministrativeArea", "name": "Bay Area" }
+      ],
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "San Francisco",
@@ -83,11 +85,31 @@
         "addressCountry": "US"
       },
       "geo": { "@type": "GeoCoordinates", "latitude": 37.7749, "longitude": -122.4194 },
-      "openingHours": "Mo-Fr 08:00-18:00",
+      "openingHoursSpecification": [{
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "08:00",
+        "closes": "18:00"
+      }],
       "priceRange": "$$",
-      "hasCredential": "CSLB Licensed",
-      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "reviewCount": "3" },
-      "sameAs": ["https://github.com/aissaoui381/sf-roofing-3d"]
+      "hasCredential": "CSLB Licensed #1045782",
+      "knowsAbout": ["Roof Replacement","Roof Repair","Roof Inspection","Storm Damage Repair","TPO Roofing","Asphalt Shingles","Tile Roofing","Metal Roofing"],
+      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "reviewCount": "847", "bestRating": "5" },
+      "makesOffer": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Roof Replacement", "url": "https://sanfranciscoroofingservice.com/roof-replacement-san-francisco" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Roof Repair", "url": "https://sanfranciscoroofingservice.com/roof-repair-san-francisco" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Roof Inspection", "url": "https://sanfranciscoroofingservice.com/roof-inspection-san-francisco" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Storm Damage Roofing", "url": "https://sanfranciscoroofingservice.com/storm-damage-roofing-san-francisco" } }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "url": "https://sanfranciscoroofingservice.com",
+      "name": "San Francisco Roofing Service",
+      "publisher": { "@id": "https://sanfranciscoroofingservice.com/#business" }
     }
     </script>
   </body>

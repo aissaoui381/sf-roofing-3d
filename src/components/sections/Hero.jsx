@@ -3,6 +3,10 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ChevronDown, ArrowRight, ShieldCheck, MapPin } from 'lucide-react';
 
+const prefersReducedMotion =
+  typeof window !== 'undefined' &&
+  window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
 const STATS = [
   { value: '847+', label: 'Roofs Completed' },
   { value: '15+',  label: 'Years in SF' },
@@ -83,7 +87,7 @@ export default function Hero() {
   const floatRefs    = useRef([]);
   const leftColRef   = useRef(null);
 
-  // Chrome loop fix
+  // Chrome loop fix — kick the video back to the start if it ever stalls
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -92,48 +96,25 @@ export default function Hero() {
     return () => video.removeEventListener('ended', restart);
   }, []);
 
-  // Auto-fit loop — ResizeObserver watches the left column every frame
-  // and keeps text + buttons scaled to whatever width is available
-  useEffect(() => {
-    const col = leftColRef.current;
-    if (!col) return;
-    const fit = () => {
-      const w = col.offsetWidth;
-      // 0.68 at 280 px → 1.0 at 520 px, clamped at both ends
-      const s = Math.max(0.68, Math.min(1, (w - 280) / 240));
-      col.style.setProperty('--hs', s);
-    };
-    fit();
-    const ro = new ResizeObserver(fit);
-    ro.observe(col);
-    return () => ro.disconnect();
-  }, []);
-
   useGSAP(() => {
-    // Entrance sequence
-    gsap.timeline({ delay: 0.15 })
-      .from('.hero-badge',  { y: 18, opacity: 0, duration: 0.5,  ease: 'power3.out' })
-      .from('.hero-title',  { y: 40, opacity: 0, duration: 0.8,  ease: 'power3.out' }, '-=0.2')
-      .from('.hero-sub',    { y: 22, opacity: 0, duration: 0.6,  ease: 'power3.out' }, '-=0.4')
-      .from('.hero-body',   { y: 16, opacity: 0, duration: 0.5,  ease: 'power3.out' }, '-=0.3')
-      .from('.hero-cta',    { y: 16, opacity: 0, duration: 0.5,  ease: 'power3.out' }, '-=0.3')
-      .from('.hero-trust',  { opacity: 0, duration: 0.4 }, '-=0.2')
-      .from('.hero-cards',  { x: 40, opacity: 0, duration: 0.7, ease: 'power3.out' }, '-=0.5')
-      .from('.hero-stats',  { y: 20, opacity: 0, duration: 0.5, ease: 'power3.out' }, '-=0.3')
-      .from('.hero-scroll', { opacity: 0, duration: 0.4 }, '-=0.2');
+    if (prefersReducedMotion) return;
 
-    // Gentle float for preview cards — each on its own rhythm
+    // Single short entrance — heavier sequences chained scroll-spy reflows
+    gsap.from('.hero-anim', {
+      y: 24, opacity: 0, duration: 0.6, ease: 'power3.out',
+      stagger: 0.06, delay: 0.1,
+    });
+
+    // Subtle float for preview cards (composite-only)
     floatRefs.current.forEach((el, i) => {
       if (!el) return;
       gsap.to(el, {
-        y: i % 2 === 0 ? -12 : -7,
-        x: i % 2 === 0 ? 3 : -3,
-        rotation: i % 2 === 0 ? 0.8 : -0.8,
-        duration: 3.2 + i * 0.7,
+        y: i % 2 === 0 ? -10 : -6,
+        duration: 3.4 + i * 0.6,
         ease: 'sine.inOut',
         repeat: -1,
         yoyo: true,
-        delay: i * 0.6,
+        delay: i * 0.5,
       });
     });
   }, { scope: containerRef });
@@ -158,12 +139,15 @@ export default function Hero() {
         <div className="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full bg-[#CE9843]/5 blur-[80px]" />
       </div>
 
-      {/* ── Video background ── */}
+      {/* ── Video background ── (low priority so it never competes with LCP) */}
       <video
         ref={videoRef}
         src="/hero-2.mp4"
         autoPlay loop muted playsInline
-        fetchPriority="high"
+        preload="metadata"
+        fetchPriority="low"
+        aria-hidden="true"
+        tabIndex={-1}
         className="absolute inset-0 w-full h-full object-cover z-[1]"
       />
 
@@ -176,80 +160,66 @@ export default function Hero() {
       <div className="absolute inset-0 z-10 flex items-center px-8 lg:px-16 pt-10 pb-28">
         <div className="w-full max-w-7xl mx-auto flex items-center justify-between gap-12">
 
-          {/* Left — copy — leftColRef drives the --hs auto-fit loop */}
-          <div ref={leftColRef} className="max-w-xl flex-shrink-0 min-w-0 w-full lg:w-auto"
-               style={{ '--hs': 1 }}>
+          {/* Left — copy */}
+          <div ref={leftColRef} className="max-w-xl flex-shrink-0 min-w-0 w-full lg:w-auto">
 
-            <div className="hero-badge inline-flex items-center gap-2 mb-5
-                            px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm"
-                 style={{ fontSize: 'calc(var(--hs) * 0.75rem)' }}>
-              <span className="w-2 h-2 bg-[#DD9E3A] rounded-full animate-pulse flex-shrink-0" />
+            <div className="hero-anim inline-flex items-center gap-2 mb-5
+                            px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm
+                            text-xs">
+              <span className="w-2 h-2 bg-[#DD9E3A] rounded-full flex-shrink-0" />
               <span className="text-[#DD9E3A] font-semibold tracking-widest uppercase">
                 SanFranciscoRoofingService.com
               </span>
             </div>
 
-            <h1 className="hero-title font-black leading-[1.0] tracking-tight mb-3 text-[#DD9E3A]"
-                style={{ fontSize: 'calc(var(--hs) * clamp(2.5rem, 7vw, 4.5rem))' }}>
+            <h1 className="hero-anim font-black leading-[1.0] tracking-tight mb-3 text-[#DD9E3A]
+                           text-[clamp(2rem,7vw,4.5rem)]">
               San Francisco<br />Roofing Service
             </h1>
 
-            <h2 className="hero-sub text-white font-semibold mb-4"
-                style={{ fontSize: 'calc(var(--hs) * 1.125rem)' }}>
+            <h2 className="hero-anim text-white font-semibold mb-4 text-base sm:text-lg">
               Complete Roofing Solutions
             </h2>
 
-            <p className="hero-body text-zinc-300 leading-relaxed mb-7 max-w-md"
-               style={{ fontSize: 'calc(var(--hs) * 0.9rem)' }}>
+            <p className="hero-anim text-zinc-300 leading-relaxed mb-7 max-w-md text-sm">
               From Victorian flats in the Mission to hillside homes in Twin Peaks —
               code-compliant, weather-tight roofing with every cost itemised before
               we touch your home.
             </p>
 
-            <div className="hero-cta flex flex-row gap-2.5 mb-8">
+            <div className="hero-anim flex flex-row gap-2.5 mb-8">
               <button
                 onClick={() => scrollTo('quote')}
                 className="group relative flex items-center justify-center gap-2
-                           rounded-xl flex-1
+                           rounded-xl flex-1 px-5 py-3
                            bg-[#DD9E3A] hover:bg-[#C98D2F]
-                           text-zinc-950 font-bold
-                           transition-all duration-300
-                           hover:-translate-y-0.5 active:scale-[0.98]"
-                style={{
-                  fontSize: 'calc(var(--hs) * 0.875rem)',
-                  padding: 'calc(var(--hs) * 0.75rem) calc(var(--hs) * 1.25rem)',
-                  animation: 'glow-pulse 3s ease-in-out infinite',
-                }}
+                           text-zinc-950 font-bold text-sm
+                           transition-colors duration-200
+                           active:scale-[0.98]
+                           shadow-[0_4px_20px_rgba(206,152,67,0.35)]"
               >
                 <span aria-hidden className="absolute inset-0 rounded-xl bg-gradient-to-b from-white/20 to-transparent pointer-events-none" />
                 <span className="relative leading-tight text-center">Build My Custom Quote</span>
                 <ArrowRight size={15} strokeWidth={2.5}
-                  className="relative flex-shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
+                  className="relative flex-shrink-0 transition-transform duration-200 group-hover:translate-x-0.5" />
               </button>
 
               <button
                 onClick={() => scrollTo('services')}
                 className="flex items-center justify-center gap-2
-                           rounded-xl flex-1
-                           bg-gradient-to-r from-zinc-700 to-zinc-600
-                           hover:from-zinc-600 hover:to-zinc-500
-                           border border-zinc-500/50 hover:border-zinc-400/60
-                           text-white font-semibold
-                           transition-all duration-300 active:scale-[0.98]
-                           shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
-                style={{
-                  fontSize: 'calc(var(--hs) * 0.875rem)',
-                  padding: 'calc(var(--hs) * 0.75rem) calc(var(--hs) * 1.25rem)',
-                }}
+                           rounded-xl flex-1 px-5 py-3
+                           bg-zinc-700 hover:bg-zinc-600
+                           border border-zinc-500/50
+                           text-white font-semibold text-sm
+                           transition-colors duration-200 active:scale-[0.98]"
               >
                 View Services
               </button>
             </div>
 
-            <div className="hero-trust flex flex-wrap gap-x-5 gap-y-2">
+            <div className="hero-anim flex flex-wrap gap-x-5 gap-y-2 text-xs">
               {['Licensed & Insured', '25-Year Warranty', 'Free Itemised Estimate'].map((item) => (
-                <span key={item} className="flex items-center gap-1.5 text-zinc-400"
-                      style={{ fontSize: 'calc(var(--hs) * 0.75rem)' }}>
+                <span key={item} className="flex items-center gap-1.5 text-zinc-400">
                   <ShieldCheck size={13} className="text-[#DD9E3A] flex-shrink-0" />
                   {item}
                 </span>
@@ -258,7 +228,7 @@ export default function Hero() {
           </div>
 
           {/* Right — floating project preview cards (desktop only) */}
-          <div className="hero-cards hidden lg:flex flex-col gap-4 flex-shrink-0 w-72">
+          <div className="hero-anim hidden lg:flex flex-col gap-4 flex-shrink-0 w-72">
             {PREVIEWS.map((p, i) => (
               <div
                 key={p.neighborhood}
@@ -298,16 +268,13 @@ export default function Hero() {
       </div>
 
       {/* ── Stats bar ── */}
-      <div className="hero-stats absolute bottom-0 left-0 right-0 z-20
+      <div className="hero-anim absolute bottom-0 left-0 right-0 z-20
                       bg-white/90 backdrop-blur-md border-t border-zinc-200">
         <div className="max-w-7xl mx-auto px-8 lg:px-16 py-4
                         grid grid-cols-2 md:grid-cols-4 gap-4">
-          {STATS.map((s, i) => (
+          {STATS.map((s) => (
             <div key={s.label} className="text-center">
-              <p
-                className="text-[#CE9843] font-black text-xl md:text-2xl leading-none"
-                style={{ animation: `float-bob ${3 + i * 0.4}s ease-in-out infinite`, animationDelay: `${i * 0.5}s` }}
-              >
+              <p className="text-[#CE9843] font-black text-xl md:text-2xl leading-none">
                 {s.value}
               </p>
               <p className="text-zinc-500 text-xs mt-1 tracking-wide">{s.label}</p>
@@ -319,7 +286,7 @@ export default function Hero() {
       {/* ── Scroll hint ── */}
       <button
         onClick={() => scrollTo('services')}
-        className="hero-scroll absolute bottom-20 left-1/2 -translate-x-1/2 z-30
+        className="hero-anim absolute bottom-20 left-1/2 -translate-x-1/2 z-30
                    flex flex-col items-center gap-1.5 group
                    text-white/40 hover:text-[#DD9E3A] transition-colors duration-300"
       >

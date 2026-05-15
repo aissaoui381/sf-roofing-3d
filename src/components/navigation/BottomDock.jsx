@@ -13,18 +13,29 @@ export default function BottomDock() {
   const [active, setActive] = useState('hero');
 
   useEffect(() => {
-    const handleScroll = () => {
-      const midpoint = window.scrollY + window.innerHeight / 2;
-      for (let i = NAV_ITEMS.length - 1; i >= 0; i--) {
-        const el = document.getElementById(NAV_ITEMS[i].id);
-        if (el && el.offsetTop <= midpoint) {
-          setActive(NAV_ITEMS[i].id);
-          break;
+    const visible = new Map();
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) visible.set(e.target.id, e.intersectionRatio);
+          else visible.delete(e.target.id);
         }
-      }
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+        let bestId = null;
+        let bestRatio = 0;
+        for (const [id, ratio] of visible) {
+          if (ratio > bestRatio) { bestRatio = ratio; bestId = id; }
+        }
+        if (bestId) setActive(bestId);
+      },
+      { threshold: [0, 0.25, 0.5, 0.75, 1] },
+    );
+
+    const observed = [];
+    for (const item of NAV_ITEMS) {
+      const el = document.getElementById(item.id);
+      if (el) { io.observe(el); observed.push(el); }
+    }
+    return () => io.disconnect();
   }, []);
 
   const scrollTo = (id) => {

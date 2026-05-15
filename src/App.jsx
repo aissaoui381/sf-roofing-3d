@@ -1,7 +1,5 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -13,13 +11,36 @@ const PrivacyPage = lazy(() => import('./pages/PrivacyPage.jsx'));
 const ContactPage = lazy(() => import('./pages/ContactPage.jsx'));
 const ServicePage = lazy(() => import('./pages/ServicePage.jsx'));
 
+// Defer Vercel telemetry until after first paint + idle so it never costs INP
+const Analytics     = lazy(() => import('@vercel/analytics/react').then(m => ({ default: m.Analytics })));
+const SpeedInsights = lazy(() => import('@vercel/speed-insights/react').then(m => ({ default: m.SpeedInsights })));
+
 gsap.registerPlugin(ScrollTrigger, useGSAP);
+
+function DeferredTelemetry() {
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    const cb = () => setReady(true);
+    if ('requestIdleCallback' in window) {
+      const id = window.requestIdleCallback(cb, { timeout: 4000 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const t = setTimeout(cb, 2500);
+    return () => clearTimeout(t);
+  }, []);
+  if (!ready) return null;
+  return (
+    <Suspense fallback={null}>
+      <Analytics />
+      <SpeedInsights />
+    </Suspense>
+  );
+}
 
 export default function App() {
   return (
     <BrowserRouter>
-      <Analytics />
-      <SpeedInsights />
+      <DeferredTelemetry />
       <Suspense fallback={<div className="min-h-screen bg-white" />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
