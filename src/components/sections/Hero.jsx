@@ -2,11 +2,6 @@ import { useRef, useEffect, useState } from 'react';
 import { ChevronDown, ArrowRight, ShieldCheck, MapPin } from 'lucide-react';
 import { site } from '../../site.config.js';
 
-// Treat phones as "no-video" — the gradient background already looks intentional
-// and skipping the 770KB MP4 is the single biggest mobile PageSpeed win.
-const isDesktopViewport = () =>
-  typeof window !== 'undefined' && window.matchMedia?.('(min-width: 1024px)').matches;
-
 const STATS = [
   { value: `${site.stats.projectsCompleted}+`,         label: 'Roofs Completed' },
   { value: `${site.stats.yearsInBusiness}+`,           label: `Years in ${site.city.short}` },
@@ -87,10 +82,9 @@ export default function Hero() {
   const leftColRef   = useRef(null);
   const [showVideo, setShowVideo] = useState(false);
 
-  // Decide on the client whether to mount the video. SSR/initial paint never
-  // includes it, so mobile never pays the download cost.
+  // Mount the video AFTER initial paint so it doesn't compete with LCP.
+  // The poster image holds the visual while the MP4 loads in the background.
   useEffect(() => {
-    if (!isDesktopViewport()) return;
     const mount = () => setShowVideo(true);
     if ('requestIdleCallback' in window) {
       const id = window.requestIdleCallback(mount, { timeout: 1500 });
@@ -130,11 +124,13 @@ export default function Hero() {
         <div className="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full bg-[#CE9843]/5 blur-[80px]" />
       </div>
 
-      {/* ── Video background ── desktop-only, mounted after idle so it never competes with LCP */}
+      {/* ── Video background ── mounted after idle so it never competes with LCP.
+           Poster paints instantly while the MP4 streams in. */}
       {showVideo && (
         <video
           ref={videoRef}
           src="/hero-2.mp4"
+          poster="/hero-2-poster.jpg"
           autoPlay loop muted playsInline
           preload="metadata"
           fetchPriority="low"
