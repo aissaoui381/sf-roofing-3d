@@ -30,8 +30,8 @@ export const site = {
   },
 
   domain: {
-    host: 'sanfranciscoroofingservice.com',
-    url:  'https://sanfranciscoroofingservice.com',
+    host: 'sanfranciscoroofingservices.com',
+    url:  'https://sanfranciscoroofingservices.com',
   },
 
   contact: {

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sanfranciscoroofingservice.com/sitemap.xml
+Sitemap: https://sanfranciscoroofingservices.com/sitemap.xml
