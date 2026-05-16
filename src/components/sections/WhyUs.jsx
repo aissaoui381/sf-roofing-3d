@@ -99,10 +99,6 @@ export default function WhyUs() {
       y: 30, opacity: 0, duration: 0.8, ease: 'power3.out',
       scrollTrigger: { trigger: containerRef.current, start: 'top 78%' },
     });
-    gsap.from('.house-img', {
-      scale: 1.04, opacity: 0, duration: 1.1, ease: 'power2.out',
-      scrollTrigger: { trigger: '.house-img', start: 'top 82%' },
-    });
     gsap.from('.stat-pill', {
       y: 20, opacity: 0, stagger: 0.1, duration: 0.7, ease: 'power2.out',
       scrollTrigger: { trigger: '.stats-overlay', start: 'top 90%' },
@@ -180,20 +176,7 @@ export default function WhyUs() {
         </div>
       </div>
 
-      {/* ── Luxury house image ── */}
-      <div className="relative bg-zinc-100 overflow-hidden">
-        <img
-          src="/luxury-house.svg"
-          alt={`Luxury ${site.city.name} home with premium roofing`}
-          loading="lazy"
-          decoding="async"
-          className="house-img w-full object-cover"
-          style={{ aspectRatio: '16/7' }}
-        />
-        <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-[#CE9843]/10 to-transparent pointer-events-none" />
-      </div>
-
-      {/* ── Stats bar — fully white, below the image ── */}
+      {/* ── Stats bar ── */}
       <div className="stats-overlay bg-white border-y border-zinc-200">
         <div className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24">
           <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-zinc-200">
