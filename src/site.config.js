@@ -35,7 +35,7 @@ export const site = {
   },
 
   contact: {
-    email:        'INFO@SanFranciscoRoofingService.com',
+    email:        'Contact@SanFranciscoRoofingService.com',
     serviceArea: 'San Francisco & Bay Area',
     responseTime: 'Within 2 business hours',
   },
