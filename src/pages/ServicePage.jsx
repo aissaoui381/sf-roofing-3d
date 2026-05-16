@@ -103,13 +103,40 @@ export default function ServicePage({ service }) {
   if (!s) return null;
 
   const slug = site.services.find((x) => x.id === service)?.slug ?? '';
+  const canonical = `${site.domain.url}/${slug}`;
+
+  // FAQPage rich-snippet schema — Google can surface these as expandable
+  // accordions directly in search results for "[service] San Francisco" queries.
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: s.faqs.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
+  };
+
+  // BreadcrumbList schema — helps Google show "Home › Services › <Service>"
+  // breadcrumbs in the SERP instead of the bare URL.
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home',     item: site.domain.url },
+      { '@type': 'ListItem', position: 2, name: 'Services', item: `${site.domain.url}/#services` },
+      { '@type': 'ListItem', position: 3, name: s.headline, item: canonical },
+    ],
+  };
 
   return (
     <>
       <Helmet>
         <title>{s.metaTitle}</title>
         <meta name="description" content={s.metaDesc} />
-        <link rel="canonical" href={`${site.domain.url}/${slug}`} />
+        <link rel="canonical" href={canonical} />
+        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       </Helmet>
     <div className="min-h-screen bg-zinc-950 text-white">
 

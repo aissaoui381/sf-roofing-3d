@@ -10,6 +10,14 @@ export default function ContactPage() {
         <title>Contact Us | {site.brand.name}</title>
         <meta name="description" content={`Contact ${site.brand.name}. Email us for a free estimate, emergency repairs, or any roofing question. Response within 2 business hours.`} />
         <link rel="canonical" href={`${site.domain.url}/contact`} />
+        <script type="application/ld+json">{JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home',    item: site.domain.url },
+            { '@type': 'ListItem', position: 2, name: 'Contact', item: `${site.domain.url}/contact` },
+          ],
+        })}</script>
       </Helmet>
     <div className="min-h-screen bg-zinc-950 text-white">
 

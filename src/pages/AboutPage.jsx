@@ -10,6 +10,14 @@ export default function AboutPage() {
         <title>About Us | {site.brand.name}</title>
         <meta name="description" content={`Learn about ${site.brand.name} — licensed roofing contractors with ${site.stats.yearsInBusiness}+ years serving ${site.city.short} homeowners. Transparent pricing, expert craftsmanship.`} />
         <link rel="canonical" href={`${site.domain.url}/about`} />
+        <script type="application/ld+json">{JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home',  item: site.domain.url },
+            { '@type': 'ListItem', position: 2, name: 'About', item: `${site.domain.url}/about` },
+          ],
+        })}</script>
       </Helmet>
 
       <div className="min-h-screen bg-zinc-950 text-white">

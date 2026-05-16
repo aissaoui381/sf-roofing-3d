@@ -9,6 +9,14 @@ export default function PrivacyPage() {
         <title>Privacy Policy | {site.brand.name}</title>
         <meta name="description" content={`Privacy policy for ${site.brand.name}. Learn how we collect, use, and protect your personal information.`} />
         <link rel="canonical" href={`${site.domain.url}/privacy`} />
+        <script type="application/ld+json">{JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home',    item: site.domain.url },
+            { '@type': 'ListItem', position: 2, name: 'Privacy', item: `${site.domain.url}/privacy` },
+          ],
+        })}</script>
       </Helmet>
     <div className="min-h-screen bg-zinc-950 text-white px-6 md:px-16 lg:px-24 py-20">
       <div className="max-w-3xl mx-auto">
