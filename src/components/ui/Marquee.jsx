@@ -1,7 +1,9 @@
+import { site } from '../../site.config.js';
+
 const ITEMS = [
   'Roof Replacement', 'Storm Damage Response', '25-Year Warranty',
-  'Licensed & Insured', 'SF Architecture Experts', 'Free Itemised Estimates',
-  'Roof Repair', '847+ Projects Completed', 'New Construction', 'Maintenance Plans',
+  'Licensed & Insured', `${site.city.short} Architecture Experts`, 'Free Itemised Estimates',
+  'Roof Repair', `${site.stats.projectsCompleted}+ Projects Completed`, 'New Construction', 'Maintenance Plans',
 ];
 
 export default function Marquee() {

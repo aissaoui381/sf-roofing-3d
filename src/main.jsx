@@ -1,18 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { ConvexProvider, ConvexReactClient } from 'convex/react';
 import { HelmetProvider } from 'react-helmet-async';
 import App from './App.jsx';
 import './index.css';
 
-const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL);
-
+// ConvexProvider lives inside the QuoteCalculator chunk so the 60KB Convex
+// runtime is lazy-loaded with the only feature that actually uses it.
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <HelmetProvider>
-      <ConvexProvider client={convex}>
-        <App />
-      </ConvexProvider>
+      <App />
     </HelmetProvider>
   </React.StrictMode>
 );

@@ -1,14 +1,15 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Mail, MapPin, Clock, ArrowRight } from 'lucide-react';
+import { site, mailto } from '../site.config.js';
 
 export default function ContactPage() {
   return (
     <>
       <Helmet>
-        <title>Contact Us | San Francisco Roofing Service</title>
-        <meta name="description" content="Contact San Francisco Roofing Service. Email us for a free estimate, emergency repairs, or any roofing question. Response within 2 business hours." />
-        <link rel="canonical" href="https://sanfranciscoroofingservice.com/contact" />
+        <title>Contact Us | {site.brand.name}</title>
+        <meta name="description" content={`Contact ${site.brand.name}. Email us for a free estimate, emergency repairs, or any roofing question. Response within 2 business hours.`} />
+        <link rel="canonical" href={`${site.domain.url}/contact`} />
       </Helmet>
     <div className="min-h-screen bg-zinc-950 text-white">
 
@@ -37,9 +38,9 @@ export default function ContactPage() {
             </div>
 
             {[
-              { icon: Mail,    label: 'Email',    value: 'INFO@SanFranciscoRoofingService.com', href: 'mailto:INFO@SanFranciscoRoofingService.com' },
-              { icon: MapPin,  label: 'Service Area', value: 'San Francisco & Bay Area', href: null },
-              { icon: Clock,   label: 'Response Time', value: 'Within 2 business hours', href: null },
+              { icon: Mail,    label: 'Email',         value: site.contact.email,        href: mailto },
+              { icon: MapPin,  label: 'Service Area',  value: site.contact.serviceArea,  href: null },
+              { icon: Clock,   label: 'Response Time', value: site.contact.responseTime, href: null },
             ].map(({ icon: Icon, label, value, href }) => (
               <div key={label} className="flex gap-4 p-6 rounded-2xl bg-zinc-900 border border-zinc-800">
                 <div className="w-10 h-10 bg-gold/10 rounded-xl flex items-center justify-center flex-shrink-0">
@@ -76,7 +77,7 @@ export default function ContactPage() {
 
       <div className="px-6 md:px-16 lg:px-24 py-8 border-t border-zinc-800">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between gap-4 text-zinc-600 text-sm">
-          <p>© 2025 San Francisco Roofing Service. All rights reserved.</p>
+          <p>© {site.copyrightYear} {site.brand.name}. All rights reserved.</p>
           <div className="flex gap-6">
             <Link to="/about" className="hover:text-zinc-400 transition-colors">About</Link>
             <Link to="/privacy" className="hover:text-zinc-400 transition-colors">Privacy Policy</Link>

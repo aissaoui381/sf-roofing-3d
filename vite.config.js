@@ -4,6 +4,12 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
+// Match an npm package by its real folder boundary so a coincidental
+// substring (e.g. "convex" inside "react-something") can't pull it
+// into the wrong vendor chunk.
+const inPkg = (id, pkg) =>
+  id.includes(`/node_modules/${pkg}/`) || id.includes(`\\node_modules\\${pkg}\\`);
+
 export default defineConfig({
   plugins: [react()],
   build: {
@@ -15,13 +21,15 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (!id.includes('node_modules')) return;
-          if (id.includes('react-router')) return 'vendor-router';
-          if (id.includes('/react/') || id.includes('/react-dom/') || id.includes('scheduler')) return 'vendor-react';
-          if (id.includes('gsap') || id.includes('@gsap')) return 'vendor-gsap';
-          if (id.includes('lucide-react')) return 'vendor-lucide';
-          if (id.includes('convex')) return 'vendor-convex';
-          if (id.includes('@vercel')) return 'vendor-vercel';
-          if (id.includes('react-helmet')) return 'vendor-helmet';
+          // Convex is dynamic-only (lazy QuoteCalculator). Leave it for Vite's
+          // default chunker so it lands in the QuoteCalculator chunk and never
+          // gets module-preloaded from the entry HTML.
+          if (inPkg(id, 'convex')) return;
+          if (inPkg(id, 'react-router') || inPkg(id, 'react-router-dom')) return 'vendor-router';
+          if (inPkg(id, 'react') || inPkg(id, 'react-dom') || inPkg(id, 'scheduler')) return 'vendor-react';
+          if (inPkg(id, 'gsap') || inPkg(id, '@gsap/react')) return 'vendor-gsap';
+          if (inPkg(id, 'lucide-react')) return 'vendor-lucide';
+          if (inPkg(id, 'react-helmet-async')) return 'vendor-helmet';
           return 'vendor';
         },
       },

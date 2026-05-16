@@ -3,12 +3,15 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
+import { site } from '../../site.config.js';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const STATS = [
-  { value: 847,  suffix: '+',    label: 'Roofs Completed',     dur: 2   },
-  { value: 15,   suffix: ' yrs', label: 'Years in Business',   dur: 1.5 },
-  { value: 98,   suffix: '%',    label: 'Client Satisfaction', dur: 2   },
-  { value: 24,   suffix: ' hrs', label: 'Emergency Response',  dur: 1.5 },
+  { value: site.stats.projectsCompleted,     suffix: '+',    label: 'Roofs Completed',     dur: 2   },
+  { value: site.stats.yearsInBusiness,       suffix: ' yrs', label: 'Years in Business',   dur: 1.5 },
+  { value: site.stats.clientSatisfactionPct, suffix: '%',    label: 'Client Satisfaction', dur: 2   },
+  { value: site.stats.emergencyResponseHrs,  suffix: ' hrs', label: 'Emergency Response',  dur: 1.5 },
 ];
 
 const BENEFITS = [
@@ -24,7 +27,7 @@ const BENEFITS = [
   {
     num: '02',
     title: 'Licensed & Insured',
-    desc: 'Fully licensed in California (CSLB #1045782) with $2M liability coverage protecting you and your property on every project.',
+    desc: `Fully licensed in California (CSLB #${site.license.cslbNumber}) with ${site.license.insurance} coverage protecting you and your property on every project.`,
     detail: 'Your home is protected from the moment our crew arrives. $2M liability policy, workers\' comp on every crew member, bonded and verified.',
     accent: '#e8b855',
     bg: 'from-orange-500/[0.08] to-orange-100/[0.5]',
@@ -32,8 +35,8 @@ const BENEFITS = [
   },
   {
     num: '03',
-    title: 'SF Architecture Experts',
-    desc: "We know San Francisco's micro-climates, Victorian flats, Edwardian details, and building codes better than any general contractor.",
+    title: `${site.city.short} Architecture Experts`,
+    desc: `We know ${site.city.name}'s micro-climates, Victorian flats, Edwardian details, and building codes better than any general contractor.`,
     detail: 'From fog-belt moisture barriers to Mission District flat roofs — we\'ve handled every SF roof type and every city permit requirement.',
     accent: '#f59e0b',
     bg: 'from-yellow-500/[0.08] to-yellow-100/[0.5]',
@@ -158,7 +161,7 @@ export default function WhyUs() {
             </div>
             <div className="md:mb-2">
               <p className="text-zinc-900 text-lg leading-relaxed max-w-sm mb-8">
-                San Francisco homeowners trust us because we show our work — every cost, every step, every day of the project.
+                {site.city.name} homeowners trust us because we show our work — every cost, every step, every day of the project.
               </p>
               <button
                 onClick={() => scrollTo('quote')}
@@ -181,7 +184,7 @@ export default function WhyUs() {
       <div className="relative bg-zinc-100 overflow-hidden">
         <img
           src="/luxury-house.svg"
-          alt="Luxury San Francisco home with premium roofing"
+          alt={`Luxury ${site.city.name} home with premium roofing`}
           loading="lazy"
           decoding="async"
           className="house-img w-full object-cover"

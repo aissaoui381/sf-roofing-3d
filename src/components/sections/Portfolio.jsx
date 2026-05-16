@@ -4,6 +4,9 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MapPin, ArrowRight, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { site } from '../../site.config.js';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const PROJECTS = [
   {
@@ -208,11 +211,11 @@ export default function Portfolio() {
             Recent Projects
           </p>
           <h2 className="text-4xl md:text-5xl font-black text-zinc-900 leading-[1.05]">
-            Our Work Across<br />San Francisco
+            Our Work Across<br />{site.city.name}
           </h2>
         </div>
         <p className="text-zinc-500 text-sm max-w-xs md:text-right">
-          847+ roofs completed — every SF neighborhood, every roof type, every budget.
+          {site.stats.projectsCompleted}+ roofs completed — every {site.city.short} neighborhood, every roof type, every budget.
         </p>
       </div>
 

@@ -1,8 +1,5 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
 import HomePage from './pages/HomePage.jsx';
 
 // Secondary pages loaded only when visited — keeps the home page bundle small
@@ -14,8 +11,6 @@ const ServicePage = lazy(() => import('./pages/ServicePage.jsx'));
 // Defer Vercel telemetry until after first paint + idle so it never costs INP
 const Analytics     = lazy(() => import('@vercel/analytics/react').then(m => ({ default: m.Analytics })));
 const SpeedInsights = lazy(() => import('@vercel/speed-insights/react').then(m => ({ default: m.SpeedInsights })));
-
-gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 function DeferredTelemetry() {
   const [ready, setReady] = useState(false);

@@ -1,9 +1,15 @@
 import { useState, useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight, ArrowLeft, CheckCircle, Send, Check, ShieldCheck, Ban, Zap } from 'lucide-react';
-import { useMutation } from 'convex/react';
+import { ConvexProvider, ConvexReactClient, useMutation } from 'convex/react';
 import { api } from '../../../convex/_generated/api';
+
+gsap.registerPlugin(ScrollTrigger);
+
+// Single shared client, instantiated when this lazy chunk loads (never on first paint).
+const convexClient = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL);
 
 const STEPS = [
   {
@@ -60,6 +66,14 @@ function calcEstimate(sel) {
 const EMAIL_STEP = STEPS.length;
 
 export default function QuoteCalculator() {
+  return (
+    <ConvexProvider client={convexClient}>
+      <QuoteCalculatorInner />
+    </ConvexProvider>
+  );
+}
+
+function QuoteCalculatorInner() {
   const [step, setStep]             = useState(0);
   const [selections, setSelections] = useState({});
   const [email, setEmail]           = useState('');

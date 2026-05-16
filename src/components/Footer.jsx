@@ -1,13 +1,11 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Mail, MapPin, ShieldCheck, Facebook, Instagram, Youtube, Twitter } from 'lucide-react';
+import { site, mailto } from '../site.config.js';
 
 const SERVICES = [
-  { label: 'Roof Replacement', href: '/roof-replacement-san-francisco' },
-  { label: 'Roof Repair',      href: '/roof-repair-san-francisco' },
-  { label: 'Roof Inspection',  href: '/roof-inspection-san-francisco' },
-  { label: 'Storm Damage',     href: '/storm-damage-roofing-san-francisco' },
+  ...site.services.map((s) => ({ label: s.label, href: `/${s.slug}` })),
   { label: 'New Construction', href: '/#services' },
-  { label: 'Maintenance Plans',href: '/#services' },
+  { label: 'Maintenance Plans', href: '/#services' },
 ];
 
 const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -30,17 +28,17 @@ export default function Footer() {
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 bg-gold rounded-xl flex items-center justify-center flex-shrink-0
                               shadow-[0_4px_16px_rgba(206,152,67,0.4)]">
-                <span className="text-zinc-950 font-black text-sm tracking-tight">SF</span>
+                <span className="text-zinc-950 font-black text-sm tracking-tight">{site.brand.shortBadge}</span>
               </div>
               <div>
                 <p className="text-zinc-900 font-black text-lg tracking-tight leading-none">
-                  San Francisco Roofing Service
+                  {site.brand.name}
                 </p>
-                <p className="text-zinc-400 text-xs mt-0.5">SanFranciscoRoofingService.com</p>
+                <p className="text-zinc-400 text-xs mt-0.5">{site.domain.host}</p>
               </div>
             </div>
             <p className="text-zinc-500 text-sm leading-relaxed max-w-sm">
-              San Francisco's trusted roofing specialists. Transparent pricing, premium materials, and results built to last.
+              {site.brand.descriptor}
             </p>
           </div>
 
@@ -88,23 +86,23 @@ export default function Footer() {
             <p className="text-zinc-400 text-xs font-bold tracking-[0.2em] uppercase mb-5">Contact</p>
             <div className="space-y-4">
               <a
-                href="mailto:INFO@SanFranciscoRoofingService.com"
+                href={mailto}
                 className="flex items-center gap-2.5 text-[#CE9843] hover:text-[#B8832A] transition-colors duration-200 text-sm font-medium"
               >
                 <Mail size={14} className="flex-shrink-0" />
-                INFO@SanFranciscoRoofingService.com
+                {site.contact.email}
               </a>
               <p className="text-zinc-400 text-xs">All enquiries answered within 2 business hours.</p>
               <div className="flex items-start gap-2.5 pt-1">
                 <MapPin size={14} className="text-zinc-400 flex-shrink-0 mt-0.5" />
-                <p className="text-zinc-500 text-sm">San Francisco & Bay Area</p>
+                <p className="text-zinc-500 text-sm">{site.contact.serviceArea}</p>
               </div>
               <div className="flex items-center gap-3 pt-2">
                 {[
-                  { icon: Facebook,  href: 'https://facebook.com',  label: 'Facebook' },
-                  { icon: Instagram, href: 'https://instagram.com', label: 'Instagram' },
-                  { icon: Twitter,   href: 'https://twitter.com',   label: 'X / Twitter' },
-                  { icon: Youtube,   href: 'https://youtube.com',   label: 'YouTube' },
+                  { icon: Facebook,  href: site.social.facebook,  label: 'Facebook' },
+                  { icon: Instagram, href: site.social.instagram, label: 'Instagram' },
+                  { icon: Twitter,   href: site.social.twitter,   label: 'X / Twitter' },
+                  { icon: Youtube,   href: site.social.youtube,   label: 'YouTube' },
                 ].map(({ icon: Icon, href, label }) => (
                   <a
                     key={label}
@@ -127,9 +125,9 @@ export default function Footer() {
             <p className="text-zinc-400 text-xs font-bold tracking-[0.2em] uppercase mb-5">Credentials</p>
             <div className="space-y-3">
               {[
-                'CSLB Licensed #1045782',
-                'Fully Insured · $2M Liability',
-                '25-Year Workmanship Warranty',
+                site.license.cslbLabel,
+                `Fully Insured · ${site.license.insurance}`,
+                site.license.warranty,
                 'EPA Lead-Safe Certified',
               ].map((item) => (
                 <div key={item} className="flex items-center gap-2.5">
@@ -146,7 +144,7 @@ export default function Footer() {
       {/* ── Bottom bar ── */}
       <div className="px-6 md:px-16 lg:px-24 py-5 border-t border-zinc-200">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-zinc-400 text-xs">© 2025 San Francisco Roofing Service. All rights reserved.</p>
+          <p className="text-zinc-400 text-xs">© {site.copyrightYear} {site.brand.name}. All rights reserved.</p>
           <div className="flex gap-5">
             <Link to="/about" className="text-zinc-400 hover:text-zinc-600 text-xs transition-colors">About</Link>
             <Link to="/contact" className="text-zinc-400 hover:text-zinc-600 text-xs transition-colors">Contact</Link>

@@ -1,7 +1,10 @@
 import { useRef, useState, useEffect } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ChevronLeft, ChevronRight, CheckCircle, Clock, ArrowRight } from 'lucide-react';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const SLIDES = [
   { src: '/projects/material-asphalt.webp', label: 'Asphalt Shingles', desc: '20–30 yr lifespan · Most popular in SF' },

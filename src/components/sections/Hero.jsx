@@ -1,17 +1,17 @@
-import { useRef, useEffect } from 'react';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
+import { useRef, useEffect, useState } from 'react';
 import { ChevronDown, ArrowRight, ShieldCheck, MapPin } from 'lucide-react';
+import { site } from '../../site.config.js';
 
-const prefersReducedMotion =
-  typeof window !== 'undefined' &&
-  window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+// Treat phones as "no-video" — the gradient background already looks intentional
+// and skipping the 770KB MP4 is the single biggest mobile PageSpeed win.
+const isDesktopViewport = () =>
+  typeof window !== 'undefined' && window.matchMedia?.('(min-width: 1024px)').matches;
 
 const STATS = [
-  { value: '847+', label: 'Roofs Completed' },
-  { value: '15+',  label: 'Years in SF' },
-  { value: '$2M',  label: 'Insured' },
-  { value: '24hr', label: 'Emergency' },
+  { value: `${site.stats.projectsCompleted}+`,         label: 'Roofs Completed' },
+  { value: `${site.stats.yearsInBusiness}+`,           label: `Years in ${site.city.short}` },
+  { value: site.stats.insurance,                       label: 'Insured' },
+  { value: `${site.stats.emergencyResponseHrs}hr`,     label: 'Emergency' },
 ];
 
 const PREVIEWS = [
@@ -84,40 +84,31 @@ function MiniRoof({ roofType, skyA, skyB, uid }) {
 export default function Hero() {
   const containerRef = useRef(null);
   const videoRef     = useRef(null);
-  const floatRefs    = useRef([]);
   const leftColRef   = useRef(null);
+  const [showVideo, setShowVideo] = useState(false);
+
+  // Decide on the client whether to mount the video. SSR/initial paint never
+  // includes it, so mobile never pays the download cost.
+  useEffect(() => {
+    if (!isDesktopViewport()) return;
+    const mount = () => setShowVideo(true);
+    if ('requestIdleCallback' in window) {
+      const id = window.requestIdleCallback(mount, { timeout: 1500 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const t = setTimeout(mount, 400);
+    return () => clearTimeout(t);
+  }, []);
 
   // Chrome loop fix — kick the video back to the start if it ever stalls
   useEffect(() => {
+    if (!showVideo) return;
     const video = videoRef.current;
     if (!video) return;
     const restart = () => { video.currentTime = 0; video.play().catch(() => {}); };
     video.addEventListener('ended', restart);
     return () => video.removeEventListener('ended', restart);
-  }, []);
-
-  useGSAP(() => {
-    if (prefersReducedMotion) return;
-
-    // Single short entrance — heavier sequences chained scroll-spy reflows
-    gsap.from('.hero-anim', {
-      y: 24, opacity: 0, duration: 0.6, ease: 'power3.out',
-      stagger: 0.06, delay: 0.1,
-    });
-
-    // Subtle float for preview cards (composite-only)
-    floatRefs.current.forEach((el, i) => {
-      if (!el) return;
-      gsap.to(el, {
-        y: i % 2 === 0 ? -10 : -6,
-        duration: 3.4 + i * 0.6,
-        ease: 'sine.inOut',
-        repeat: -1,
-        yoyo: true,
-        delay: i * 0.5,
-      });
-    });
-  }, { scope: containerRef });
+  }, [showVideo]);
 
   const scrollTo = (id) =>
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -139,17 +130,19 @@ export default function Hero() {
         <div className="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full bg-[#CE9843]/5 blur-[80px]" />
       </div>
 
-      {/* ── Video background ── (low priority so it never competes with LCP) */}
-      <video
-        ref={videoRef}
-        src="/hero-2.mp4"
-        autoPlay loop muted playsInline
-        preload="metadata"
-        fetchPriority="low"
-        aria-hidden="true"
-        tabIndex={-1}
-        className="absolute inset-0 w-full h-full object-cover z-[1]"
-      />
+      {/* ── Video background ── desktop-only, mounted after idle so it never competes with LCP */}
+      {showVideo && (
+        <video
+          ref={videoRef}
+          src="/hero-2.mp4"
+          autoPlay loop muted playsInline
+          preload="metadata"
+          fetchPriority="low"
+          aria-hidden="true"
+          tabIndex={-1}
+          className="absolute inset-0 w-full h-full object-cover z-[1]"
+        />
+      )}
 
       {/* ── Overlays ── */}
       <div className="absolute inset-0 z-[2] bg-black/55" />
@@ -168,21 +161,21 @@ export default function Hero() {
                             text-xs">
               <span className="w-2 h-2 bg-[#DD9E3A] rounded-full flex-shrink-0" />
               <span className="text-[#DD9E3A] font-semibold tracking-widest uppercase">
-                SanFranciscoRoofingService.com
+                {site.domain.host}
               </span>
             </div>
 
             <h1 className="hero-anim font-black leading-[1.0] tracking-tight mb-3 text-[#DD9E3A]
                            text-[clamp(2rem,7vw,4.5rem)]">
-              San Francisco<br />Roofing Service
+              {site.brand.headlineLineOne}<br />{site.brand.headlineLineTwo}
             </h1>
 
             <h2 className="hero-anim text-white font-semibold mb-4 text-base sm:text-lg">
-              Complete Roofing Solutions
+              {site.brand.tagline}
             </h2>
 
             <p className="hero-anim text-zinc-300 leading-relaxed mb-7 max-w-md text-sm">
-              From Victorian flats in the Mission to hillside homes in Twin Peaks —
+              {site.city.blurb} —
               code-compliant, weather-tight roofing with every cost itemised before
               we touch your home.
             </p>
@@ -232,16 +225,21 @@ export default function Hero() {
             {PREVIEWS.map((p, i) => (
               <div
                 key={p.neighborhood}
-                ref={(el) => (floatRefs.current[i] = el)}
-                className="rounded-2xl overflow-hidden border border-white/10
+                className="hero-float rounded-2xl overflow-hidden border border-white/10
                            bg-white/5 backdrop-blur-md
                            shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
-                style={{ transform: `translateX(${i % 2 === 0 ? '0px' : '20px'})` }}
+                style={{
+                  transform: `translateX(${i % 2 === 0 ? '0px' : '20px'})`,
+                  animationDelay: `${i * 0.5}s`,
+                  animationDuration: `${3.4 + i * 0.6}s`,
+                }}
               >
                 <div className="h-28 overflow-hidden">
                   <img
                     src={p.img}
                     alt={p.neighborhood}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover"
                   />
                 </div>

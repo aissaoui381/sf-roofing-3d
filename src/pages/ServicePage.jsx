@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { CheckCircle, ArrowRight, Clock, ShieldCheck } from 'lucide-react';
+import { site, mailto } from '../site.config.js';
 
 const SERVICES = {
   replacement: {
@@ -8,7 +9,7 @@ const SERVICES = {
     metaTitle: 'Roof Replacement San Francisco | Licensed SF Roofing Contractor',
     metaDesc: 'Expert roof replacement in San Francisco. Full tear-off, installation, permits & inspection. Licensed (CSLB), insured, transparent pricing. Free estimate.',
     headline: 'Full Roof Replacement',
-    subline: 'San Francisco, CA',
+    subline: `${site.city.name}, ${site.city.state}`,
     intro: 'Complete roof replacement for San Francisco homes — from Victorian flats in the Mission to hillside homes in Twin Peaks. We handle everything from structural assessment to final city inspection.',
     time: '2–5 days',
     price: '$8,000 – $22,000',
@@ -31,7 +32,7 @@ const SERVICES = {
     metaTitle: 'Roof Repair San Francisco | Same-Week Emergency Roof Repairs SF',
     metaDesc: 'Fast roof repairs in San Francisco. Leaks, damaged shingles, flashing, storm damage. Same-week scheduling, licensed & insured. Free itemised estimate.',
     headline: 'Roof Repair',
-    subline: 'San Francisco, CA',
+    subline: `${site.city.name}, ${site.city.state}`,
     intro: 'Targeted roof repairs for San Francisco homes — leaks, damaged shingles, flashing failures, and storm damage. We diagnose the root cause and fix it right the first time.',
     time: '1–2 days',
     price: '$500 – $3,500',
@@ -54,7 +55,7 @@ const SERVICES = {
     metaTitle: 'Roof Inspection San Francisco | Same-Day Roof Inspections SF',
     metaDesc: 'Professional roof inspections in San Francisco. Same-day availability, drone photography, full written report. Licensed inspector. Perfect for home buyers.',
     headline: 'Roof Inspection',
-    subline: 'San Francisco, CA',
+    subline: `${site.city.name}, ${site.city.state}`,
     intro: 'Detailed roof inspections for San Francisco home purchases, insurance requirements, or peace of mind. Full written and photographic report with drone aerial photography.',
     time: 'Same day',
     price: '$250 – $550',
@@ -77,7 +78,7 @@ const SERVICES = {
     metaTitle: 'Storm Damage Roof Repair San Francisco | 24-Hour Emergency Response',
     metaDesc: '24-hour storm damage roof repair in San Francisco. Emergency tarping, insurance documentation, direct adjuster billing. Licensed & insured SF roofing contractor.',
     headline: 'Storm Damage Roofing',
-    subline: 'San Francisco, CA',
+    subline: `${site.city.name}, ${site.city.state}`,
     intro: 'Emergency storm damage response for San Francisco homes. We tarp, document, repair, and handle your insurance claim — so you can focus on what matters.',
     time: '24-hr response',
     price: 'Insurance covered',
@@ -101,19 +102,14 @@ export default function ServicePage({ service }) {
   const s = SERVICES[service];
   if (!s) return null;
 
-  const slugMap = {
-    replacement: 'roof-replacement-san-francisco',
-    repair:      'roof-repair-san-francisco',
-    inspection:  'roof-inspection-san-francisco',
-    storm:       'storm-damage-roofing-san-francisco',
-  };
+  const slug = site.services.find((x) => x.id === service)?.slug ?? '';
 
   return (
     <>
       <Helmet>
         <title>{s.metaTitle}</title>
         <meta name="description" content={s.metaDesc} />
-        <link rel="canonical" href={`https://sanfranciscoroofingservice.com/${slugMap[service]}`} />
+        <link rel="canonical" href={`${site.domain.url}/${slug}`} />
       </Helmet>
     <div className="min-h-screen bg-zinc-950 text-white">
 
@@ -124,7 +120,7 @@ export default function ServicePage({ service }) {
             ← Back to Home
           </Link>
           <p className="text-zinc-950/50 text-xs font-bold tracking-[0.25em] uppercase mb-4">
-            San Francisco Roofing Service
+            {site.brand.name}
           </p>
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-zinc-950 leading-[1.0] tracking-tight mb-6">
             {s.headline}<br />
@@ -179,7 +175,7 @@ export default function ServicePage({ service }) {
                 Get a Free Quote <ArrowRight size={16} />
               </Link>
               <a
-                href="mailto:INFO@SanFranciscoRoofingService.com"
+                href={mailto}
                 className="w-full flex items-center justify-center gap-2 mt-3 py-3 rounded-xl
                            border border-zinc-700 text-zinc-400 hover:text-white hover:border-zinc-500
                            text-sm font-medium transition-all duration-200"
@@ -190,7 +186,7 @@ export default function ServicePage({ service }) {
 
             {/* Trust badges */}
             <div className="grid grid-cols-2 gap-3">
-              {['CSLB Licensed', '$2M Insured', '25-yr Warranty', 'SF Experts'].map((badge) => (
+              {['CSLB Licensed', site.license.insuranceShort, '25-yr Warranty', `${site.city.short} Experts`].map((badge) => (
                 <div key={badge} className="flex items-center gap-2 p-4 rounded-xl bg-zinc-900 border border-zinc-800">
                   <ShieldCheck size={14} className="text-gold flex-shrink-0" />
                   <span className="text-zinc-400 text-sm">{badge}</span>
@@ -217,7 +213,7 @@ export default function ServicePage({ service }) {
       {/* Footer */}
       <div className="px-6 md:px-16 lg:px-24 py-8 border-t border-zinc-800">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between gap-4 text-zinc-600 text-sm">
-          <p>© 2025 San Francisco Roofing Service. All rights reserved.</p>
+          <p>© {site.copyrightYear} {site.brand.name}. All rights reserved.</p>
           <div className="flex gap-6">
             <Link to="/about" className="hover:text-zinc-400 transition-colors">About</Link>
             <Link to="/privacy" className="hover:text-zinc-400 transition-colors">Privacy Policy</Link>
