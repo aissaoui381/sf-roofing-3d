@@ -1,0 +1,55 @@
+name: IndexNow ping
+
+# Ping IndexNow (Bing / Yandex / Seznam) whenever Vercel finishes a production
+# deploy. Google does NOT participate in IndexNow — production URLs still need
+# to be submitted manually via Google Search Console.
+
+on:
+  # Vercel creates a GitHub Deployment for every push and updates its status
+  # as the build runs. We listen for the final state change.
+  deployment_status:
+  # Allow manual trigger from the Actions tab in case the auto-ping is missed.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ping:
+    # Two conditions trigger the job:
+    #  - manual dispatch from the Actions UI, OR
+    #  - a successful Production deployment (preview deploys are skipped
+    #    because they live on *.vercel.app, not on the indexed domain).
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.deployment_status.state == 'success' &&
+       github.event.deployment_status.environment == 'Production')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout deployed commit
+        uses: actions/checkout@v4
+        with:
+          # Use the SHA Vercel actually shipped so the local sitemap matches
+          # the live one we're about to notify on.
+          ref: ${{ github.event.deployment.sha || github.sha }}
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Wait for sitemap.xml to be live
+        run: |
+          for i in $(seq 1 20); do
+            if curl -sf -o /dev/null https://sanfranciscoroofingservices.com/sitemap.xml; then
+              echo "Sitemap is reachable"
+              exit 0
+            fi
+            echo "Waiting for sitemap... ($i/20)"
+            sleep 6
+          done
+          echo "Timed out waiting for sitemap"
+          exit 1
+
+      - name: Submit URLs to IndexNow
+        run: npm run notify-search-engines
