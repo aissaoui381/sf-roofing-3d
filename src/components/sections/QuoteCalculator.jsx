@@ -175,39 +175,51 @@ function QuoteCalculatorInner() {
         </div>
 
         <div className="calc-body">
-          {/* Step indicator */}
-          {!submitted && (
-            <div className="flex items-center mb-8 max-w-lg">
-              {STEPS.map((s, i) => {
-                const done    = step > i || step === EMAIL_STEP;
-                const current = step === i;
-                return (
-                  <div key={s.id} className="flex items-center flex-1 last:flex-none">
-                    <div className={`
-                      w-10 h-10 rounded-full flex items-center justify-center text-sm font-black
-                      flex-shrink-0 border-2 transition-all duration-300
-                      ${done    ? 'text-zinc-950'    : ''}
-                      ${current ? 'shadow-[0_0_18px_rgba(206,152,67,0.4)]' : ''}
-                      ${!done && !current ? 'bg-white border-zinc-300 text-zinc-400' : ''}
-                    `}
-                    style={
-                      done    ? { background: '#CE9843', borderColor: '#CE9843' } :
-                      current ? { background: 'rgba(206,152,67,0.15)', borderColor: '#CE9843', color: '#CE9843' } :
-                      {}
-                    }>
-                      {done ? <Check size={16} strokeWidth={3} /> : i + 1}
-                    </div>
-                    {i < STEPS.length - 1 && (
-                      <div
-                        className="flex-1 h-0.5 mx-2 rounded-full transition-all duration-500"
-                        style={{ background: step > i ? '#CE9843' : '#e4e4e7' }}
-                      />
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          )}
+          {/* Progress slider — non-interactive bar that fills as the user
+              advances through the steps. Replaces the old circle-and-line
+              indicator that looked clickable but wasn't. */}
+          {!submitted && (() => {
+            // EMAIL_STEP (after the 4 questions) reads as 100% complete.
+            const totalSlots = STEPS.length;
+            const completedSlots = step >= EMAIL_STEP ? totalSlots : step;
+            const progressPct = (completedSlots / totalSlots) * 100;
+            const labelStep = step >= EMAIL_STEP ? EMAIL_STEP : step + 1;
+            const labelTotal = EMAIL_STEP + 1; // 4 questions + email step
+
+            return (
+              <div className="mb-8 max-w-lg">
+                <div className="flex items-baseline justify-between mb-3">
+                  <p className="text-zinc-500 text-xs font-bold tracking-[0.15em] uppercase">
+                    Step {labelStep} of {labelTotal}
+                  </p>
+                  <p className="text-gold text-xs font-bold tabular-nums">{Math.round(progressPct)}%</p>
+                </div>
+
+                {/* Track */}
+                <div className="relative h-2 rounded-full bg-zinc-200 overflow-visible">
+                  {/* Fill */}
+                  <div
+                    className="absolute top-0 left-0 h-full rounded-full transition-all duration-500 ease-out"
+                    style={{
+                      width: `${progressPct}%`,
+                      background: 'linear-gradient(90deg, #CE9843 0%, #e8b855 100%)',
+                      boxShadow: '0 0 12px rgba(206,152,67,0.45)',
+                    }}
+                  />
+                  {/* Thumb */}
+                  {progressPct > 0 && progressPct < 100 && (
+                    <div
+                      className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2
+                                 w-4 h-4 rounded-full bg-white border-2 border-gold
+                                 shadow-[0_0_10px_rgba(206,152,67,0.5)]
+                                 transition-all duration-500 ease-out"
+                      style={{ left: `${progressPct}%` }}
+                    />
+                  )}
+                </div>
+              </div>
+            );
+          })()}
 
           {/* Main card */}
           <div className="rounded-2xl bg-white border border-zinc-200 shadow-[0_8px_40px_rgba(0,0,0,0.06)]">
