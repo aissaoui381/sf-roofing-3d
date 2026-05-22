@@ -156,7 +156,12 @@ export default function Footer() {
               <div>
                 <p className="text-zinc-400 text-[11px] font-bold tracking-[0.2em] uppercase mb-2">Neighborhoods</p>
                 <p className="text-zinc-600 text-sm leading-relaxed">
-                  {site.serviceArea.neighborhoods.join(' · ')}
+                  {site.serviceArea.neighborhoods.map((n, i) => (
+                    <span key={n.slug}>
+                      <Link to={`/${n.slug}`} className="hover:text-gold transition-colors">{n.name}</Link>
+                      {i < site.serviceArea.neighborhoods.length - 1 && ' · '}
+                    </span>
+                  ))}
                 </p>
               </div>
               <div>

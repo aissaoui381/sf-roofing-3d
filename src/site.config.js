@@ -92,14 +92,16 @@ export const site = {
   // SF service-area entities used by Footer + JSON-LD for geographic
   // entity reinforcement. Keep these in sync with index.html schema.
   serviceArea: {
+    // Each neighborhood maps to a dedicated landing page in the mini-silo.
+    // slug pattern: /roofing-{slug}-san-francisco
     neighborhoods: [
-      'Mission District',
-      'Twin Peaks',
-      'Sunset District',
-      'Richmond District',
-      'SOMA',
-      'Pacific Heights',
-      'Noe Valley',
+      { name: 'Mission District',  slug: 'roofing-mission-district-san-francisco' },
+      { name: 'Twin Peaks',        slug: 'roofing-twin-peaks-san-francisco' },
+      { name: 'Sunset District',   slug: 'roofing-sunset-district-san-francisco' },
+      { name: 'Richmond District', slug: 'roofing-richmond-district-san-francisco' },
+      { name: 'SOMA',              slug: 'roofing-soma-san-francisco' },
+      { name: 'Pacific Heights',   slug: 'roofing-pacific-heights-san-francisco' },
+      { name: 'Noe Valley',        slug: 'roofing-noe-valley-san-francisco' },
     ],
     zipCodes: ['94102', '94103', '94110', '94112', '94114', '94116', '94122', '94124'],
   },

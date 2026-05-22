@@ -7,6 +7,7 @@ const AboutPage   = lazy(() => import('./pages/AboutPage.jsx'));
 const PrivacyPage = lazy(() => import('./pages/PrivacyPage.jsx'));
 const ContactPage = lazy(() => import('./pages/ContactPage.jsx'));
 const ServicePage = lazy(() => import('./pages/ServicePage.jsx'));
+const NeighborhoodPage = lazy(() => import('./pages/NeighborhoodPage.jsx'));
 
 // Defer Vercel telemetry until after first paint + idle so it never costs INP
 const Analytics     = lazy(() => import('@vercel/analytics/react').then(m => ({ default: m.Analytics })));
@@ -47,6 +48,15 @@ export default function App() {
           <Route path="/roof-repair-san-francisco"           element={<ServicePage service="repair" />} />
           <Route path="/roof-inspection-san-francisco"   element={<ServicePage service="inspection" />} />
           <Route path="/storm-damage-roofing-san-francisco" element={<ServicePage service="storm" />} />
+
+          {/* Neighborhood mini-silo — hyper-local long-tail landing pages */}
+          <Route path="/roofing-mission-district-san-francisco"   element={<NeighborhoodPage neighborhood="mission" />} />
+          <Route path="/roofing-twin-peaks-san-francisco"         element={<NeighborhoodPage neighborhood="twin-peaks" />} />
+          <Route path="/roofing-sunset-district-san-francisco"    element={<NeighborhoodPage neighborhood="sunset" />} />
+          <Route path="/roofing-richmond-district-san-francisco"  element={<NeighborhoodPage neighborhood="richmond" />} />
+          <Route path="/roofing-soma-san-francisco"               element={<NeighborhoodPage neighborhood="soma" />} />
+          <Route path="/roofing-pacific-heights-san-francisco"    element={<NeighborhoodPage neighborhood="pacific-heights" />} />
+          <Route path="/roofing-noe-valley-san-francisco"         element={<NeighborhoodPage neighborhood="noe-valley" />} />
         </Routes>
       </Suspense>
     </BrowserRouter>

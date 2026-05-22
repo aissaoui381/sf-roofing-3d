@@ -494,7 +494,9 @@ export default function ServicePage({ service }) {
                 <p className="text-zinc-500 text-xs font-bold tracking-[0.2em] uppercase mb-3">Neighborhoods</p>
                 <ul className="text-zinc-300 text-sm space-y-1.5">
                   {site.serviceArea.neighborhoods.map((n) => (
-                    <li key={n}>{n}</li>
+                    <li key={n.slug}>
+                      <Link to={`/${n.slug}`} className="hover:text-gold transition-colors">{n.name}</Link>
+                    </li>
                   ))}
                 </ul>
               </div>
