@@ -129,6 +129,7 @@ export default function Footer() {
                 `Fully Insured · ${site.license.insurance}`,
                 site.license.warranty,
                 'EPA Lead-Safe Certified',
+                'SF DBI Permit Compliant',
               ].map((item) => (
                 <div key={item} className="flex items-center gap-2.5">
                   <ShieldCheck size={13} className="text-gold flex-shrink-0" />
@@ -139,6 +140,34 @@ export default function Footer() {
           </div>
 
         </div>
+
+        {/* ── Service-area entity block ──
+             Neighborhoods + zip codes mirror the JSON-LD areaServed so every
+             page surfaces the same local entities for geographic ranking. */}
+        {site.serviceArea && (
+          <div className="max-w-7xl mx-auto mt-14 pt-10 border-t border-zinc-200">
+            <p className="text-zinc-400 text-xs font-bold tracking-[0.2em] uppercase mb-4">
+              San Francisco Service Areas
+            </p>
+            <p className="text-zinc-500 text-sm leading-relaxed mb-5 max-w-3xl">
+              Licensed San Francisco roofing services across every neighborhood and zip code in the city. We pull permits through the San Francisco Department of Building Inspection (DBI) and comply with all local roofing codes on every project.
+            </p>
+            <div className="grid sm:grid-cols-2 gap-x-10 gap-y-3 max-w-3xl">
+              <div>
+                <p className="text-zinc-400 text-[11px] font-bold tracking-[0.2em] uppercase mb-2">Neighborhoods</p>
+                <p className="text-zinc-600 text-sm leading-relaxed">
+                  {site.serviceArea.neighborhoods.join(' · ')}
+                </p>
+              </div>
+              <div>
+                <p className="text-zinc-400 text-[11px] font-bold tracking-[0.2em] uppercase mb-2">Zip Codes</p>
+                <p className="text-zinc-600 text-sm leading-relaxed">
+                  {site.serviceArea.zipCodes.join(' · ')}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* ── Bottom bar ── */}

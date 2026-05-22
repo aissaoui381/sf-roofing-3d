@@ -14,16 +14,19 @@ const PREVIEWS = [
     neighborhood: 'Noe Valley',
     service: 'Victorian Replacement',
     img: '/projects/noe-valley.webp',
+    alt: 'Residential roof replacement near me in Noe Valley, San Francisco — Victorian re-roofing',
   },
   {
     neighborhood: 'Mission District',
     service: 'TPO Flat Roof',
     img: '/projects/mission.webp',
+    alt: 'Flat roof replacement near me in Mission District San Francisco — TPO membrane install',
   },
   {
     neighborhood: 'Twin Peaks',
     service: 'Storm Repair',
     img: '/projects/twin-peaks.webp',
+    alt: 'Emergency roof leak repair San Francisco — Twin Peaks storm damage restoration',
   },
 ];
 
@@ -167,13 +170,14 @@ export default function Hero() {
             </h1>
 
             <h2 className="hero-anim text-white font-semibold mb-4 text-base sm:text-lg">
-              {site.brand.tagline}
+              Licensed Roofing Contractors SF &mdash; Replacement, Repair & Inspection
             </h2>
 
             <p className="hero-anim text-zinc-300 leading-relaxed mb-7 max-w-md text-sm">
-              {site.city.blurb} —
-              code-compliant, weather-tight roofing with every cost itemised before
-              we touch your home.
+              {site.city.blurb} &mdash; trusted San Francisco roofing services for
+              residential roof replacement, flat roof replacement, and emergency
+              roof leak repair. CSLB licensed, fully insured, every cost itemized
+              before we touch your home.
             </p>
 
             <div className="hero-anim flex flex-row gap-2.5 mb-8">
@@ -188,7 +192,7 @@ export default function Hero() {
                            shadow-[0_4px_20px_rgba(206,152,67,0.35)]"
               >
                 <span aria-hidden className="absolute inset-0 rounded-xl bg-gradient-to-b from-white/20 to-transparent pointer-events-none" />
-                <span className="relative leading-tight text-center">Build My Custom Quote</span>
+                <span className="relative leading-tight text-center">Get My Free Itemized Estimate</span>
                 <ArrowRight size={15} strokeWidth={2.5}
                   className="relative flex-shrink-0 transition-transform duration-200 group-hover:translate-x-0.5" />
               </button>
@@ -233,7 +237,7 @@ export default function Hero() {
                 <div className="h-28 overflow-hidden">
                   <img
                     src={p.img}
-                    alt={p.neighborhood}
+                    alt={p.alt}
                     loading="lazy"
                     decoding="async"
                     className="w-full h-full object-cover"

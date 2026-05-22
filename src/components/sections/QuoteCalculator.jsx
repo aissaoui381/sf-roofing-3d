@@ -149,15 +149,15 @@ function QuoteCalculatorInner() {
         <div className="calc-header grid md:grid-cols-2 gap-8 md:gap-20 items-end mb-12">
           <div>
             <span className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-4 block">
-              Free Estimate
+              Free Itemized Roofing Estimate
             </span>
             <h2 className="text-5xl md:text-6xl font-black text-zinc-900 leading-[1.05] tracking-tight">
-              How Much<br />Will It Cost?
+              Free Itemized<br />Estimate for Your<br />San Francisco Roof
             </h2>
           </div>
           <div className="flex flex-col gap-4 md:mb-2">
             <p className="text-zinc-500 text-base leading-relaxed">
-              Answer 4 quick questions and we'll email you a full itemised estimate — materials, labour, and timeline — within minutes.
+              Answer 4 quick questions and we'll email you a free itemized roofing estimate &mdash; materials, labor, and timeline &mdash; for your residential roof replacement or flat roof replacement in San Francisco. Within minutes.
             </p>
             <div className="flex flex-wrap gap-2">
               {[

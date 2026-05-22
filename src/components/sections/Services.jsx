@@ -7,10 +7,10 @@ import { ChevronLeft, ChevronRight, CheckCircle, Clock, ArrowRight } from 'lucid
 gsap.registerPlugin(ScrollTrigger);
 
 const SLIDES = [
-  { src: '/projects/material-asphalt.webp', label: 'Asphalt Shingles', desc: '20–30 yr lifespan · Most popular in SF' },
-  { src: '/projects/material-tile.webp',    label: 'Spanish Tile',      desc: '50+ yr lifespan · Classic California look' },
-  { src: '/projects/material-metal.webp',   label: 'Metal Roofing',     desc: '40–70 yr lifespan · Modern & durable' },
-  { src: '/projects/material-tpo.webp',     label: 'Flat / TPO',        desc: '15–25 yr lifespan · Most SF flat roofs' },
+  { src: '/projects/material-asphalt.webp', label: 'Asphalt Shingles', desc: '20–30 yr lifespan · Most popular in SF', alt: 'Asphalt shingle residential roof replacement near me in San Francisco' },
+  { src: '/projects/material-tile.webp',    label: 'Spanish Tile',      desc: '50+ yr lifespan · Classic California look', alt: 'Spanish tile roof replacement in San Francisco hillside home' },
+  { src: '/projects/material-metal.webp',   label: 'Metal Roofing',     desc: '40–70 yr lifespan · Modern & durable', alt: 'Standing-seam metal residential roofing replacement near me in SF' },
+  { src: '/projects/material-tpo.webp',     label: 'Flat / TPO',        desc: '15–25 yr lifespan · Most SF flat roofs', alt: 'TPO flat roof replacement near me — commercial TPO and shingle roofing San Francisco' },
 ];
 
 const SERVICES = [
@@ -68,7 +68,7 @@ function MaterialCarousel() {
         <img
           key={index}
           src={slide.src}
-          alt={slide.label}
+          alt={slide.alt}
           loading="lazy"
           decoding="async"
           className="w-full h-full object-cover"
@@ -156,11 +156,11 @@ export default function Services() {
               What We Do
             </span>
             <h2 className="text-3xl md:text-5xl font-black text-zinc-900 leading-[1.05] tracking-tight">
-              Complete Roofing Solutions
+              San Francisco Roofing Services for Every Roof
             </h2>
           </div>
           <p className="text-zinc-500 text-base leading-relaxed max-w-xs md:mb-2">
-            From a missing shingle to a full Victorian flat re-roof — every project delivered with itemised pricing before we touch your home.
+            From a missing shingle to a full Victorian flat re-roofing — residential roof replacement, flat roof replacement, and emergency roof leak repair across SF, every cost itemized before we touch your home.
           </p>
         </div>
 

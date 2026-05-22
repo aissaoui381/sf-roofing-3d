@@ -152,7 +152,7 @@ export default function WhyUs() {
                 Why Peak Roofing
               </span>
               <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-zinc-950 leading-[1.0] tracking-tight">
-                Built on Trust.<br />Proven by<br />Results.
+                Licensed San Francisco<br />Roofing Contractors<br />You Can Trust.
               </h2>
             </div>
             <div className="md:mb-2">
@@ -208,7 +208,7 @@ export default function WhyUs() {
                 Our Commitments
               </span>
               <h3 className="text-3xl md:text-4xl font-black text-zinc-900 leading-tight">
-                What Sets Us Apart
+                Why Choose Our San Francisco Roofing Service
               </h3>
             </div>
 

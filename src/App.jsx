@@ -42,8 +42,9 @@ export default function App() {
           <Route path="/about"   element={<AboutPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route path="/roof-replacement-san-francisco"  element={<ServicePage service="replacement" />} />
-          <Route path="/roof-repair-san-francisco"       element={<ServicePage service="repair" />} />
+          <Route path="/roof-replacement-san-francisco"      element={<ServicePage service="replacement" />} />
+          <Route path="/flat-roof-replacement-san-francisco" element={<ServicePage service="flatRoof" />} />
+          <Route path="/roof-repair-san-francisco"           element={<ServicePage service="repair" />} />
           <Route path="/roof-inspection-san-francisco"   element={<ServicePage service="inspection" />} />
           <Route path="/storm-damage-roofing-san-francisco" element={<ServicePage service="storm" />} />
         </Routes>
