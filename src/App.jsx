@@ -8,6 +8,7 @@ const PrivacyPage = lazy(() => import('./pages/PrivacyPage.jsx'));
 const ContactPage = lazy(() => import('./pages/ContactPage.jsx'));
 const ServicePage = lazy(() => import('./pages/ServicePage.jsx'));
 const NeighborhoodPage = lazy(() => import('./pages/NeighborhoodPage.jsx'));
+const PressKitPage = lazy(() => import('./pages/PressKitPage.jsx'));
 
 // Defer Vercel telemetry until after first paint + idle so it never costs INP
 const Analytics     = lazy(() => import('@vercel/analytics/react').then(m => ({ default: m.Analytics })));
@@ -43,6 +44,7 @@ export default function App() {
           <Route path="/about"   element={<AboutPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/press"   element={<PressKitPage />} />
           <Route path="/roof-replacement-san-francisco"      element={<ServicePage service="replacement" />} />
           <Route path="/flat-roof-replacement-san-francisco" element={<ServicePage service="flatRoof" />} />
           <Route path="/roof-repair-san-francisco"           element={<ServicePage service="repair" />} />
