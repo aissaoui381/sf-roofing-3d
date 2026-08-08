@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight, CheckCircle, MapPin, ShieldCheck } from 'lucide-react';
 import { site, mailto } from '../site.config.js';
+import posthog, { isPostHogEnabled } from '../posthog.js';
 
 // Each neighborhood entry is a hyper-local long-tail landing page. The content
 // is unique per neighborhood (housing stock, microclimate, common failure
@@ -294,7 +295,10 @@ export default function NeighborhoodPage({ neighborhood }) {
               </p>
               <Link
                 to="/"
-                onClick={() => setTimeout(() => document.getElementById('quote')?.scrollIntoView({ behavior: 'smooth' }), 100)}
+                onClick={() => {
+                  if (isPostHogEnabled) posthog.capture('estimate_cta_clicked', { location: 'neighborhood_page', neighborhood });
+                  setTimeout(() => document.getElementById('quote')?.scrollIntoView({ behavior: 'smooth' }), 100);
+                }}
                 className="inline-flex items-center gap-2.5 px-7 py-4 rounded-xl font-bold text-zinc-950
                            bg-gradient-to-r from-[#CE9843] to-[#e8b855]
                            hover:from-[#d9ac63] hover:to-[#f0c870]

@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight, ArrowLeft, CheckCircle, Send, Check, ShieldCheck, Ban, Zap } from 'lucide-react';
 import { ConvexProvider, ConvexReactClient, useMutation } from 'convex/react';
 import { api } from '../../../convex/_generated/api';
+import posthog, { isPostHogEnabled } from '../../posthog.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -109,6 +110,12 @@ function QuoteCalculatorInner() {
 
   const selectOption = (optionId) => {
     const key = STEPS[step]?.id;
+    if (isPostHogEnabled) {
+      posthog.capture('quote_option_selected', {
+        question: key,
+        option: optionId,
+      });
+    }
     setSelections((prev) => ({ ...prev, [key]: optionId }));
     if (step < STEPS.length - 1) setTimeout(() => transition(1, step + 1), 280);
   };
@@ -128,6 +135,16 @@ function QuoteCalculatorInner() {
       estMin:   estimate.min,
       estMax:   estimate.max,
     });
+    if (isPostHogEnabled) {
+      posthog.capture('quote_submitted', {
+        service: selections.service,
+        roof_size: selections.size,
+        material: selections.material,
+        timeline: selections.timeline,
+        estimate_min: estimate.min,
+        estimate_max: estimate.max,
+      });
+    }
     setSubmitted(true);
   };
 
@@ -310,7 +327,10 @@ function QuoteCalculatorInner() {
                     {step === STEPS.length - 1 && selections[STEPS[step].id] && (
                       <div className="mt-8 flex justify-end">
                         <button
-                          onClick={() => transition(1, EMAIL_STEP)}
+                          onClick={() => {
+                            if (isPostHogEnabled) posthog.capture('quote_estimate_requested');
+                            transition(1, EMAIL_STEP);
+                          }}
                           className="flex items-center gap-2.5 px-8 py-4 rounded-xl font-black text-base
                                      bg-gradient-to-r from-[#CE9843] to-[#e8b855] text-zinc-950
                                      hover:from-[#d9ac63] hover:to-[#f0c870]

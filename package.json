@@ -17,6 +17,7 @@
     "convex": "^1.38.0",
     "gsap": "^3.12.7",
     "lucide-react": "^0.511.0",
+    "posthog-js": "^1.414.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-helmet-async": "^3.0.0",
