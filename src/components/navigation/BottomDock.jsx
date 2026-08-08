@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Home, Wrench, Calculator, Star, Mail } from 'lucide-react';
+import { Home, Wrench, Calculator, Mail } from 'lucide-react';
 
 const NAV_ITEMS = [
   { id: 'hero',         icon: Home,       label: 'Home' },
   { id: 'services',     icon: Wrench,     label: 'Services' },
   { id: 'quote',        icon: Calculator, label: 'Get Quote' },
-  { id: 'testimonials', icon: Star,       label: 'Reviews' },
   { id: 'footer',       icon: Mail,       label: 'Contact' },
 ];
 

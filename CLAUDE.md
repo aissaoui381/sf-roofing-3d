@@ -27,7 +27,6 @@ App
     ├── Services        (6-card grid, scroll-triggered stagger)
     ├── WhyUs           (stat counters + benefit cards)
     ├── QuoteCalculator (4-step wizard → email capture)
-    ├── Testimonials    (3 review cards)
     └── Footer          (email-only contact, no phone number)
 ```
 
@@ -49,7 +48,7 @@ Never put GSAP tweens in raw `useEffect`. `ScrollTrigger` and `useGSAP` are regi
 
 **Quote calculator pricing:** `calcEstimate()` in `QuoteCalculator.jsx` computes `base × sizeFactor × materialFactor × timelineFactor`. The `handleSubmit` function is a stub — wire it to your email automation provider (Resend, ConvertKit, Mailchimp, etc.).
 
-**Bottom dock active state** is driven by a scroll listener that compares `window.scrollY + vh/2` against each section's `offsetTop`. Sections must have matching `id` attributes (`hero`, `services`, `quote`, `testimonials`, `footer`).
+**Bottom dock active state** is driven by a scroll listener that compares `window.scrollY + vh/2` against each section's `offsetTop`. Sections must have matching `id` attributes (`hero`, `services`, `quote`, `footer`).
 
 <!-- convex-ai-start -->
 

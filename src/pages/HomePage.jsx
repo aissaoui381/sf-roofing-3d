@@ -7,7 +7,6 @@ const Services        = lazy(() => import('../components/sections/Services.jsx')
 const WhyUs           = lazy(() => import('../components/sections/WhyUs.jsx'));
 const Portfolio       = lazy(() => import('../components/sections/Portfolio.jsx'));
 const QuoteCalculator = lazy(() => import('../components/sections/QuoteCalculator.jsx'));
-const Testimonials    = lazy(() => import('../components/sections/Testimonials.jsx'));
 const Footer          = lazy(() => import('../components/Footer.jsx'));
 
 const Skeleton = ({ h = 400 }) => (
@@ -32,9 +31,6 @@ export default function HomePage() {
       </Suspense>
       <Suspense fallback={<Skeleton />}>
         <QuoteCalculator />
-      </Suspense>
-      <Suspense fallback={<Skeleton />}>
-        <Testimonials />
       </Suspense>
       <Suspense fallback={<Skeleton h={300} />}>
         <Footer />
