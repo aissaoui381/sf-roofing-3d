@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { HelmetProvider } from 'react-helmet-async';
 import App from './App.jsx';
+import './posthog.js';
 import './index.css';
 
 // ConvexProvider lives inside the QuoteCalculator chunk so the 60KB Convex

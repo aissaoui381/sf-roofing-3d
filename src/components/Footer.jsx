@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Mail, MapPin, ShieldCheck, Facebook, Instagram, Youtube, Twitter } from 'lucide-react';
 import { site, mailto } from '../site.config.js';
+import posthog, { isPostHogEnabled } from '../posthog.js';
 
 const SERVICES = [
   ...site.services.map((s) => ({ label: s.label, href: `/${s.slug}` })),
@@ -43,7 +44,10 @@ export default function Footer() {
           </div>
 
           <button
-            onClick={() => scrollTo('quote')}
+            onClick={() => {
+              if (isPostHogEnabled) posthog.capture('estimate_cta_clicked', { location: 'footer' });
+              scrollTo('quote');
+            }}
             className="
               group flex items-center gap-2 px-6 py-3.5 rounded-xl flex-shrink-0
               bg-gradient-to-r from-[#CE9843] to-[#e8b855]

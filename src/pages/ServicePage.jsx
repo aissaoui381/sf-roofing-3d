@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { CheckCircle, ArrowRight, Clock, ShieldCheck, MapPin } from 'lucide-react';
 import { site, mailto } from '../site.config.js';
+import posthog, { isPostHogEnabled } from '../posthog.js';
 
 // Each service entry includes a longBody array rendered as the main article.
 // Local hooks (neighborhoods, zip codes, DBI permits, SF coastal weather) are
@@ -429,7 +430,10 @@ export default function ServicePage({ service }) {
               <p className="text-zinc-500 text-sm mb-6">Answer 4 questions and receive a free itemized roofing estimate in your inbox &mdash; no commitment required.</p>
               <Link
                 to="/"
-                onClick={() => setTimeout(() => document.getElementById('quote')?.scrollIntoView({ behavior: 'smooth' }), 100)}
+                onClick={() => {
+                  if (isPostHogEnabled) posthog.capture('estimate_cta_clicked', { location: 'service_page', service });
+                  setTimeout(() => document.getElementById('quote')?.scrollIntoView({ behavior: 'smooth' }), 100);
+                }}
                 className="w-full flex items-center justify-center gap-2.5 py-4 rounded-xl font-bold
                            text-zinc-950 bg-gradient-to-r from-[#CE9843] to-[#e8b855]
                            hover:from-[#d9ac63] hover:to-[#f0c870]

@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import { ChevronDown, ArrowRight, ShieldCheck, MapPin } from 'lucide-react';
 import { site } from '../../site.config.js';
+import posthog, { isPostHogEnabled } from '../../posthog.js';
 
 const STATS = [
   { value: `${site.stats.projectsCompleted}+`,         label: 'Roofs Completed' },
@@ -182,7 +183,10 @@ export default function Hero() {
 
             <div className="hero-anim flex flex-row gap-2.5 mb-8">
               <button
-                onClick={() => scrollTo('quote')}
+                onClick={() => {
+                  if (isPostHogEnabled) posthog.capture('estimate_cta_clicked', { location: 'hero' });
+                  scrollTo('quote');
+                }}
                 className="group relative flex items-center justify-center gap-2
                            rounded-xl flex-1 px-5 py-3
                            bg-[#DD9E3A] hover:bg-[#C98D2F]

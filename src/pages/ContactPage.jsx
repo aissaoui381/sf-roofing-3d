@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Mail, MapPin, Clock, ArrowRight } from 'lucide-react';
 import { site, mailto } from '../site.config.js';
+import posthog, { isPostHogEnabled } from '../posthog.js';
 
 export default function ContactPage() {
   return (
@@ -57,7 +58,13 @@ export default function ContactPage() {
                 <div>
                   <p className="text-zinc-500 text-xs font-bold tracking-widest uppercase mb-1">{label}</p>
                   {href ? (
-                    <a href={href} className="text-gold font-semibold hover:text-gold-light transition-colors">{value}</a>
+                    <a
+                      href={href}
+                      onClick={() => isPostHogEnabled && posthog.capture('contact_email_clicked', { location: 'contact_page' })}
+                      className="text-gold font-semibold hover:text-gold-light transition-colors"
+                    >
+                      {value}
+                    </a>
                   ) : (
                     <p className="text-white font-semibold">{value}</p>
                   )}
@@ -71,7 +78,10 @@ export default function ContactPage() {
             <p className="text-zinc-500 text-sm mb-8">The fastest way to get a price — answer 4 questions and receive a full breakdown in your inbox.</p>
             <Link
               to="/"
-              onClick={() => setTimeout(() => document.getElementById('quote')?.scrollIntoView({ behavior: 'smooth' }), 100)}
+              onClick={() => {
+                if (isPostHogEnabled) posthog.capture('estimate_cta_clicked', { location: 'contact_page' });
+                setTimeout(() => document.getElementById('quote')?.scrollIntoView({ behavior: 'smooth' }), 100);
+              }}
               className="w-full flex items-center justify-center gap-2.5 py-4 rounded-xl font-bold
                          text-zinc-950 bg-gradient-to-r from-[#CE9843] to-[#e8b855]
                          hover:from-[#d9ac63] hover:to-[#f0c870]

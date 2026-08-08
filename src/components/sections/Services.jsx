@@ -3,6 +3,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ChevronLeft, ChevronRight, CheckCircle, Clock, ArrowRight } from 'lucide-react';
+import posthog, { isPostHogEnabled } from '../../posthog.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -172,7 +173,10 @@ export default function Services() {
             {SERVICES.map((s) => (
               <button
                 key={s.title}
-                onClick={() => setSelected(s)}
+                onClick={() => {
+                  if (isPostHogEnabled) posthog.capture('service_details_selected', { service: s.title });
+                  setSelected(s);
+                }}
                 className={`
                   flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold
                   border transition-all duration-200
@@ -223,7 +227,10 @@ export default function Services() {
                 ))}
               </ul>
               <button
-                onClick={() => document.getElementById('quote')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => {
+                  if (isPostHogEnabled) posthog.capture('estimate_cta_clicked', { location: 'services' });
+                  document.getElementById('quote')?.scrollIntoView({ behavior: 'smooth' });
+                }}
                 className="group inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-bold text-sm
                            text-zinc-950 bg-gradient-to-r from-[#CE9843] to-[#e8b855]
                            hover:from-[#d9ac63] hover:to-[#f0c870]
