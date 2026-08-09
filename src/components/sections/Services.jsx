@@ -3,6 +3,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ChevronLeft, ChevronRight, CheckCircle, Clock, ArrowRight } from 'lucide-react';
+import posthog, { isPostHogConfigured } from '../../posthog.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -140,6 +141,15 @@ export default function Services() {
 
   const selectedIndex = SERVICES.findIndex((s) => s.title === selected.title);
 
+  const selectService = (service) => {
+    setSelected(service);
+    if (isPostHogConfigured) {
+      posthog.capture('service_selected', {
+        service: service.title,
+      });
+    }
+  };
+
   return (
     <section id="services" ref={containerRef}
       className="py-24 px-6 md:px-16 lg:px-24 bg-white relative overflow-hidden">
@@ -172,7 +182,7 @@ export default function Services() {
             {SERVICES.map((s) => (
               <button
                 key={s.title}
-                onClick={() => setSelected(s)}
+                onClick={() => selectService(s)}
                 className={`
                   flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold
                   border transition-all duration-200
