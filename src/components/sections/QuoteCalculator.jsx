@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight, ArrowLeft, CheckCircle, Send, Check, ShieldCheck, Ban, Zap } from 'lucide-react';
 import { ConvexProvider, ConvexReactClient, useMutation } from 'convex/react';
 import { api } from '../../../convex/_generated/api';
+import posthog, { isPostHogConfigured } from '../../posthog.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -109,6 +110,22 @@ function QuoteCalculatorInner() {
 
   const selectOption = (optionId) => {
     const key = STEPS[step]?.id;
+    const stepNumber = step + 1;
+
+    if (isPostHogConfigured) {
+      if (step === 0) {
+        posthog.capture('quote_calculator_started', {
+          service: optionId,
+        });
+      }
+
+      posthog.capture('quote_calculator_step_completed', {
+        step: key,
+        step_number: stepNumber,
+        selection: optionId,
+      });
+    }
+
     setSelections((prev) => ({ ...prev, [key]: optionId }));
     if (step < STEPS.length - 1) setTimeout(() => transition(1, step + 1), 280);
   };
@@ -128,6 +145,16 @@ function QuoteCalculatorInner() {
       estMin:   estimate.min,
       estMax:   estimate.max,
     });
+    if (isPostHogConfigured) {
+      posthog.capture('quote_calculator_completed', {
+        service: selections.service,
+        roof_size: selections.size,
+        material: selections.material,
+        timeline: selections.timeline,
+        estimate_min: estimate.min,
+        estimate_max: estimate.max,
+      });
+    }
     setSubmitted(true);
   };
 
